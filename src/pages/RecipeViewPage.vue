@@ -55,7 +55,7 @@ export default {
 
       try {
         response = await this.axios.get(
-          "https://test-for-3-2.herokuapp.com/recipes/info",
+          "https://assignment3-2-yarden.herokuapp.com/recipes/displayPreviewRecipe/recipeId",
           {
             params: { id: this.$route.params.recipeId }
           }

@@ -17,17 +17,17 @@ import RecipePreview from "./RecipePreview.vue";
 export default {
   name: "RecipePreviewList",
   components: {
-    RecipePreview
+    RecipePreview,
   },
   props: {
     title: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      recipes: []
+      recipes: [],
     };
   },
   mounted() {
@@ -37,19 +37,22 @@ export default {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-          "https://test-for-3-2.herokuapp.com/recipes/random"
+          "https://assignment3-2-yarden.herokuapp.com/recipes/random"
         );
 
         // console.log(response);
-        const recipes = response.data.recipes;
+        const recipes_ = response.data.recipes;
+        console.log(response);
+        this.recipes.push;
         this.recipes = [];
-        this.recipes.push(...recipes);
+
+        this.recipes.push(...recipes_);
         // console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
