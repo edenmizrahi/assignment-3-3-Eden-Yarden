@@ -14,11 +14,8 @@
             </div>
             Ingredients:
             <ul>
-              <li
-                v-for="(r, index) in recipe.extendedIngredients"
-                :key="index + '_' + r.id"
-              >
-                {{ r.original }}
+              <li v-for="r in recipe.ingredients" :key="'_' + r.name">
+                {{ r.name }}
               </li>
             </ul>
           </div>
@@ -26,7 +23,7 @@
             Instructions:
             <ol>
               <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
+                  {{ s.step }}
               </li>
             </ol>
           </div>
@@ -86,12 +83,12 @@ export default {
       };
       console.log(a);
       console.log(a.instructions);
-      let _instructions = a.instructions
-        .map((fstep) => {
-          fstep = fstep.number + " " + fstep.step;
-          return fstep;
-        })
-        .reduce((a, b) => [...a, ...b], []);
+      let _instructions = a.instructions;
+      // .map((fstep) => {
+      //   fstep = fstep.number + " " + fstep.step;
+      //   return fstep;
+      // })
+      // .reduce((a, b) => [...a, ...b], []);
 
       let _recipe = {
         instructions: response.data.instructions,
