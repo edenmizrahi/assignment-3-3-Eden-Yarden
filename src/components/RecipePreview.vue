@@ -3,7 +3,7 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
   >
-    <div class="recipe-body">
+    <!-- <div class="recipe-body">
       <img v-if="image_load" :src="recipe.image" class="recipe-image" />
     </div>
     <div class="recipe-footer">
@@ -14,6 +14,41 @@
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.aggregateLikes }} likes</li>
       </ul>
+    </div> -->
+
+    <article class="recipe-card">
+      <div id="carousel" class="recipe-pic-frame">
+        <div id="sliderBox" class="slider-box">
+          <div class="recipe-pic pic1" role="img"></div>
+          <div class="recipe-pic pic2" role="img"></div>
+          <div class="recipe-pic pic3" role="img"></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div :title="recipe.title" class="recipe-title">
+            {{ recipe.title }}
+          </div>
+        </div>
+        <div class="card-body">
+          <img
+            v-if="image_load"
+            :src="recipe.image"
+            class="recipe-image"
+            style="  width:300px;
+  height:200px;"
+          />
+        </div>
+        <div class="card-footer">
+          <ul class="recipe-overview">
+            <li>{{ recipe.readyInMinutes }} minutes</li>
+            <li>{{ recipe.aggregateLikes }} likes</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </router-link>
 </template>
@@ -27,14 +62,14 @@ export default {
   },
   data() {
     return {
-      image_load: false
+      image_load: false,
     };
   },
   props: {
     recipe: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
 
     // id: {
     //   type: Number,
@@ -59,7 +94,7 @@ export default {
     //     return undefined;
     //   }
     // }
-  }
+  },
 };
 </script>
 
@@ -138,4 +173,6 @@ export default {
   display: table-cell;
   text-align: center;
 }
+
+/************************** */
 </style>

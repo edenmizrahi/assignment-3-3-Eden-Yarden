@@ -19,6 +19,9 @@
 
 <script>
 export default {
+  mounted() {
+    console.log(this.$cookie.get("session"));
+  },
   name: "App",
   methods: {
     Logout() {
@@ -28,8 +31,8 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

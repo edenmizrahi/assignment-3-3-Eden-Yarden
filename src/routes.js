@@ -6,6 +6,9 @@ const routes = [
     path: "/",
     name: "main",
     component: Main,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/register",

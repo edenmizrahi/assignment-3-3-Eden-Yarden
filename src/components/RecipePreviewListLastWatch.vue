@@ -4,18 +4,18 @@
       {{ title }}:
       <slot></slot>
     </h3>
-    <b-row>
       <b-col v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
+       
       </b-col>
-    </b-row>
+     
   </b-container>
 </template>
 
 <script>
 import RecipePreview from "./RecipePreview.vue";
 export default {
-  name: "RecipePreviewList",
+  name: "RecipePreviewListLastWatch",
   components: {
     RecipePreview,
   },
