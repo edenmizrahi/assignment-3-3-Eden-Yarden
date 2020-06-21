@@ -40,14 +40,14 @@ export default {
           "https://assignment3-2-yarden.herokuapp.com/recipes/random"
         );
 
-        // console.log(response);
         const recipes_ = response.data;
         console.log(response);
+        console.log(recipes_);
         this.recipes.push;
         this.recipes = [];
 
         this.recipes.push(...recipes_);
-        // console.log(this.recipes);
+        console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }
