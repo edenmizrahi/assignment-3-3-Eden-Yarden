@@ -13,6 +13,7 @@
       <ul class="recipe-overview">
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.aggregateLikes }} likes</li>
+        <br />
       </ul>
     </div> -->
 
@@ -35,17 +36,20 @@
         </div>
         <div class="card-body">
           <img
-            v-if="image_load"
+          
             :src="recipe.image"
             class="recipe-image"
-            style="  width:300px;
-  height:200px;"
+            style="width:300px;height:200px;"
           />
         </div>
         <div class="card-footer">
           <ul class="recipe-overview">
             <li>{{ recipe.readyInMinutes }} minutes</li>
             <li>{{ recipe.aggregateLikes }} likes</li>
+          </ul>
+          <ul class="recipe-overview">
+            <li>Vegan: {{ recipe.vegan }}</li>
+            <li>Vegetarian: {{ recipe.vegetarian }}</li>
           </ul>
         </div>
       </div>
@@ -55,11 +59,11 @@
 
 <script>
 export default {
-  mounted() {
-    this.axios.get(this.recipe.image).then((i) => {
-      this.image_load = true;
-    });
-  },
+  // mounted() {
+  //   this.axios.get(this.recipe.image).then((i) => {
+  //     this.image_load = true;
+  //   });
+  // },
   data() {
     return {
       image_load: false,

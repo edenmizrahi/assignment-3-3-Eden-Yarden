@@ -8,7 +8,7 @@
 export default {
   data() {
     return {
-      header: "Search Page",
+      header: "Family Page",
     };
   },
 };

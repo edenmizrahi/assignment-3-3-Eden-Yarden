@@ -6,9 +6,12 @@ import VueCookies from 'vue-cookies'
 
 import routes from "./routes";
 import VueRouter from "vue-router";
+import VueCookie from "vue-cookies";
+
 Vue.use(VueCookies);
 Vue.use(VueRouter);
 
+axios.defaults.withCredentials = true;
 const router = new VueRouter({
   routes,
 });
@@ -26,6 +29,22 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
+// Vue.prototype.$root.store = shared_data;
+
+// router.beforeEach((to, from, next) => {
+//   console.log(shared_data.username === undefined, !Vue.$cookies.get("session"));
+//   // if the user was logged in and than the cookie expired: if in global storage there is a username but there is no cookie
+//   if ((shared_data.username === undefined && Vue.$cookies.get("session")) || (shared_data.username !== undefined && !Vue.$cookies.get("session"))) 
+//  {
+//     shared_data.logout();
+//     if (to.name !== "login") next({ name: "main" });
+//     else next();
+//   } else {
+//     next();
+//   }
+//   // console.log(123, Vue.$cookies.keys());
+//   // console.log(VueCookie);
+// });
 
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
@@ -84,7 +103,7 @@ Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
 const shared_data = {
-  BASE_URL: "http://localhost:4000/recipes/random",
+  BASE_URL: "http://localhost:4000",
   username: localStorage.username,
   login(username) {
     localStorage.setItem("username", username);
