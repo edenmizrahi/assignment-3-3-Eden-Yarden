@@ -1,11 +1,13 @@
 <template>
-  <b-container>
+
+   <b-container>
     <h3>
       {{ title }}:
       <slot></slot>
     </h3>
+
     <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
+      <b-col v-for="(r) in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
@@ -20,6 +22,7 @@ export default {
     RecipePreview,
   },
   props: {
+    recipes: Array,
     title: {
       type: String,
       required: true,
@@ -27,31 +30,32 @@ export default {
   },
   data() {
     return {
-      recipes: [],
+
     };
   },
   mounted() {
-    this.updateRecipes();
+
+    // this.updateRecipes();
   },
   methods: {
-    async updateRecipes() {
-      try {
-        const response = await this.axios.get(
-          "http://localhost:4000/recipes/random"
-        );
+    // async updateRecipes() {
+    //   try {
+    //     const response = await this.axios.get(
+    //       "http://localhost:4000/recipes/random"
+    //     );
 
-        const recipes_ = response.data;
-        console.log(response);
-        console.log(recipes_);
-        this.recipes.push;
-        this.recipes = [];
+    //     const recipes_ = response.data;
+    //     console.log(response);
+    //     console.log(recipes_);
+    //     this.recipes.push;
+    //     this.recipes = [];
 
-        this.recipes.push(...recipes_);
-        console.log(this.recipes);
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    //     this.recipes.push(...recipes_);
+    //     console.log(this.recipes);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
   },
 };
 </script>

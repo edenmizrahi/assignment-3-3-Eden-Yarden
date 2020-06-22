@@ -7,6 +7,8 @@
         class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center"
       >
         <div class="logoarea pt-5 pb-5">
+          <RandomRecipesPreviewList></RandomRecipesPreviewList>
+          <!-- <RecipePreviewList></RecipePreviewList>
           <RecipePreviewList
             title="Random"
             :class="{
@@ -15,8 +17,8 @@
               center: true,
             }"
             disabled
-          ></RecipePreviewList>
-          <button> more </button>
+          ></RecipePreviewList> -->
+ 
         </div>
       </div>
     </div>
@@ -94,12 +96,16 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+import RandomRecipesPreviewList from "../components/RandomRecipesPreviewList";
+
+
 import LoginPage from "../pages/LoginPage.vue";
 import RecipePreviewListLastWatch from "../components/RecipePreviewListLastWatch";
 
 export default {
   components: {
-    RecipePreviewList,
+    // RecipePreviewList,
+    RandomRecipesPreviewList,
     LoginPage,
     RecipePreviewListLastWatch,
   },

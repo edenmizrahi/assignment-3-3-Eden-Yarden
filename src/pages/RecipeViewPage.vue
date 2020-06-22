@@ -60,13 +60,14 @@ export default {
       let response;
 
       try {
-        console.log(this.$route.params.recipeId);
+        console.log("recipe id: " + this.$route.params.recipeId);
         response = await this.axios.get(
           "http://localhost:4000/recipes/displayRecipePage/recipeId/:id",
           {
             params: { id: this.$route.params.recipeId },
           }
         );
+        console.log("success addd!!!!!!!!!!!");
         // console.log("after");
         // console.log("response.status", response.status);
         if (response.status !== 200) this.$router.replace("/NotFound");
@@ -95,7 +96,7 @@ export default {
       let _instructions = a.instructions;
       //do login
       if (this.$root.store.username) {
-        await this.checkIfLogin(_instructions,response);
+        await this.checkIfLogin(_instructions, response);
       } else {
         let _recipe = {
           instructions: response.data.instructions,
@@ -124,7 +125,7 @@ export default {
     }
   },
   methods: {
-    async checkIfLogin(_instructions,response) {
+    async checkIfLogin(_instructions, response) {
       let responewatchedorfav;
       let responeAddToWatched;
       //add to watchedList

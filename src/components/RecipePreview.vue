@@ -58,6 +58,7 @@
 
 <script>
 export default {
+  name: "RecipePreview",
   // mounted() {
   //   this.axios.get(this.recipe.image).then((i) => {
   //     this.image_load = true;
