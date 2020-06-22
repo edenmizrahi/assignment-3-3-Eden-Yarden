@@ -67,10 +67,8 @@ export default {
       try {
         console.log("recipe id: " + this.$route.params.recipeId);
         response = await this.axios.get(
-          "http://localhost:4000/recipes/displayRecipePage/recipeId/:id",
-          {
-            params: { id: this.$route.params.recipeId },
-          }
+          "http://localhost:4000/recipes/displayRecipePage/recipeId/"+ this.$route.params.recipeId 
+          
         );
         console.log("success addd!!!!!!!!!!!");
         // console.log("after");
