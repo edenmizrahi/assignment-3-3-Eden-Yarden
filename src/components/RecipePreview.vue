@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+    :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }"
     class="recipe-preview"
   >
     <!-- <div class="recipe-body">
@@ -49,6 +49,7 @@
           <ul class="recipe-overview">
             <li>Vegan: {{ recipe.vegan }}</li>
             <li>Vegetarian: {{ recipe.vegetarian }}</li>
+            <li>Gluten Free: {{ recipe.glutenFree }}</li>
           </ul>
         </div>
       </div>

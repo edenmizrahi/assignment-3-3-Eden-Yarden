@@ -74,7 +74,9 @@ export default {
           vegan: response.data[0].vegan,
           glutenFree: response.data[0].glutenFree,
           duration: response.data[0].duration,
-          image: response.data[0].image,
+          image:
+            "https://res.cloudinary.com/dc9fdssoo/image/upload/" +
+            response.data[0].image,
           title: response.data[0].title,
           owner: response.data[0].owner,
           where: response.data[0].where,
@@ -94,3 +96,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.wrapper {
+  display: flex;
+}
+.wrapped {
+  width: 50%;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+/* .recipe-header{
+
+} */
+</style>

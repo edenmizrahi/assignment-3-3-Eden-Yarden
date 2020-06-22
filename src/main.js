@@ -6,7 +6,6 @@ import VueCookies from 'vue-cookies'
 
 import routes from "./routes";
 import VueRouter from "vue-router";
-import VueCookie from "vue-cookies";
 
 Vue.use(VueCookies);
 Vue.use(VueRouter);
