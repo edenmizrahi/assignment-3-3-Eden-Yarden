@@ -16,18 +16,18 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  //if the user was logged in and than the cookie expired : if in local storage there is username but there is no cookie.
-  // if (Auth.currentUser) {
-  //   next();
-  // } else {
-  //   next({ path: "/login" });
-  // }
-  console.log(Vue);
-    console.log(Vue);
+// router.beforeEach((to, from, next) => {
+//   //if the user was logged in and than the cookie expired : if in local storage there is username but there is no cookie.
+//   // if (Auth.currentUser) {
+//   //   next();
+//   // } else {
+//   //   next({ path: "/login" });
+//   // }
+//   console.log(Vue);
+//     console.log(Vue);
 
-  next();
-});
+//   next();
+// });
 
 // Vue.prototype.$root.store = shared_data;
 

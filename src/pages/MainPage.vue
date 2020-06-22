@@ -16,7 +16,7 @@
             }"
             disabled
           ></RecipePreviewList>
-          <button> more </button>
+          <button>more</button>
         </div>
       </div>
     </div>
@@ -42,6 +42,8 @@
         </div>
       </div>
     </div>
+
+    <router-link to="/family" tag="button" />
   </div>
 
   <!-- <div class="container-fluid">
