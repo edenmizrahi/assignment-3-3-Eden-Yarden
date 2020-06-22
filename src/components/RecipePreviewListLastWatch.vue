@@ -4,10 +4,9 @@
       {{ title }}:
       <slot></slot>
     </h3>
-      <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
-      </b-col>
-
+    <b-col v-for="r in recipes" :key="r.id">
+      <RecipePreview class="recipePreview" :recipe="r" />
+    </b-col>
   </b-container>
 </template>
 
@@ -36,7 +35,7 @@ export default {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-          "http://localhost:4000/profile/watchedList/top"
+          this.$root.store.BASE_URL + "/profile/watchedList/top"
         );
 
         // console.log(response);
@@ -44,12 +43,11 @@ export default {
         console.log(response);
         this.recipes.push;
         this.recipes = [];
-        console.log("start check***********************")
-      
-        this.recipes.push(...recipes_);
-                console.log("start check***********************");
+        console.log("start check***********************");
 
-      
+        this.recipes.push(...recipes_);
+        console.log("start check***********************");
+
         console.log(recipes_);
 
         // console.log(this.recipes);

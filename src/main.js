@@ -1,51 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
-import VueAxios from "vue-axios";
-import axios from "axios";
-import VueCookies from 'vue-cookies'
 
-import routes from "./routes";
-import VueRouter from "vue-router";
-
-Vue.use(VueCookies);
-Vue.use(VueRouter);
-
-axios.defaults.withCredentials = true;
-const router = new VueRouter({
-  routes,
-});
-
-// router.beforeEach((to, from, next) => {
-//   //if the user was logged in and than the cookie expired : if in local storage there is username but there is no cookie.
-//   // if (Auth.currentUser) {
-//   //   next();
-//   // } else {
-//   //   next({ path: "/login" });
-//   // }
-//   console.log(Vue);
-//     console.log(Vue);
-
-//   next();
-// });
-
-// Vue.prototype.$root.store = shared_data;
-
-// router.beforeEach((to, from, next) => {
-//   console.log(shared_data.username === undefined, !Vue.$cookies.get("session"));
-//   // if the user was logged in and than the cookie expired: if in global storage there is a username but there is no cookie
-//   if ((shared_data.username === undefined && Vue.$cookies.get("session")) || (shared_data.username !== undefined && !Vue.$cookies.get("session"))) 
-//  {
-//     shared_data.logout();
-//     if (to.name !== "login") next({ name: "main" });
-//     else next();
-//   } else {
-//     next();
-//   }
-//   // console.log(123, Vue.$cookies.keys());
-//   // console.log(VueCookie);
-// });
-
-import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import {
@@ -72,6 +27,75 @@ import {
   ToastPlugin,
   LayoutPlugin,
 ].forEach((x) => Vue.use(x));
+
+import VueAxios from "vue-axios";
+import axios from "axios";
+import VueCookies from "vue-cookies";
+
+import routes from "./routes";
+import VueRouter from "vue-router";
+
+Vue.use(VueCookies);
+Vue.use(VueRouter);
+
+axios.defaults.withCredentials = true;
+const router = new VueRouter({
+  routes,
+});
+
+const shared_data = {
+  BASE_URL: "http://localhost:4000",
+  username: localStorage.username,
+  login(username) {
+    localStorage.setItem("username", username);
+    this.username = username;
+    console.log("login", this.username);
+  },
+  logout() {
+    console.log("logout");
+    Vue.$cookies.remove("session");
+    localStorage.removeItem("username");
+    this.username = undefined;
+  },
+};
+
+router.beforeEach((to, from, next) => {
+  // if there was a transition from logged in to session expired or localStorage was deleted
+
+  // if we try to enter auth required pages and we are not authorized
+  if (shared_data.username === undefined || !Vue.$cookies.get("session")) {
+    if (
+      (shared_data.username === undefined && Vue.$cookies.get("session")) ||
+      (shared_data.username !== undefined && !Vue.$cookies.get("session"))
+    ) {
+      shared_data.logout();
+    }
+
+    // if the route requires Authorization, (and we know the user is not authorized), we redirect to login page
+    if (to.matched.some((route) => route.meta.requiresAuth)) {
+      next({ name: "login" });
+    } else next();
+  } else next();
+});
+
+// Vue.prototype.$root.store = shared_data;
+
+// router.beforeEach((to, from, next) => {
+//   console.log(shared_data.username === undefined, !Vue.$cookies.get("session"));
+//   // if the user was logged in and than the cookie expired: if in global storage there is a username but there is no cookie
+//   if ((shared_data.username === undefined && Vue.$cookies.get("session")) || (shared_data.username !== undefined && !Vue.$cookies.get("session")))
+//  {
+//     shared_data.logout();
+//     if (to.name !== "login") next({ name: "main" });
+//     else next();
+//   } else {
+//     next();
+//   }
+//   // console.log(123, Vue.$cookies.keys());
+//   // console.log(VueCookie);
+// });
+
+import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
 axios.interceptors.request.use(
@@ -101,20 +125,6 @@ Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
-const shared_data = {
-  BASE_URL: "http://localhost:4000",
-  username: localStorage.username,
-  login(username) {
-    localStorage.setItem("username", username);
-    this.username = username;
-    console.log("login", this.username);
-  },
-  logout() {
-    console.log("logout");
-    localStorage.removeItem("username");
-    this.username = undefined;
-  },
-};
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
 

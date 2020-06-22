@@ -1,14 +1,13 @@
 <template>
   <div>
-      <RecipePreviewList
-      title="Some Of Our Recipes"
-      :recipes="recipes"
-      > </RecipePreviewList>
-<br>
-<br>
-<br>
-      <RandomRecipesAction v-on:random-click-event="updateRecipes"></RandomRecipesAction>
-
+    <RecipePreviewList title="Some Of Our Recipes" :recipes="recipes">
+    </RecipePreviewList>
+    <br />
+    <br />
+    <br />
+    <RandomRecipesAction
+      v-on:random-click-event="updateRecipes"
+    ></RandomRecipesAction>
   </div>
 </template>
 
@@ -16,7 +15,7 @@
 import RecipePreviewList from "./RecipePreviewList.vue";
 import RandomRecipesAction from "./RandomRecipesAction.vue";
 export default {
-components: {
+  components: {
     RecipePreviewList,
     RandomRecipesAction,
   },
@@ -32,7 +31,7 @@ components: {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-          "http://localhost:4000/recipes/random"
+          this.$root.store.BASE_URL + "/recipes/random"
         );
 
         const recipes_ = response.data;
@@ -42,6 +41,9 @@ components: {
         this.recipes = [];
 
         this.recipes.push(...recipes_);
+        console.log("start check22222222***********************");
+
+        console.log(recipes_);
         console.log(this.recipes);
       } catch (error) {
         console.log(error);

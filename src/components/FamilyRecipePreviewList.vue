@@ -35,7 +35,7 @@ export default {
     async showRecipes() {
       try {
         const response = await this.axios.get(
-          "http://localhost:4000/profile/familyRecipes"
+          this.$root.store.BASE_URL + "/profile/familyRecipes"
         );
 
         // console.log(response);

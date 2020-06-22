@@ -1,13 +1,12 @@
 <template>
-
-   <b-container>
+  <b-container>
     <h3>
       {{ title }}:
       <slot></slot>
     </h3>
 
     <b-row>
-      <b-col v-for="(r) in recipes" :key="r.id">
+      <b-col v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
@@ -27,30 +26,24 @@ export default {
       type: String,
       required: true,
     },
-
   },
   data() {
-    return {
-
-    };
+    return {};
   },
   mounted() {
-
     // this.updateRecipes();
   },
   methods: {
     // async updateRecipes() {
     //   try {
     //     const response = await this.axios.get(
-    //       "http://localhost:4000/recipes/random"
+    //       this.$root.store.BASE_URL + "/recipes/random"
     //     );
-
     //     const recipes_ = response.data;
     //     console.log(response);
     //     console.log(recipes_);
     //     this.recipes.push;
     //     this.recipes = [];
-
     //     this.recipes.push(...recipes_);
     //     console.log(this.recipes);
     //   } catch (error) {

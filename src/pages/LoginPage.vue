@@ -93,15 +93,18 @@ export default {
     },
     async Login() {
       try {
-        const response = await this.axios.post("http://localhost:4000/login", {
-          username: this.form.username,
-          password: this.form.password,
-        });
+        const response = await this.axios.post(
+          this.$root.store.BASE_URL + "/login",
+          {
+            username: this.form.username,
+            password: this.form.password,
+          }
+        );
         // console.log(response);
         // this.$root.loggedIn = true;
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.$router.push("/");
+        this.$router.push("/").catch(()=>{});
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;

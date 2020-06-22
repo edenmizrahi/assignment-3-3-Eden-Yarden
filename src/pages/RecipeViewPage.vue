@@ -18,7 +18,6 @@
               <div>
                 <!-- <div class="favorite" > -->
                 <div v-if="$root.store.username">
-                  
                   Favorite: {{ recipe.favorite }}
                 </div>
                 <div v-if="$root.store.username">
@@ -69,9 +68,12 @@ export default {
       try {
         console.log("recipe id: " + this.$route.params.recipeId);
         response = await this.axios.get(
-          "http://localhost:4000/recipes/displayRecipePage/recipeId/" +
+          this.$root.store.BASE_URL +
+            "/recipes/displayRecipePage/recipeId/" +
             this.$route.params.recipeId
         );
+        console.log("recipe id: " + this.$route.params.recipeId);
+
         console.log("success addd!!!!!!!!!!!");
         // console.log("after");
         // console.log("response.status", response.status);
@@ -133,7 +135,8 @@ export default {
           // console.log(this.$route.params.recipeId);
           console.log("enter to watch/fav");
           responewatchedorfav = await this.axios.get(
-            "http://localhost:4000/profile/recipeInfo/" +
+            this.$root.store.BASE_URL +
+              "/profile/recipeInfo/" +
               "[" +
               this.$route.params.recipeId +
               "]"

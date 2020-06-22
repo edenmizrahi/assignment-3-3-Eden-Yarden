@@ -3,9 +3,6 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }"
     class="recipe-preview"
   >
-
-
-  
     <!-- <div class="recipe-body">
       <img v-if="image_load" :src="recipe.image" class="recipe-image" />
     </div>
@@ -54,6 +51,12 @@
             <li>Vegetarian: {{ recipe.vegetarian }}</li>
             <li>Gluten Free: {{ recipe.glutenFree }}</li>
           </ul>
+          <div v-if="$root.store.username">
+            Favorite: {{ this.recipe.favorite }}
+          </div>
+          <div v-if="$root.store.username">
+            Watched: {{ this.recipe.watched }}
+          </div>
         </div>
       </div>
     </div>
@@ -63,6 +66,11 @@
 <script>
 export default {
   name: "RecipePreview",
+  mounted() {
+    if (this.$root.store.username) {
+      this.checkIfLogin();
+    }
+  },
   // mounted() {
   //   this.axios.get(this.recipe.image).then((i) => {
   //     this.image_load = true;
@@ -102,6 +110,47 @@ export default {
     //     return undefined;
     //   }
     // }
+  },
+
+  methods: {
+    async checkIfLogin() {
+      try {
+        let responewatchedorfav;
+
+        //favorite / watched
+        try {
+          // console.log(this.$route.params.recipeId);
+          console.log(111111111111, this.recipe.recipe_id);
+          responewatchedorfav = await this.axios.get(
+            this.$root.store.BASE_URL +
+              "/profile/recipeInfo/" +
+              "[" +
+              this.recipe.recipe_id +
+              "]"
+          );
+          console.log("after");
+          console.log(responewatchedorfav);
+          // console.log("response.status", response.status);
+          if (responewatchedorfav.status !== 200)
+            this.$router.replace("/NotFound");
+        } catch (error) {
+          console.log(
+            "error.respone_watchedOrFav.status",
+            error.responewatchedorfav.status
+          );
+          this.$router.replace("/NotFound");
+          return;
+        }
+        this.recipe.favorite =
+          responewatchedorfav.data[this.recipe.recipe_id].favorite;
+        this.recipe.watched =
+          responewatchedorfav.data[this.recipe.recipe_id].watched;
+        console.log("****************************************");
+        console.log(234433, this.recipe);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
