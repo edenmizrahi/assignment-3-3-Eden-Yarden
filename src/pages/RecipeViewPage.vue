@@ -18,11 +18,29 @@
               <div>
                 <!-- <div class="favorite" > -->
                 <div v-if="$root.store.username">
-                  
-                  Favorite: {{ recipe.favorite }}
+                  Watched: {{ recipe.watched }}
                 </div>
                 <div v-if="$root.store.username">
-                  Watched: {{ recipe.watched }}
+                  <div class="favBtn" v-if="recipe.favorite == false">
+                    <button
+                      type="button"
+                      variant="primary"
+                      style="width:80px;display:block;font-size: 10px;"
+                      @click="AddToFavoriteAction(recipe)"
+                      ref="btnFavorite"
+                    >
+                      Add To Favorite
+                    </button>
+                  </div>
+                  <div v-else>
+                    <button
+                      variant="primary"
+                      style="width:80px;display:block;font-size: 10px;"
+                      ref="btnFavorite"
+                    >
+                      Already In Favorite
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -56,7 +74,12 @@
 </template>
 
 <script>
+// import AddToFavoriteVue from '../components/AddToFavorite.vue';
+// import AddRecipeToFavorite from "../component/AddRecipeToFavorite.vue";
 export default {
+  // components: {
+  //   AddRecipeToFavorite,
+  // },
   data() {
     return {
       recipe: null,
@@ -72,7 +95,7 @@ export default {
           "http://localhost:4000/recipes/displayRecipePage/recipeId/" +
             this.$route.params.recipeId
         );
-        console.log("success addd!!!!!!!!!!!");
+        console.log("success add!!!!!!!!!!");
         // console.log("after");
         // console.log("response.status", response.status);
         if (response.status !== 200) this.$router.replace("/NotFound");
@@ -84,7 +107,7 @@ export default {
       console.log(response);
       let a = {
         // analyzedInstructions,
-        id: response.data.id,
+        id: response.data.recipe_id,
         image: response.data.image,
         title: response.data.title,
         readyInMinutes: response.data.readyInMinutes,
@@ -176,6 +199,39 @@ export default {
         console.log(error);
       }
     },
+    async AddToFavoriteAction(recipe) {
+      console.log("enter to add to favorite action");
+
+      let responseAfterAddFavorite;
+
+      //favorite / watched
+      try {
+        // console.log(this.$route.params.recipeId);
+        responseAfterAddFavorite = await this.axios.put(
+          "http://localhost:4000/profile/favorite/add/" +
+            this.$route.params.recipeId
+        );
+        console.log("after");
+        console.log(responseAfterAddFavorite);
+
+        // console.log("response.status", response.status);
+        if (responseAfterAddFavorite.status !== 200)
+          this.$router.replace("/NotFound");
+      } catch (error) {
+        console.log(error.responseAfterAddFavorite.status);
+        this.$router.replace("/NotFound");
+        return;
+      }
+      this.$refs.btnFavorite.innerText = "Already In Favorite";
+    },
+    // greet: function (event) {
+    //   // `this` inside methods points to the Vue instance
+    //   alert('Hello ' + this.name + '!')
+    //   // `event` is the native DOM event
+    //   if (event) {
+    //     alert(event.target.tagName)
+    //   }
+    // }
   },
 };
 </script>
@@ -194,10 +250,9 @@ export default {
   width: 50%;
 }
 
-.favorite,
-.watched {
-  display: none;
-}
+/* .favBtn{
+  width: 50%;
+} */
 /* .recipe-header{
 
 } */

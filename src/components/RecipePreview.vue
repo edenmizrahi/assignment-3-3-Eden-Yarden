@@ -3,9 +3,6 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }"
     class="recipe-preview"
   >
-
-
-  
     <!-- <div class="recipe-body">
       <img v-if="image_load" :src="recipe.image" class="recipe-image" />
     </div>
@@ -78,30 +75,6 @@ export default {
       type: Object,
       required: true,
     },
-
-    // id: {
-    //   type: Number,
-    //   required: true
-    // },
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
-    // readyInMinutes: {
-    //   type: Number,
-    //   required: true
-    // },
-    // image: {
-    //   type: String,
-    //   required: true
-    // },
-    // aggregateLikes: {
-    //   type: Number,
-    //   required: false,
-    //   default() {
-    //     return undefined;
-    //   }
-    // }
   },
 };
 </script>

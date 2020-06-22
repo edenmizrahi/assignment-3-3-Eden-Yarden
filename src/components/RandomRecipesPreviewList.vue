@@ -1,14 +1,13 @@
 <template>
   <div>
-      <RecipePreviewList
-      title="Some Of Our Recipes"
-      :recipes="recipes"
-      > </RecipePreviewList>
-<br>
-<br>
-<br>
-      <RandomRecipesAction v-on:random-click-event="updateRecipes"></RandomRecipesAction>
-
+    <RecipePreviewList title="Some Of Our Recipes" :recipes="recipes">
+    </RecipePreviewList>
+    <br />
+    <br />
+    <br />
+    <RandomRecipesAction
+      v-on:random-click-event="updateRecipes"
+    ></RandomRecipesAction>
   </div>
 </template>
 
@@ -16,7 +15,7 @@
 import RecipePreviewList from "./RecipePreviewList.vue";
 import RandomRecipesAction from "./RandomRecipesAction.vue";
 export default {
-components: {
+  components: {
     RecipePreviewList,
     RandomRecipesAction,
   },
