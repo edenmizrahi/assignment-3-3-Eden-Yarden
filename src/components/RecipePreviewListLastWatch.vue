@@ -6,9 +6,8 @@
     </h3>
       <b-col v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
-       
       </b-col>
-     
+
   </b-container>
 </template>
 
@@ -45,8 +44,14 @@ export default {
         console.log(response);
         this.recipes.push;
         this.recipes = [];
-
+        console.log("start check***********************")
+      
         this.recipes.push(...recipes_);
+                console.log("start check***********************");
+
+      
+        console.log(recipes_);
+
         // console.log(this.recipes);
       } catch (error) {
         console.log(error);
