@@ -36,7 +36,6 @@
         </div>
         <div class="card-body">
           <img
-          
             :src="recipe.image"
             class="recipe-image"
             style="width:300px;height:200px;"
