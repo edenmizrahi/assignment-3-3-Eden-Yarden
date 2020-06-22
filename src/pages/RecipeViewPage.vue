@@ -14,10 +14,15 @@
               <div>Vegan: {{ recipe.vegan }}</div>
               <div>Vegetarian: {{ recipe.vegetarian }}</div>
               <div>Likes: {{ recipe.aggregateLikes }} likes</div>
-              <div class="favorite" style="display = 'none'">
-                Favorite: {{ recipe.favorite }}
+              <div>
+                <!-- <div class="favorite" > -->
+                <div v-if="$root.store.username">
+                  Favorite: {{ recipe.favorite }}
+                </div>
+                <div v-if="$root.store.username">
+                  Watched: {{ recipe.watched }}
+                </div>
               </div>
-              <div class="watched">Watched: {{ recipe.watched }}</div>
             </div>
             Ingredients:
             <ul>
@@ -110,14 +115,7 @@ export default {
           image: response.data.image,
           title: response.data.title,
           servings: response.data.servings,
-          // favorite:
-          //   responewatchedorfav.data[this.$route.params.recipeId].favorite,
-          // watched:
-          //   responewatchedorfav.data[this.$route.params.recipeId].watched,
         };
-        // this.getElementsByClassName("watched").disabled = true;
-        // document.getElementById("watched").disabled = true;
-        // document.getElementById("favorite").disabled = true;
         this.recipe = _recipe;
       }
     } catch (error) {
@@ -126,72 +124,55 @@ export default {
   },
   methods: {
     async checkIfLogin(_instructions, response) {
-      let responewatchedorfav;
-      let responeAddToWatched;
-      //add to watchedList
       try {
-        // console.log(this.$route.params.recipeId);
-        console.log("enter to add to watchedList");
-        responeAddToWatched = await this.axios.put(
-          "https://assignment3-2-yarden.herokuapp.com/profile/watchedList/add/" +
-            this.$route.params.recipeId
-        );
-        console.log("after add to watchedList");
-        console.log(responeAddToWatched);
-        // console.log("response.status", response.status);
+        let responewatchedorfav;
 
-        if (responeAddToWatched.status !== 200)
+        //favorite / watched
+        try {
+          // console.log(this.$route.params.recipeId);
+          console.log("enter to watch/fav");
+          responewatchedorfav = await this.axios.get(
+            "http://localhost:4000/profile/recipeInfo/" +
+              "[" +
+              this.$route.params.recipeId +
+              "]"
+          );
+          console.log("after");
+          console.log(responewatchedorfav);
+          // console.log("response.status", response.status);
+          if (responewatchedorfav.status !== 200)
+            this.$router.replace("/NotFound");
+        } catch (error) {
+          console.log(
+            "error.respone_watchedOrFav.status",
+            error.responewatchedorfav.status
+          );
           this.$router.replace("/NotFound");
+          return;
+        }
+
+        let _recipe = {
+          instructions: response.data.instructions,
+          _instructions,
+          // analyzedInstructions,
+          ingredients: response.data.ingredients,
+          vegetarian: response.data.vegetarian,
+          vegan: response.data.vegan,
+          aggregateLikes: response.data.aggregateLikes,
+          readyInMinutes: response.data.readyInMinutes,
+          image: response.data.image,
+          title: response.data.title,
+          servings: response.data.servings,
+          favorite:
+            responewatchedorfav.data[this.$route.params.recipeId].favorite,
+          watched:
+            responewatchedorfav.data[this.$route.params.recipeId].watched,
+        };
+
+        this.recipe = _recipe;
       } catch (error) {
-        console.log(error.responeAddToWatched.status);
-        if (responeAddToWatched.message == "unauthorized")
-          this.favorite.style = "block";
-        // this.$router.replace("/NotFound");
-        return;
+        console.log(error);
       }
-
-      //favorite / watched
-      try {
-        // console.log(this.$route.params.recipeId);
-        console.log("enter to watch/fav");
-        responewatchedorfav = await this.axios.get(
-          "https://assignment3-2-yarden.herokuapp.com/profile/recipeInfo/" +
-            "[" +
-            this.$route.params.recipeId +
-            "]"
-        );
-        console.log("after");
-        console.log(responewatchedorfav);
-        // console.log("response.status", response.status);
-        if (responewatchedorfav.status !== 200)
-          this.$router.replace("/NotFound");
-      } catch (error) {
-        console.log(
-          "error.respone_watchedOrFav.status",
-          error.responewatchedorfav.status
-        );
-        this.$router.replace("/NotFound");
-        return;
-      }
-
-      let _recipe = {
-        instructions: response.data.instructions,
-        _instructions,
-        // analyzedInstructions,
-        ingredients: response.data.ingredients,
-        vegetarian: response.data.vegetarian,
-        vegan: response.data.vegan,
-        aggregateLikes: response.data.aggregateLikes,
-        readyInMinutes: response.data.readyInMinutes,
-        image: response.data.image,
-        title: response.data.title,
-        servings: response.data.servings,
-        favorite:
-          responewatchedorfav.data[this.$route.params.recipeId].favorite,
-        watched: responewatchedorfav.data[this.$route.params.recipeId].watched,
-      };
-
-      this.recipe = _recipe;
     },
   },
 };
@@ -209,6 +190,11 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.favorite,
+.watched {
+  display: none;
 }
 /* .recipe-header{
 

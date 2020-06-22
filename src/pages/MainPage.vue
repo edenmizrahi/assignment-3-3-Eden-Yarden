@@ -44,6 +44,8 @@
         </div>
       </div>
     </div>
+
+    <router-link to="/family" tag="button" />
   </div>
 
   <!-- <div class="container-fluid">
