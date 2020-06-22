@@ -1,14 +1,12 @@
 <template>
-      <b-container>
+  <b-container>
     <!-- <h3>
       {{ title }}:
       <slot></slot>
     </h3> -->
-      <b-col v-for="r in familyRecipes" :key="r.id">
-        <FamilyRecipePreview class="familyRecipePreview" :recipe="r" />
-       
-      </b-col>
-     
+    <b-col v-for="r in familyRecipes" :key="r.id">
+      <FamilyRecipePreview class="familyRecipePreview" :recipe="r" />
+    </b-col>
   </b-container>
 </template>
 
@@ -19,12 +17,12 @@ export default {
   components: {
     FamilyRecipePreview,
   },
-//   props: {
-//     title: {
-//       type: String,
-//       required: true,
-//     },
-//   },
+  //   props: {
+  //     title: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //   },
   data() {
     return {
       familyRecipes: [],
@@ -41,7 +39,15 @@ export default {
         );
 
         // console.log(response);
-        const familyRecipes_ = response.data;
+        let familyRecipes_ = response.data;
+        familyRecipes_.forEach((element) => {
+          element.image =
+            "https://res.cloudinary.com/dc9fdssoo/image/upload/" +
+            element.image;
+        });
+
+        // const familyRecipes_ = response.data;
+
         console.log(response);
         this.familyRecipes.push;
         this.familyRecipes = [];

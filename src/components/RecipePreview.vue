@@ -52,6 +52,7 @@
           <ul class="recipe-overview">
             <li>Vegan: {{ recipe.vegan }}</li>
             <li>Vegetarian: {{ recipe.vegetarian }}</li>
+            <li>Gluten Free: {{ recipe.glutenFree }}</li>
           </ul>
         </div>
       </div>

@@ -18,7 +18,6 @@
             }"
             disabled
           ></RecipePreviewList> -->
- 
         </div>
       </div>
     </div>
@@ -44,8 +43,9 @@
         </div>
       </div>
     </div>
-
-    <router-link to="/family" tag="button" />
+    <div v-if="!$root.store.username">
+      <router-link to="/family" tag="button" />
+    </div>
   </div>
 
   <!-- <div class="container-fluid">
@@ -99,7 +99,6 @@
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
 import RandomRecipesPreviewList from "../components/RandomRecipesPreviewList";
-
 
 import LoginPage from "../pages/LoginPage.vue";
 import RecipePreviewListLastWatch from "../components/RecipePreviewListLastWatch";
