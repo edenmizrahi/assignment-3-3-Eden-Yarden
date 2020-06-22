@@ -125,28 +125,6 @@ export default {
     async checkIfLogin(_instructions, response) {
       try {
         let responewatchedorfav;
-        let responeAddToWatched;
-        //add to watchedList
-        try {
-          // console.log(this.$route.params.recipeId);
-          console.log("enter to add to watchedList");
-          responeAddToWatched = await this.axios.put(
-            "http://localhost:4000/profile/watchedList/add/" +
-              this.$route.params.recipeId
-          );
-          console.log("after add to watchedList");
-          console.log(responeAddToWatched);
-          // console.log("response.status", response.status);
-
-          if (responeAddToWatched.status !== 200)
-            this.$router.replace("/NotFound");
-        } catch (error) {
-          console.log(error.responeAddToWatched.status);
-          // if (responeAddToWatched.message == "unauthorized")
-          //   // this.favorite.style = "block";
-          //   this.$router.replace("/NotFound");
-          return;
-        }
 
         //favorite / watched
         try {
