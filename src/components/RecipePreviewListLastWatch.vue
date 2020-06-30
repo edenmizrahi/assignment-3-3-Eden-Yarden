@@ -45,6 +45,22 @@ export default {
         this.recipes = [];
         console.log("start check***********************");
 
+
+        this.recipes.push;
+        this.recipes = [];
+
+        console.log("start check33333333***********************");
+
+        this.recipes_.map((r) => {
+          // this.recipes.map((r) => {
+          this.promises.push(this.checkIfLogin(r));
+        });
+        let x = await Promise.all(this.promises);
+        // this.$forceUpdate();
+        this.recipes.push(...this.recipes_);
+
+
+
         this.recipes.push(...recipes_);
         console.log("start check***********************");
 
