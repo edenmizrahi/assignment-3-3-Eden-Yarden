@@ -40,6 +40,7 @@ const routes = [
       requiresAuth: true,
     },
   },
+
   {
     path: "/family/:recipeId",
     name: "familyRecipe",
@@ -48,6 +49,16 @@ const routes = [
       requiresAuth: true,
     },
   },
+
+  {
+    path: "/recipes/:name",
+    name: "recipesPage",
+    component: () => import("./pages/RecipesPage"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
   {
     path: "*",
     name: "notFound",

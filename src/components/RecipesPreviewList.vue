@@ -1,11 +1,14 @@
 <template>
   <div>
     <div  v-if="type=='random'">
+      
   <b-container>
     <h3>
      Random Recipes:
       <slot></slot>
     </h3>
+
+
 
     <b-row>
       <b-col v-for="r in this.recipes" :key="r.recipe_id">
@@ -38,7 +41,7 @@
 
 </template>
 
-<script>
+<script >
 import RandomRecipesAction from "./RandomRecipesAction.vue";
 import RecipePreview from "./RecipePreview.vue";
 
@@ -55,6 +58,7 @@ export default {
       recipes: [],
       promises: [],
       recipes_:[],
+   
     };
   },
   watch: {
@@ -188,4 +192,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+
+#app {
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+
+ul {
+  list-style-type: none;
+}
+</style>
