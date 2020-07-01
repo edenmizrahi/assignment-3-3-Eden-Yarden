@@ -24,31 +24,21 @@ export default {
       }
     },
   },
-    // props:{
-    //     numOfCollumn:{
-    //         type: Number,
-    //         require: true,
-    //     },
-    //     recipes:{ 
-    //         type:Array,
-    //         require:true,
-    //     },
-    //     title: {type: String, require: true,},
-    // },
+    props:{
+        numberOfColumns:{
+            type: Number,
+            require: true,
+        },
+        title: {type: String, require: true,},
+    },
     data(){
         return {
-        numberOfColumns:3,
         recipes:[],
-        title: ""
         }
     },
       async mounted() {
-          if(!!this.$route.params.name&&!!this.$route.params.numberOfColumns){
-          console.log(45678,this.$route.params.numberOfColumns)
-          console.log(6789,this.$route.params.name)
-          this.numberOfColumns=this.$route.params.numberOfColumns;
-          this.title=this.$route.params.name;
-          }
+          console.log(1234567890000,this.title);
+          console.log(1234567890000,this.numberOfColumns);
 
       try {
         let response=[];
