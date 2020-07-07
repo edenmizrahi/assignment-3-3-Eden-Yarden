@@ -7,17 +7,10 @@
         class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center"
       >
         <div class="logoarea pt-5 pb-5">
-          <RandomRecipesPreviewList></RandomRecipesPreviewList>
-          <!-- <RecipePreviewList></RecipePreviewList>
-          <RecipePreviewList
-            title="Random"
-            :class="{
-              RandomRecipes: true,
-              blur: !$root.store.username,
-              center: true,
-            }"
-            disabled
-          ></RecipePreviewList> -->
+          <RecipesPreviewList
+            :isLogin="!!$root.store.username"
+            type="random"
+          ></RecipesPreviewList>
         </div>
       </div>
     </div>
@@ -32,14 +25,13 @@
           <LoginPage></LoginPage>
         </div>
         <div v-else>
-          <RecipePreviewListLastWatch
-            title="Last Viewed Recipes"
-            :class="{
-              RandomRecipes: true,
-              blur: !$root.store.username,
-              center: true,
-            }"
-          ></RecipePreviewListLastWatch>
+
+                    <RecipesPreviewList
+            :isLogin="!!$root.store.username"
+            type="lastWatch"
+          
+          ></RecipesPreviewList>
+
         </div>
       </div>
     </div>
@@ -97,18 +89,16 @@
 </template>
 
 <script>
-import RecipePreviewList from "../components/RecipePreviewList";
-import RandomRecipesPreviewList from "../components/RandomRecipesPreviewList";
+import RecipesPreviewList from "../components/RecipesPreviewList";
 
 import LoginPage from "../pages/LoginPage.vue";
-import RecipePreviewListLastWatch from "../components/RecipePreviewListLastWatch";
 
 export default {
   components: {
     // RecipePreviewList,
-    RandomRecipesPreviewList,
+    RecipesPreviewList,
     LoginPage,
-    RecipePreviewListLastWatch,
+    // RecipePreviewListLastWatch,
   },
 };
 </script>

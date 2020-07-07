@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+
     <div id="nav">
+         
       <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
       <router-link :to="{ name: 'search' }">Search</router-link>|
 
@@ -12,9 +14,15 @@
       </span>
       <span v-else>
         <router-link :to="{ name: 'family' }">Family recipes</router-link>|
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
+        <router-link :to="{ name: 'recipesPage', params: { name:'favorites' ,numberOfColumns:4  } }">Favorites recipes</router-link>|
+
+        {{ $root.store.username }}: <button @click="Logout">Logout</button>
+        
+        
       </span>
+        
     </div>
+ 
     <router-view />
   </div>
 </template>

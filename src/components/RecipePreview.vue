@@ -50,13 +50,14 @@
             <li>Vegan: {{ recipe.vegan }}</li>
             <li>Vegetarian: {{ recipe.vegetarian }}</li>
             <li>Gluten Free: {{ recipe.glutenFree }}</li>
+            <li v-if="$root.store.username">
+            Favorite: {{ recipe.favorite }}
+          </li>
+          <li v-if="recipe.watched==true" >
+            Watched: {{ recipe.watched}} 
+          </li>
           </ul>
-          <div v-if="$root.store.username">
-            Favorite: {{ this.recipe.favorite }}
-          </div>
-          <div v-if="$root.store.username">
-            Watched: {{ this.recipe.watched }}
-          </div>
+       
         </div>
       </div>
     </div>
@@ -66,19 +67,19 @@
 <script>
 export default {
   name: "RecipePreview",
-  mounted() {
-    if (this.$root.store.username) {
-      this.checkIfLogin();
-    }
-  },
-  // mounted() {
-  //   this.axios.get(this.recipe.image).then((i) => {
-  //     this.image_load = true;
-  //   });
+  // async mounted() {
+  //   if (this.$root.store.username) {
+  //     await this.checkIfLogin();
+  //   }
   // },
+  async mounted() {
+    // await this.checkIfLogin();
+    console.log(111115555,this.recipe)
+  },
   data() {
     return {
       image_load: false,
+      // cur_recipe:this.recipe,
     };
   },
   props: {
@@ -117,12 +118,10 @@ export default {
           this.$router.replace("/NotFound");
           return;
         }
-        this.recipe.favorite =
-          responewatchedorfav.data[this.recipe.recipe_id].favorite;
-        this.recipe.watched =
-          responewatchedorfav.data[this.recipe.recipe_id].watched;
+        this.recipe.favorite =responewatchedorfav.data[this.recipe.recipe_id].favorite;
+        this.recipe.watched =responewatchedorfav.data[this.recipe.recipe_id].watched;
         console.log("****************************************");
-        console.log(234433, this.recipe);
+        console.log(234433,this.recipe.watched);
       } catch (error) {
         console.log(error);
       }
