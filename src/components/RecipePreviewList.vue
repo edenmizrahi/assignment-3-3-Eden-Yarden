@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <h3>
-      {{ title }}:
+      {{ title }}
       <slot></slot>
     </h3>
 
@@ -57,5 +57,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
+  width: 100%;
 }
 </style>

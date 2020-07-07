@@ -1,5 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
+import VueSimpleAlert from "vue-simple-alert";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -34,9 +35,11 @@ import VueCookies from "vue-cookies";
 
 import routes from "./routes";
 import VueRouter from "vue-router";
-
+import { ButtonGroupPlugin } from 'bootstrap-vue'
+Vue.use(ButtonGroupPlugin)
 Vue.use(VueCookies);
 Vue.use(VueRouter);
+Vue.use(VueSimpleAlert);
 
 axios.defaults.withCredentials = true;
 const router = new VueRouter({
