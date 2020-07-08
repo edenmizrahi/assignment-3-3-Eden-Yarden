@@ -42,23 +42,32 @@ const routes = [
   },
 
   {
-    path: "/family/:recipeId",
-    name: "familyRecipe",
-    component: () => import("./pages/FamilyViewPage"),
+    path: "/PersonalRecipe/:type/:recipeId",
+    name: "PersonalViewPage",
+    component: () => import("./pages/PersonalViewPage"),
     meta: {
       requiresAuth: true,
     },
   },
 
   {
-    path: "/recipes/:name",
+    path: "/recipes/favorites",
     name: "recipesPage",
     component: () => import("./pages/RecipesPage"),
+    props: true,
     meta: {
       requiresAuth: true,
     },
   },
-
+  {
+    path: "/recipes/myRecipes",
+    name: "myRecipesPage",
+    component: () => import("./pages/RecipesPage"),
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
   {
     path: "*",
     name: "notFound",

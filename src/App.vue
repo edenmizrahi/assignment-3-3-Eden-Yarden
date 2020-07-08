@@ -14,7 +14,10 @@
       </span>
       <span v-else>
         <router-link :to="{ name: 'family' }">Family recipes</router-link>|
-        <router-link :to="{ name: 'recipesPage', params: { name:'favorites' ,numberOfColumns:4  } }">Favorites recipes</router-link>|
+        <router-link  @click="clickHandler()" :to="{ name: 'recipesPage' ,
+        params: { title: 'Favorite Recipes' , numberOfColumns:4 } }">Favorite recipes</router-link>|
+        <router-link :to="{ name: 'myRecipesPage' , 
+        params: { title: 'My Recipes' , numberOfColumns:4 } }">My recipes</router-link>|
 
         {{ $root.store.username }}: <button @click="Logout">Logout</button>
         
@@ -34,6 +37,10 @@ export default {
     console.log(this.$cookies.get("session"));
   },
   methods: {
+    clickHandler(){
+      console.log("**********************clickHandler")
+      this.$root.store.recipePage="Favorite Recipes"
+    },
     Logout() {
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");

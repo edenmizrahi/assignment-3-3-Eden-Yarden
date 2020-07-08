@@ -49,6 +49,7 @@ const router = new VueRouter({
 const shared_data = {
   BASE_URL: "http://localhost:4000",
   username: localStorage.username,
+  recipePage: "",
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;

@@ -9,9 +9,9 @@
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
-              <div>Ready in {{ familyRecipe.duration }} minutes</div>
+              <div>Ready in {{ familyRecipe.readyInMinutes }} minutes</div>
               <div>Vegan: {{ familyRecipe.vegan }}</div>
-              <div>Vegetarian: {{ familyRecipe.vegetarians }}</div>
+              <div>Vegetarian: {{ familyRecipe.vegetarian }}</div>
               <div>GlutenFree: {{ familyRecipe.glutenFree }}</div>
               <div>This recipe made by: {{ familyRecipe.owner }}</div>
               <div>Where: {{ familyRecipe.where }}</div>
@@ -52,12 +52,15 @@ export default {
       familyRecipe: null,
     };
   },
+
   async created() {
+    console.log("created",1111111)
     try {
       let response;
 
       try {
         console.log(this.$route.params.recipeId);
+        if(this.$route.params.type=="family"){
         response = await this.axios.get(
           this.$root.store.BASE_URL +
             "/profile/familyRecipes/" +
@@ -65,16 +68,29 @@ export default {
             this.$route.params.recipeId +
             "]"
         );
+        }
+
+        else{
+          if(this.$route.params.type=="my"){
+                    response = await this.axios.get(
+          this.$root.store.BASE_URL +
+            "/profile/myRecipes/" +
+            "[" +
+            this.$route.params.recipeId +
+            "]"
+        );
+          }
+        }
         console.log("after");
         console.log(response);
 
         let _familyRecipe = {
           instructions: response.data[0].instructions,
           ingredients: response.data[0].ingredients,
-          vegetarian: response.data[0].vegetarians,
+          vegetarian: response.data[0].vegetarian,
           vegan: response.data[0].vegan,
           glutenFree: response.data[0].glutenFree,
-          duration: response.data[0].duration,
+          readyInMinutes: response.data[0].readyInMinutes,
           image:
             "https://res.cloudinary.com/dc9fdssoo/image/upload/" +
             response.data[0].image,
