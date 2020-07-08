@@ -1,22 +1,10 @@
 <template>
-  <router-link
+<div>
+  <router-link v-if="type!='My Recipes'" 
     :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }"
     class="recipe-preview"
   >
-    <!-- <div class="recipe-body">
-      <img v-if="image_load" :src="recipe.image" class="recipe-image" />
-    </div>
-    <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
-      </div>
-      <ul class="recipe-overview">
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
-        <br />
-      </ul>
-    </div> -->
-
+   
     <article class="recipe-card">
       <div id="carousel" class="recipe-pic-frame">
         <div id="sliderBox" class="slider-box">
@@ -44,13 +32,13 @@
         <div class="card-footer">
           <ul class="recipe-overview">
             <li>{{ recipe.readyInMinutes }} minutes</li>
-            <li>{{ recipe.aggregateLikes }} likes</li>
+            <li  v-if="recipe.aggregateLikes" >{{ recipe.aggregateLikes }} likes</li>
           </ul>
           <ul class="recipe-overview">
             <li>Vegan: {{ recipe.vegan }}</li>
             <li>Vegetarian: {{ recipe.vegetarian }}</li>
             <li>Gluten Free: {{ recipe.glutenFree }}</li>
-            <li v-if="$root.store.username">
+            <li v-if="$root.store.username&&recipe.favorite==true">
             Favorite: {{ recipe.favorite }}
           </li>
           <li v-if="recipe.watched==true" >
@@ -61,7 +49,61 @@
         </div>
       </div>
     </div>
+       
   </router-link>
+  <router-link v-else
+    :to="{ name: 'PersonalViewPage', params: { type:'my' , recipeId: recipe.recipe_id } }"
+    class="recipe-preview"
+  >
+  
+    <article class="recipe-card">
+      <div id="carousel" class="recipe-pic-frame">
+        <div id="sliderBox" class="slider-box">
+          <div class="recipe-pic pic1" role="img"></div>
+          <div class="recipe-pic pic2" role="img"></div>
+          <div class="recipe-pic pic3" role="img"></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div :title="recipe.title" class="recipe-title">
+            {{ recipe.title }}
+          </div>
+        </div>
+        <div class="card-body">
+          <img
+            :src="recipe.image"
+            class="recipe-image"
+            style="width:300px;height:200px;"
+          />
+        </div>
+        <div class="card-footer">
+          <ul class="recipe-overview">
+            <li>{{ recipe.readyInMinutes }} minutes</li>
+            <li  v-if="recipe.aggregateLikes" >{{ recipe.aggregateLikes }} likes</li>
+          </ul>
+          <ul class="recipe-overview">
+            <li>Vegan: {{ recipe.vegan }}</li>
+            <li>Vegetarian: {{ recipe.vegetarian }}</li>
+            <li>Gluten Free: {{ recipe.glutenFree }}</li>
+            <li v-if="$root.store.username&&recipe.favorite==true">
+            Favorite: {{ recipe.favorite }}
+          </li>
+          <li v-if="recipe.watched==true" >
+            Watched: {{ recipe.watched}} 
+          </li>
+          </ul>
+       
+        </div>
+      </div>
+    </div>
+
+  </router-link>
+</div>
+
 </template>
 
 <script>
@@ -83,6 +125,10 @@ export default {
     };
   },
   props: {
+    type:{
+      type: String,
+      required: false,
+    },
     recipe: {
       type: Object,
       required: true,
@@ -131,7 +177,7 @@ export default {
 </script>
 
 <style scoped>
-.recipe-preview {
+/* .recipe-preview {
   display: inline-block;
   width: 90%;
   height: 100%;
@@ -204,7 +250,9 @@ export default {
   width: 90px;
   display: table-cell;
   text-align: center;
-}
+} */
 
 /************************** */
+
+
 </style>

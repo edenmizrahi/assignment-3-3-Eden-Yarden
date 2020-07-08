@@ -1,6 +1,6 @@
 <template>
   <div class="d-md-flex h-md-100 align-items-center">
-    <!-- First Half -->
+    <!-- left Half -->
 
     <div class="col-md-7 p-0 bg-indigo h-md-100">
       <div

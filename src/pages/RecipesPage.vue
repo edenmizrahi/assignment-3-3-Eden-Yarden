@@ -1,10 +1,13 @@
 <template>
   <div>
-    <ul :style="gridStyle" class="card-list" >
-    <li v-for="(card, index) in recipes" class="card-item" :key="index">
-      <RecipePreview :recipe="card"></RecipePreview>
-    </li>
-  </ul>
+    <p>
+      {{ this.title_ }}
+    </p>
+    <ul :style="gridStyle" class="card-list">
+      <li v-for="(card, index) in recipes" class="card-item" :key="index">
+        <RecipePreview :recipe="card" :type="title"></RecipePreview>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -12,55 +15,91 @@
 import RecipePreview from "../components/RecipePreview.vue";
 
 export default {
-    name: "RecipesPage",
+  name: "RecipesPage",
   components: {
     RecipePreview,
     // RecipePreviewList,
   },
-   computed: {
-    gridStyle() {
-      return {
-        gridTemplateColumns: `repeat(${this.numberOfColumns}, minmax(100px, 1fr))`
-      }
+  watch: {
+    $route(to, from) {
+      this.numberOfColumns = to.params.numberOfColumns;
+      this.title = to.params.title;
+      this.inStart();
     },
   },
-    props:{
-        numberOfColumns:{
-            type: Number,
-            require: true,
-        },
-        title: {type: String, require: true,},
+  computed: {
+    gridStyle() {
+      return {
+        gridTemplateColumns: `repeat(${this.numberOfColumns_}, minmax(100px, 1fr))`,
+      };
     },
-    data(){
-        return {
-        recipes:[],
-        }
+  },
+  props: {
+    numberOfColumns: {
+      type: Number,
+      require: false,
     },
-      async mounted() {
-          console.log(1234567890000,this.title);
-          console.log(1234567890000,this.numberOfColumns);
+    title: { type: String, require: false },
+  },
+  data() {
+    return {
+      recipes: [],
+      title_:"",
+      numberOfColumns_: 3,
+    };
+  },
+  async mounted(){
+    await this.inStart();
+  },
+  methods:{
+    async inStart() {
+    console.log(1234567890000, this.title);
+    console.log(1234567890000, this.numberOfColumns);
 
-      try {
-        let response=[];
-        if(this.title=='favorites'){
-            response = await this.axios.get(
-            this.$root.store.BASE_URL + "/profile/favorite"
-            );
-        }
+    try {
+      let response = [];
+      console.log("title",this.title);
+     console.log("title_",this.title_);
 
-         this.recipes_ = response.data;
-        console.log(response);
-        console.log(this.recipes_);
-        this.recipes.push;
-        this.recipes = [];
-        // this.$forceUpdate();
-        this.recipes.push(...this.recipes_);
-      } catch (error) {
-        console.log(error);
-      }
+    if(this.title){
+       this.$root.store.recipePage=this.title;
     }
+    //   if(!!this.title){
+    //     this.title_=this.title;
+    //   }
+    //  console.log("title_",this.title_);
 
-}
+    //   if(!!this.numberOfColumns){
+    //     this.numberOfColumns_=this.numberOfColumns;
+    //   }
+      this.title_=this.$root.store.recipePage;
+        console.log("title_",this.title_);
+      if (this.title_ == "Favorite Recipes") {
+        response = await this.axios.get(
+          this.$root.store.BASE_URL + "/profile/favorite"
+        );
+      }
+      if (this.title_ == "My Recipes") {
+        response = await this.axios.get(
+          this.$root.store.BASE_URL + "/profile/myRecipes"
+        );
+
+        console.log(123123123, response);
+      }
+
+      this.recipes_ = response.data;
+      console.log(response);
+      console.log(this.recipes_);
+      this.recipes.push;
+      this.recipes = [];
+      // this.$forceUpdate();
+      this.recipes.push(...this.recipes_);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  }
+};
 </script>
 
 <style>
@@ -70,12 +109,12 @@ export default {
 }
 
 .card-item {
-  background-color: dodgerblue;
+  /* background-color: dodgerblue; */
   padding: 2em;
 }
 
 body {
-  background: #20262E;
+  background: #20262e;
   padding: 20px;
   font-family: Helvetica;
 }
@@ -90,5 +129,4 @@ body {
 ul {
   list-style-type: none;
 }
-
 </style>

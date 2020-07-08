@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'familyRecipe', params: { recipeId: recipe.recipe_id } }"
+    :to="{ name: 'PersonalViewPage', params: { type:'family' , recipeId: recipe.recipe_id } }"
     class="recipe-preview"
   >
     <!-- <div class="recipe-body">
@@ -22,11 +22,11 @@
         </div>
         <div class="card-footer">
           <ul class="recipe-overview">
-            <li>{{ recipe.duration }} minutes</li>
+            <li>{{ recipe.readyInMinutes }} minutes</li>
           </ul>
           <ul class="recipe-overview">
             <li>Vegan: {{ recipe.vegan }}</li>
-            <li>Vegetarian: {{ recipe.vegetarians }}</li>
+            <li>Vegetarian: {{ recipe.vegetarian }}</li>
             <li>Gluten Free: {{ recipe.glutenFree }}</li>
           </ul>
           <br>

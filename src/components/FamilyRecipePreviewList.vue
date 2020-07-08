@@ -13,7 +13,7 @@
 <script>
 import FamilyRecipePreview from "./FamilyRecipePreview.vue";
 export default {
-  name: "RecipePreviewListLastWatch",
+  name: "FamilyRecipePreviewList",
   components: {
     FamilyRecipePreview,
   },
