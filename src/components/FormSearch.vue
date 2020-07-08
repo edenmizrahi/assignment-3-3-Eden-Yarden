@@ -37,7 +37,7 @@
           :state="validateState('amount')"
         ></b-form-input>
         <b-form-invalid-feedback v-if="!$v.form.amount.required">
-          Amount name is required
+          Amount by default is 5
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!$v.form.amount.numeric">
           Amount must contain only numbers.
@@ -152,7 +152,7 @@ export default {
         alpha,
       },
       amount: {
-        required,
+        // required,
         numeric,
       },
       cuisine: {},
@@ -165,6 +165,8 @@ export default {
     this.cuisines.push(...cuisines);
     this.diets.push(...diets);
     this.intolerances.push(...intolerances);
+    // $root.store.username
+    console.log($root.store.username);
     // console.log($v);
   },
   methods: {
@@ -190,14 +192,18 @@ export default {
       //   this.Search();
     },
     onReset() {
+      this.$emit("reset-click-event");
       this.form = {
         query: "",
         amount: "",
-        country: null,
+        cuisine: null,
+        diet: null,
+        intolerance: null,
       };
       this.$nextTick(() => {
         this.$v.$reset();
       });
+      
     },
   },
 };

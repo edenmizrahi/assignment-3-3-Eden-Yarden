@@ -2,7 +2,8 @@
   <div class="container">
     <h1 class="title">{{ header }}:</h1>
 
-    <FormSearch v-on:search-click-event="Search"> </FormSearch>
+    <FormSearch v-on:search-click-event="Search" v-on:reset-click-event="Reset">
+    </FormSearch>
     <br />
     <br />
     <br />
@@ -64,7 +65,12 @@ export default {
     };
   },
   async created() {
+    console.log("beforeCreated");
     this.aftersearch = "false";
+    // console.log(this.$store.recipes);
+    // if (this.$store.recipes != "") {
+    //   this.recipes = this.$store.recipes;
+    // }
   },
   computed: {
     numOfLines: function() {
@@ -82,12 +88,16 @@ export default {
       try {
         this.results = "";
         console.log("enter to search func");
+        let validAmount = amount;
+        if (validAmount == "") {
+          validAmount = 5;
+        }
         response = await this.axios.get(
           this.$root.store.BASE_URL +
             "/recipes/search/query/" +
             query +
             "/amount/" +
-            amount,
+            validAmount,
           {
             params: { cuisine: cuisine, diet: diet, intolerance: intolerance },
           }
@@ -106,6 +116,15 @@ export default {
           this.recipes = [];
           this.recipes.push(...recipes_);
 
+          console.log(this.$root.store.search);
+          this.$root.store.search(
+            this.recipes,
+            query,
+            amount,
+            cuisine,
+            diet,
+            intolerance
+          );
           /**show sort option**/
           this.aftersearch = "true";
 
@@ -144,6 +163,14 @@ export default {
       this.recipes.push;
       this.recipes = [];
       this.recipes.push(...sortrecipes);
+    },
+    async Reset() {
+      console.log("in Reset");
+      this.resAns = "none";
+      this.results = "";
+      this.recipes.push;
+      this.recipes = [];
+      this.aftersearch = "false";
     },
   },
 };
