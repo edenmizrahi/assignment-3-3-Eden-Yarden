@@ -1,12 +1,24 @@
 <template>
   <router-link
-    :to="{ name: 'PersonalViewPage', params: { type:'family' , recipeId: recipe.recipe_id } }"
+    :to="{
+      name: 'PersonalViewPage',
+      params: { type: 'family', recipeId: recipe.recipe_id },
+    }"
     class="recipe-preview"
   >
     <!-- <div class="recipe-body">
       <img v-if="image_load" :src="recipe.image" class="recipe-image" />
     </div> -->
     <div class="container">
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+      <link
+        href="https://fonts.googleapis.com/css?family=Pacifico|Raleway:400,800"
+        rel="stylesheet"
+      />
       <div class="card">
         <div class="card-header">
           <div :title="recipe.title" class="recipe-title">
@@ -29,8 +41,8 @@
             <li>Vegetarian: {{ recipe.vegetarian }}</li>
             <li>Gluten Free: {{ recipe.glutenFree }}</li>
           </ul>
-          <br>
-            <!-- <AddRecipeToFavorite v-on:random-click-event="updateRecipes"></AddRecipeToFavorite> -->
+          <br />
+          <!-- <AddRecipeToFavorite v-on:random-click-event="updateRecipes"></AddRecipeToFavorite> -->
         </div>
       </div>
     </div>
@@ -44,6 +56,7 @@ export default {
   //     this.image_load = true;
   //   });
   // },
+  name: "FamilyRecipePreview",
   data() {
     return {
       image_load: false,

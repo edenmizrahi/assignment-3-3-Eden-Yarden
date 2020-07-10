@@ -1,45 +1,92 @@
 <template>
   <div id="app">
+    <div>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+      <b-navbar toggleable="lg" type="dark" variant="info">
+        <b-navbar-brand href="#">Recipes </b-navbar-brand>
 
-    <div id="nav">
-         
-      <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      {{ !$root.store.username }}
-      <span v-if="!$root.store.username">
-        Guest:
-        <router-link :to="{ name: 'register' }">Register</router-link>|
-        <router-link :to="{ name: 'login' }">Login</router-link>|
-      </span>
-      <span v-else>
-        <router-link :to="{ name: 'family' }">Family recipes</router-link>|
-        <router-link  @click="clickHandler()" :to="{ name: 'recipesPage' ,
-        params: { title: 'Favorite Recipes' , numberOfColumns:4 } }">Favorite recipes</router-link>|
-        <router-link :to="{ name: 'myRecipesPage' , 
-        params: { title: 'My Recipes' , numberOfColumns:4 } }">My recipes</router-link>|
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item :to="{ name: 'main' }"
+              >Main <b-icon-house-fill></b-icon-house-fill
+            ></b-nav-item>
+            <b-nav-item :to="{ name: 'search' }">
+              Search <b-icon-search></b-icon-search
+            ></b-nav-item>
+            <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
+          </b-navbar-nav>
 
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>
-        
-        
-      </span>
-        
+          <b-navbar-nav v-if="$root.store.username">
+            <b-nav-item-dropdown text="Personal" right>
+              <b-dropdown-item :to="{ name: 'family' }"
+                >Family recipes</b-dropdown-item
+              >
+              <b-dropdown-item
+                @click="clickHandler()"
+                :to="{
+                  name: 'recipesPage',
+                  params: { title: 'Favorite Recipes', numberOfColumns: 4 },
+                }"
+              >
+                Favorite recipes <b-icon-star-fill></b-icon-star-fill
+              ></b-dropdown-item>
+              <b-dropdown-item
+                :to="{
+                  name: 'myRecipesPage',
+                  params: { title: 'My Recipes', numberOfColumns: 4 },
+                }"
+                >My recipes</b-dropdown-item
+              >
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
+
+            <b-nav-item-dropdown v-if="!$root.store.username" right>
+              <template v-slot:button-content>
+                Hello Guest <b-icon-person></b-icon-person>
+              </template>
+              <b-dropdown-item :to="{ name: 'register' }"
+                >Register
+              </b-dropdown-item>
+              <b-dropdown-item :to="{ name: 'login' }">Login</b-dropdown-item>
+            </b-nav-item-dropdown>
+            <b-nav-item-dropdown v-else right>
+              <template v-slot:button-content>
+                {{ $root.store.username }}
+                <b-icon-person-fill></b-icon-person-fill>
+              </template>
+              <b-dropdown-item @click="Logout()"
+                >Log-out
+                <b-icon-power></b-icon-power></b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
     </div>
- 
     <router-view />
   </div>
 </template>
 
 <script>
+// import {BIconClock} from 'bootstrap-vue'
+
 export default {
   name: "App",
   mounted() {
     console.log(this.$cookies.get("session"));
   },
   methods: {
-    clickHandler(){
-      console.log("**********************clickHandler")
-      this.$root.store.recipePage="Favorite Recipes"
+    clickHandler() {
+      console.log("**********************clickHandler");
+      this.$root.store.recipePage = "Favorite Recipes";
     },
     Logout() {
       this.$root.store.logout();
@@ -60,21 +107,21 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  // color: #2c3e50;
   min-height: 100vh;
 
 }
 
-#nav {
-  padding: 30px;
-}
+// #nav {
+//   padding: 30px;
+// }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+// #nav a {
+//   font-weight: bold;
+//   color: #2c3e50;
+// }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+// #nav a.router-link-exact-active {
+//   color: #42b983;
+// }
 </style>

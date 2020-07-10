@@ -1,5 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
+import VueSimpleAlert from "vue-simple-alert";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -31,12 +32,18 @@ import {
 import VueAxios from "vue-axios";
 import axios from "axios";
 import VueCookies from "vue-cookies";
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 import routes from "./routes";
 import VueRouter from "vue-router";
-
+import { ButtonGroupPlugin } from 'bootstrap-vue'
+Vue.use(ButtonGroupPlugin)
 Vue.use(VueCookies);
 Vue.use(VueRouter);
+Vue.use(VueSimpleAlert);
 
 axios.defaults.withCredentials = true;
 const router = new VueRouter({
@@ -58,6 +65,27 @@ const shared_data = {
     localStorage.removeItem("username");
     this.username = undefined;
   },
+  search(recipes, query, amount, cuisine, diet, intolerance){
+    console.log("search");
+    localStorage.setItem("recipes", recipes);
+    this.recipes = recipes;
+    console.log("search", this.recipes);
+    localStorage.setItem("query", query);
+    this.query = query;
+    console.log("search", this.query);
+    localStorage.setItem("amount", amount);
+    this.amount = amount;
+    console.log("search", this.amount);
+    localStorage.setItem("cuisine", cuisine);
+    this.cuisine = cuisine;
+    console.log("search", this.cuisine);
+    localStorage.setItem("diet", diet);
+    this.diet = diet;
+    console.log("search", this.diet);
+    localStorage.setItem("intolerance", intolerance);
+    this.intolerance = intolerance;
+    console.log("search", this.intolerance);
+  }
 };
 
 router.beforeEach((to, from, next) => {

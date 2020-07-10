@@ -1,26 +1,45 @@
 <template>
   <div class="container">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico|Raleway:400,800"
+      rel="stylesheet"
+    />
     <div v-if="recipe">
-      <div class="recipe-header mt-3 mb-4">
-        <h1>{{ recipe.title }}</h1>
-        <img :src="recipe.image" class="center" />
-      </div>
+
       <div class="recipe-body">
-        <div class="wrapper">
-          <div class="wrapped">
-            <div class="mb-3">
-              <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Num Of Servings : {{ recipe.servings }}</div>
-              <div>Vegan: {{ recipe.vegan }}</div>
-              <div>Vegetarian: {{ recipe.vegetarian }}</div>
-              <div>Gluten Free: {{ recipe.glutenFree }}</div>
-              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
-              <div>
-                <!-- <div class="favorite" > -->
+        <div id="recipe__presentation" :style="bg">
+          <div class="description">
+            <h1>{{ recipe.title }}</h1>
+          </div>
+          <br />
+          <div class="circle__recipe">
+            <i class="fa fa-clock-o"
+              ><h2>{{ recipe.readyInMinutes }} min</h2></i
+            >
+          </div>
+          <div class="circle__recipe">
+            <i class="fa fa-users"
+              ><h2>{{ recipe.servings }} Serves</h2></i
+            >
+            <!-- <p>Serves</p> -->
+          </div>
+          <div class="circle__recipe">
+            <!-- <h2> {{ recipe.aggregateLikes }}</h2> -->
+            <i class="fa fa-thumbs-up">
+              <h2>{{ recipe.aggregateLikes }}</h2></i
+            >
+          </div>
+
+          <!-- <div>
                 <div v-if="$root.store.username">
-                  Favorite: {{ recipe.favorite }}
-                </div>
-                <div v-if="$root.store.username">
+                  <div v-if="$root.store.username">
+                    Favorite: {{ recipe.favorite }}
+                  </div>
                   <div class="favBtn" v-if="recipe.favorite == false">
                     <button
                       type="button"
@@ -34,6 +53,8 @@
                   </div>
                   <div v-else>
                     <button
+                      disabled
+                      class="fa fa-star"
                       variant="primary"
                       style="width:80px;display:block;font-size: 10px;"
                       ref="btnFavorite"
@@ -42,33 +63,95 @@
                     </button>
                   </div>
                 </div>
+              </div> -->
+          <div>
+            <div class="btnFav" v-if="$root.store.username">
+              <div class="favBtn" v-if="recipe.favorite == false">
+                <button
+                  class="fa fa-star-o"
+                  type="button"
+                  variant="primary"
+                  style="width:40px;height:40px;border-style:none;margin-top: 10px; border-radius: 50%; margin-left: 26px;display:block;font-size: 20px; background-color: #e2c904;"
+                  @click="AddToFavoriteAction(recipe)"
+                  ref="btnFavorite"
+                >
+                  <!-- Add To Favorite -->
+                </button>
               </div>
+              <div v-else>
+                <button
+                  disabled
+                  class="fa fa-star"
+                  variant="primary"
+                  style="width:40px; border-style:none;height:40px; margin-top: 10px;border-radius: 50%; margin-left: 26px;display:block;font-size: 20px; background-color: #e2c904;"
+                  ref="btnFavorite"
+                >
+                  <!-- Already In Favorite -->
+                </button>
+              </div>
+              <br />
             </div>
-            Ingredients:
-            <ul>
-              <li
-                v-for="r in recipe.ingredients"
-                :key="'_' + r.amount + r.name"
-              >
-                {{ r.amount + " " + r.name }}
-              </li>
-            </ul>
+            <div v-else>
+              <br />
+              <br />
+              <br />
+            </div>
           </div>
-          <div class="wrapped">
-            Instructions:
-            <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
-              </li>
-            </ol>
+
+          <!-- <div class="recipe__presentation"> -->
+          <h5>
+            <b>Vegan:</b> {{ recipe.vegan }} |
+            <b>Vegetarian:</b>
+            {{ recipe.vegetarian }} |
+            <b>Gluten Free:</b>
+            {{ recipe.glutenFree }}
+          </h5>
+          <!-- </div> -->
+
+          <div class="content">
+            <b-tabs
+              class="content"
+              content-class="mt-4"
+              align="center"
+             
+            >
+              <b-tab
+                v-if="recipe.ingredients.length > 0"
+                title="Ingredients"
+                active
+              >
+                <div>
+                  <!-- <div class="mb-3"></div> -->
+                  <h3 style="margin-left: 30px;">Ingredients:</h3>
+                  <hr>
+                  <ul class="checkmark">
+                    <li
+                      v-for="r in recipe.ingredients"
+                      :key="'_' + r.amount + r.name"
+                    >
+                      {{ r.amount + " " + r.name }}
+                    </li>
+                  </ul>
+                  <br/>
+                </div>
+              </b-tab>
+              <b-tab v-if="recipe.ingredients.length > 0" title="Instructions"  >
+                <div>
+                  <h3 style="margin-left: 30px;">Instructions:</h3>
+                  <hr>
+                  <ol>
+                    <li v-for="s in recipe._instructions" :key="s.number">
+                      {{ s.step }}
+                    </li>
+                  </ol>
+                  <br/>
+                </div>
+              </b-tab>
+            </b-tabs>
           </div>
         </div>
+
       </div>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      > -->
     </div>
   </div>
 </template>
@@ -80,10 +163,23 @@ export default {
   // components: {
   //   AddRecipeToFavorite,
   // },
+  name: "RecipeViewPage",
   data() {
     return {
       recipe: null,
     };
+  },
+  computed: {
+    bg() {
+      console.log(this.recipe.image);
+      return {
+        background: `url("${this.recipe.image}") no-repeat`,
+        "background-size": `cover`,
+        "-webkit-background-size": `cover`,
+        "-moz-background-size": `cover`,
+        "-o-background-size": `cover`,
+      };
+    },
   },
   async created() {
     try {
@@ -144,6 +240,7 @@ export default {
           servings: response.data.servings,
         };
         this.recipe = _recipe;
+        console.log("recipe", recipe);
       }
     } catch (error) {
       console.log(error);
@@ -205,7 +302,7 @@ export default {
     },
     async AddToFavoriteAction(recipe) {
       console.log("enter to add to favorite action");
-
+      console.log(recipe);
       let responseAfterAddFavorite;
 
       //favorite / watched
@@ -217,8 +314,9 @@ export default {
         );
         console.log("after");
         console.log(responseAfterAddFavorite);
-
-        // console.log("response.status", response.status);
+        // console.log(recipe);
+        // console.log(recipe.data);
+        console.log("response.status", responseAfterAddFavorite.status);
         if (responseAfterAddFavorite.status !== 200)
           this.$router.replace("/NotFound");
       } catch (error) {
@@ -226,16 +324,26 @@ export default {
         this.$router.replace("/NotFound");
         return;
       }
+      let _recipe = {
+        instructions: recipe.instructions,
+        _instructions: recipe._instructions,
+        // analyzedInstructions,
+        ingredients: recipe.ingredients,
+        vegetarian: recipe.vegetarian,
+        vegan: recipe.vegan,
+        glutenFree: recipe.glutenFree,
+        aggregateLikes: recipe.aggregateLikes,
+        readyInMinutes: recipe.readyInMinutes,
+        image: recipe.image,
+        title: recipe.title,
+        servings: recipe.servings,
+        favorite: responseAfterAddFavorite.data.favorite,
+      };
+      this.recipe = _recipe;
+
       this.$refs.btnFavorite.innerText = "Already In Favorite";
+      this.$refs.btnFavorite.className = "fa fa-star";
     },
-    // greet: function (event) {
-    //   // `this` inside methods points to the Vue instance
-    //   alert('Hello ' + this.name + '!')
-    //   // `event` is the native DOM event
-    //   if (event) {
-    //     alert(event.target.tagName)
-    //   }
-    // }
   },
 };
 </script>
@@ -243,9 +351,13 @@ export default {
 <style scoped>
 .wrapper {
   display: flex;
+  /* grid-gap: 10px;
+  grid-auto-flow: column;
+  grid-template-columns: 186px 186px 186px 186px; */
 }
 .wrapped {
-  width: 50%;
+  width: 40%;
+  /* border: 1px solid red; */
 }
 .center {
   display: block;
@@ -254,10 +366,114 @@ export default {
   width: 50%;
 }
 
-/* .favBtn{
-  width: 50%;
+/* .recipe-body{
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 } */
-/* .recipe-header{
+.content {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: fff;
+  /* width: 550px; */
+}
 
-} */
+#recipe__presentation {
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: cover;
+  width: 55%;
+  margin-left: auto;
+  margin-right: auto;
+  background-position: relative;
+  background-size: 100vw 100vh;
+  opacity: 0.8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 450px;
+}
+
+ul.checkmark li::before {
+  color: #455560;
+  content: "\2713\0020";
+  font-weight: 600;
+  margin-left: -3px;
+  margin-right: 10px;
+}
+
+.checkmark li {
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+.circle__recipe {
+  background-color: #e2c904;
+  border-style: none;
+  border-width: 10px;
+  width: 75px;
+  height: 75px;
+  opacity: 0.8;
+  border-radius: 80%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  flex-direction: column;
+  color: #000;
+}
+
+.circle__recipe h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  margin: 0;
+}
+.description {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  background-color: rgba(30, 28, 28, 0.5);
+}
+h1 {
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Raleway", cursive;
+  /* font-family:'Pacifico',cursive; */
+  font-weight: 900;
+  font-size: 30px;
+  padding-top: 10px;
+  padding-left: 10px;
+  color: white;
+}
+
+h3 {
+  font-family: "Raleway", cursive;
+  font-weight: 900;
+  margin: 0;
+  color: dimgrey;
+}
+
+hr{
+  color:dimgrey;
+  margin-left: 4%;
+  width: 200px;
+  height:2px;
+  border-width:0;
+  background-color:dimgrey;
+}
+
+h5 {
+  background-color: rgba(30, 28, 28, 0.5);
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Raleway", cursive;
+  /* font-weight: 900; */
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  color: white;
+}
 </style>
