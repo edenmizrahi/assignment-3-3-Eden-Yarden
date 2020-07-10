@@ -166,7 +166,7 @@ export default {
     this.diets.push(...diets);
     this.intolerances.push(...intolerances);
     // $root.store.username
-    console.log($root.store.username);
+    // console.log($root.store.username);
     // console.log($v);
   },
   methods: {

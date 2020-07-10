@@ -32,6 +32,10 @@ import {
 import VueAxios from "vue-axios";
 import axios from "axios";
 import VueCookies from "vue-cookies";
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 import routes from "./routes";
 import VueRouter from "vue-router";
