@@ -30,7 +30,7 @@
             <li>Gluten Free: {{ recipe.glutenFree }}</li>
           </ul>
           <br>
-            <AddRecipeToFavorite v-on:random-click-event="updateRecipes"></AddRecipeToFavorite>
+            <!-- <AddRecipeToFavorite v-on:random-click-event="updateRecipes"></AddRecipeToFavorite> -->
         </div>
       </div>
     </div>

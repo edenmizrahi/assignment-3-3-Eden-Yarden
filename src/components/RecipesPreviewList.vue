@@ -64,6 +64,7 @@ export default {
   watch: {
     isLogin: async function(newVal, lastVal) {
       if (newVal){
+        
         // this.recipes_.map((r) => {
         //   // this.recipes.map((r) => {
         //   this.promises.push(this.checkIfLogin(r));
@@ -125,16 +126,10 @@ export default {
               rec.recipe_id +
               "]"
           );
-          console.log("after");
-          console.log(responewatchedorfav);
           // console.log("response.status", response.status);
           if (responewatchedorfav.status !== 200)
             this.$router.replace("/NotFound");
         } catch (error) {
-          console.log(
-            "error.respone_watchedOrFav.status",
-            error.responewatchedorfav.status
-          );
           this.$router.replace("/NotFound");
           return;
         }

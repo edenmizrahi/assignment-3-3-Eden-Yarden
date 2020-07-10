@@ -1,4 +1,5 @@
 <template>
+<div class="border">
   <div class="d-md-flex h-md-100 align-items-center">
     <!-- left Half -->
 
@@ -26,7 +27,7 @@
         </div>
         <div v-else>
 
-                    <RecipesPreviewList
+            <RecipesPreviewList
             :isLogin="!!$root.store.username"
             type="lastWatch"
           
@@ -86,6 +87,7 @@
       Centeredasdasdad
     </div>
   </div> -->
+  </div>
 </template>
 
 <script>
@@ -241,4 +243,9 @@ export default {
 //     color: #777;
 //   }
 // }
+
+.border{
+    background-color: #2c3e50;
+  // background-image: url("../images/bg1.jpg");
+}
 </style>
