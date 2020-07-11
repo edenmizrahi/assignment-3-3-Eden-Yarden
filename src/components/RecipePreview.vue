@@ -1,112 +1,197 @@
 <template>
-<div>
-  <router-link v-if="type!='My Recipes'" 
-    :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }"
-    class="recipe-preview"
-  >
-   
-    <article class="recipe-card">
-      <div id="carousel" class="recipe-pic-frame">
-        <div id="sliderBox" class="slider-box">
-          <div class="recipe-pic pic1" role="img"></div>
-          <div class="recipe-pic pic2" role="img"></div>
-          <div class="recipe-pic pic3" role="img"></div>
-        </div>
-      </div>
-    </article>
 
-    <div class="container">
-      <div class="card">
-        <div class="card-header">
-          <div :title="recipe.title" class="recipe-title">
-            {{ recipe.title }}
-          </div>
-        </div>
-        <div class="card-body">
-          <img
-            :src="recipe.image"
-            class="recipe-image"
-            style="width:300px;height:200px;"
-          />
-        </div>
-        <div class="card-footer">
-          <ul class="recipe-overview">
-            <li>{{ recipe.readyInMinutes }} minutes</li>
-            <li  v-if="recipe.aggregateLikes" >{{ recipe.aggregateLikes }} likes</li>
-          </ul>
-          <ul class="recipe-overview">
-            <li>Vegan: {{ recipe.vegan }}</li>
-            <li>Vegetarian: {{ recipe.vegetarian }}</li>
-            <li>Gluten Free: {{ recipe.glutenFree }}</li>
-            <li v-if="$root.store.username&&recipe.favorite==true">
-            Favorite: {{ recipe.favorite }}
-          </li>
-          <li v-if="recipe.watched==true" >
-            Watched: {{ recipe.watched}} 
-          </li>
-          </ul>
-       
-        </div>
-      </div>
-    </div>
-       
-  </router-link>
-  <router-link v-else
-    :to="{ name: 'PersonalViewPage', params: { type:'my' , recipeId: recipe.recipe_id } }"
-    class="recipe-preview"
-  >
-  
-    <article class="recipe-card">
-      <div id="carousel" class="recipe-pic-frame">
-        <div id="sliderBox" class="slider-box">
-          <div class="recipe-pic pic1" role="img"></div>
-          <div class="recipe-pic pic2" role="img"></div>
-          <div class="recipe-pic pic3" role="img"></div>
-        </div>
-      </div>
-    </article>
-
-    <div class="container">
-      <div class="card">
-        <div class="card-header">
-          <div :title="recipe.title" class="recipe-title">
-            {{ recipe.title }}
-          </div>
-        </div>
-        <div class="card-body">
-          <img
-            :src="recipe.image"
-            class="recipe-image"
-            style="width:300px;height:200px;"
-          />
-        </div>
-        <div class="card-footer">
-          <ul class="recipe-overview">
-            <li>{{ recipe.readyInMinutes }} minutes</li>
-            <li  v-if="recipe.aggregateLikes" >{{ recipe.aggregateLikes }} likes</li>
-          </ul>
-          <ul class="recipe-overview">
-            <li>Vegan: {{ recipe.vegan }}</li>
-            <li>Vegetarian: {{ recipe.vegetarian }}</li>
-            <li>Gluten Free: {{ recipe.glutenFree }}</li>
-            <li v-if="$root.store.username&&recipe.favorite==true">
-            Favorite: {{ recipe.favorite }}
-          </li>
-          <li v-if="recipe.watched==true" >
-            Watched: {{ recipe.watched}} 
-          </li>
-          </ul>
-       
-        </div>
-      </div>
-    </div>
-
-  </router-link>
+  <div>
+      <p class="h1 mb-2">
+    <b-icon-eye-fill
+ v-if="recipe.watched==true"  style=" position: absolute;
+  top: 270px;
+  left: 20;">
+          </b-icon-eye-fill
+>
+  </p>
+<div  @click="addTofavorite"  v-if="$root.store.username && cur_recipe.favorite == false"  class="circle" style=" position: absolute;
+  top: 50px;
+  left: -10px;  ">
+ <!-- <p class="h1 mb-2"><b-icon-heart class="favorite" variant="danger" v-if="$root.store.username && cur_recipe.favorite == false" @click="addTofavorite"
+        style=" position: absolute;
+  top: 12px;
+  left: 8;"></b-icon-heart></p> -->
+      <p class="h1 mb-2"><b-icon-heart-fill  style="color:white; position: absolute;
+  top: 12px;
+  left: 8;"
+      ></b-icon-heart-fill></p>
 </div>
+ <p  class="h1 mb-2"><b-icon-heart-fill class="favorite" variant="danger" v-if="$root.store.username && cur_recipe.favorite == true"
+        style=" position: absolute;
+   top: 60px;
+  left: 0px;  "></b-icon-heart-fill></p>
 
+     <router-link
+      v-if="type != 'My Recipes'"
+      :to="{ name: 'recipe', params: { recipeId: this.cur_recipe.recipe_id } }"
+      class="recipe-preview"
+    >  
+    <table class="center" style="  border: 2px solid red;
+  border-radius: 50px 20px; width:300px;height:300px;">
+
+      <tr >
+    <td colspan="5" style="height:80px"> 
+   
+      {{ this.cur_recipe.title }}
+    </td>
+  </tr>
+    
+
+            <tr>
+              
+    <td colspan="5" v-bind:style="{ 'background-image': 'url(' + cur_recipe.image + ')' }" style="width:300px;height:200px;background-size: 300px 200px;"> 
+      <!-- <p class="h1 mb-2"><b-icon-heart class="favorite" variant="danger" v-if="$root.store.username && cur_recipe.favorite == false" @click="addTofavorite"
+       style=" position: absolute;
+  top: 60px;
+  left: 0;" ></b-icon-heart></p>
+      <p class="h1 mb-2"><b-icon-heart-fill  variant="danger" v-if="$root.store.username && cur_recipe.favorite == true" 
+       style=" position: absolute;
+  top: 60px;
+  left: 0;"></b-icon-heart-fill></p> -->
+  
+  
+
+
+      <!-- <img
+            :src="recipe.image"
+            class="recipe-image"
+            style="width:300px;height:200px;"
+          /> -->
+          </td>
+  </tr>
+         
+          <tr style="height:100px">
+            <th><b-icon-alarm></b-icon-alarm>{{ cur_recipe.readyInMinutes }} Min</th>
+            <th><b-icon-hand-thumbs-up variant="primary"></b-icon-hand-thumbs-up>{{ cur_recipe.aggregateLikes }} </th>
+            <th >
+              <img v-if="cur_recipe.glutenFree" src="https://img.icons8.com/office/40/000000/no-gluten.png" />
+            </th>
+            <th >
+              <!-- <img v-if="cur_recipe.vegan" src="https://ibb.co/gJKncw6" /> -->
+              <a v-if="cur_recipe.vegan" href="https://imgbb.com/"><img src="https://i.ibb.co/PgHSV4t/leaf.png" alt="leaf" border="0" style=" width:30px;height:30px;"></a>
+            <!-- </th>
+            <th> -->
+              <!-- <img  v-if="cur_recipe.vegetarian" src="https://ibb.co/gJKncw6" /> -->
+              
+              <a v-if="cur_recipe.vegetarian"  href="https://imgbb.com/"><img src="https://i.ibb.co/PgHSV4t/leaf.png" alt="leaf" border="0" style=" width:30px;height:30px;"></a>
+            </th>
+          </tr>
+        </table>
+                </router-link>
+
+
+
+<!--          
+    <article class="recipe-card">
+      <div id="carousel" class="recipe-pic-frame">
+        <div id="sliderBox" class="slider-box">
+          <div class="recipe-pic pic1" role="img"></div>
+          <div class="recipe-pic pic2" role="img"></div>
+          <div class="recipe-pic pic3" role="img"></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div :title="recipe.title" class="recipe-title">
+            {{ recipe.title }}
+          </div>
+        </div>
+        <div class="card-body">
+          <img
+            :src="recipe.image"
+            class="recipe-image"
+            style="width:300px;height:200px;"
+          />
+        </div>
+        <div class="card-footer">
+          <ul class="recipe-overview">
+            <li>{{ recipe.readyInMinutes }} minutes</li>
+            <li  v-if="recipe.aggregateLikes" >{{ recipe.aggregateLikes }} likes</li>
+          </ul>
+          <ul class="recipe-overview">
+            <li>Vegan: {{ recipe.vegan }}</li>
+            <li>Vegetarian: {{ recipe.vegetarian }}</li>
+            <li>Gluten Free: {{ recipe.glutenFree }}</li>
+            <li v-if="$root.store.username&&recipe.favorite==true">
+            Favorite: {{ recipe.favorite }}
+          </li>
+          <li v-if="recipe.watched==true" >
+            Watched: {{ recipe.watched}} 
+          </li>
+          </ul>
+       
+        </div>
+      </div>
+    </div> -->
+    
+    <!-- <router-link
+      v-else
+      :to="{
+        name: 'PersonalViewPage',
+        params: { type: 'my', recipeId: recipe.recipe_id },
+      }"
+      class="recipe-preview"
+    >
+      <article class="recipe-card">
+        <div id="carousel" class="recipe-pic-frame">
+          <div id="sliderBox" class="slider-box">
+            <div class="recipe-pic pic1" role="img"></div>
+            <div class="recipe-pic pic2" role="img"></div>
+            <div class="recipe-pic pic3" role="img"></div>
+          </div>
+        </div>
+      </article>
+
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <div :title="recipe.title" class="recipe-title">
+              {{ recipe.title }}
+            </div>
+          </div>
+          <div class="card-body">
+            <img
+              :src="recipe.image"
+              class="recipe-image"
+              style="width:300px;height:200px;"
+            />
+          </div>
+          <div class="card-footer">
+            <ul class="recipe-overview">
+              <li>{{ recipe.readyInMinutes }} minutes</li>
+              <li v-if="recipe.aggregateLikes">
+                {{ recipe.aggregateLikes }} likes
+              </li>
+            </ul>
+            <ul class="recipe-overview">
+              <li>Vegan: {{ recipe.vegan }}</li>
+              <li>Vegetarian: {{ recipe.vegetarian }}</li>
+              <li>Gluten Free: {{ recipe.glutenFree }}</li>
+              <li v-if="$root.store.username && recipe.favorite == true">
+                Favorite: {{ recipe.favorite }}
+              </li>
+              <li v-if="recipe.watched == true">
+                Watched: {{ recipe.watched }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </router-link> -->
+  </div>
 </template>
 
 <script>
+var selected = "js-is-selected";
+
 export default {
   name: "RecipePreview",
   // async mounted() {
@@ -116,16 +201,16 @@ export default {
   // },
   async mounted() {
     // await this.checkIfLogin();
-    console.log(111115555,this.recipe)
+    this.cur_recipe=this.recipe;
   },
   data() {
     return {
       image_load: false,
-      // cur_recipe:this.recipe,
+      cur_recipe:this.recipe,
     };
   },
   props: {
-    type:{
+    type: {
       type: String,
       required: false,
     },
@@ -136,6 +221,46 @@ export default {
   },
 
   methods: {
+    async addTofavorite() {
+      let responseAfterAddFavorite;
+
+      //favorite / watched
+      try {
+        // console.log(this.$route.params.recipeId);
+        responseAfterAddFavorite = await this.axios.put(
+          "http://localhost:4000/profile/favorite/add/" +
+            this.cur_recipe.recipe_id
+        );
+
+        // console.log(recipe);
+        // console.log(recipe.data);
+        if (responseAfterAddFavorite.status !== 200)
+          this.$router.replace("/NotFound");
+      } catch (error) {
+        this.$router.replace("/NotFound");
+        return;
+      }
+      let _recipe = {
+        instructions: this.cur_recipe.instructions,
+        _instructions: this.cur_recipe._instructions,
+        // analyzedInstructions,
+        ingredients: this.cur_recipe.ingredients,
+        vegetarian: this.cur_recipe.vegetarian,
+        vegan: this.cur_recipe.vegan,
+        glutenFree: this.cur_recipe.glutenFree,
+        aggregateLikes: this.cur_recipe.aggregateLikes,
+        readyInMinutes: this.cur_recipe.readyInMinutes,
+        image: this.cur_recipe.image,
+        title: this.cur_recipe.title,
+        servings: this.cur_recipe.servings,
+        favorite: true,
+      };
+      this.cur_recipe = _recipe;
+
+      // this.$refs.btnFavorite.innerText = "Already In Favorite";
+      // this.$refs.btnFavorite.className = "fa fa-star";
+   
+    },
     async checkIfLogin() {
       try {
         let responewatchedorfav;
@@ -143,16 +268,14 @@ export default {
         //favorite / watched
         try {
           // console.log(this.$route.params.recipeId);
-          console.log(111111111111, this.recipe.recipe_id);
           responewatchedorfav = await this.axios.get(
             this.$root.store.BASE_URL +
               "/profile/recipeInfo/" +
               "[" +
-              this.recipe.recipe_id +
+              this.cur_recipe.recipe_id +
               "]"
           );
-          console.log("after");
-          console.log(responewatchedorfav);
+
           // console.log("response.status", response.status);
           if (responewatchedorfav.status !== 200)
             this.$router.replace("/NotFound");
@@ -164,10 +287,11 @@ export default {
           this.$router.replace("/NotFound");
           return;
         }
-        this.recipe.favorite =responewatchedorfav.data[this.recipe.recipe_id].favorite;
-        this.recipe.watched =responewatchedorfav.data[this.recipe.recipe_id].watched;
-        console.log("****************************************");
-        console.log(234433,this.recipe.watched);
+        this.cur_recipe.favorite =
+          responewatchedorfav.data[this.cur_recipe.recipe_id].favorite;
+        this.cur_recipe.watched =
+          responewatchedorfav.data[this.cur_recipe.recipe_id].watched;
+
       } catch (error) {
         console.log(error);
       }
@@ -253,6 +377,52 @@ export default {
 } */
 
 /************************** */
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
+table {
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 1em;
+  background: #ddd;
+  border-bottom: 2px solid white; 
+}
+
+.css-mine {
+  margin-top: 2em;
+  clear: both;
+}
+
+body {
+  margin: 1.5em;
+}
+.circle:hover{
+    background-color:   rgb(0, 0, 0, 0.7) ;
+        border:1px solid rgb(0, 0, 0,0.7);    
+
+}
+.circle {
+    background-color:rgb(120, 120, 120,0.7);
+    border:1px solid rgb(120, 120, 120,0.7);    
+    height:60px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width:60px;
+}
+table:hover {
+  color: #000000;
+  border:10px  solid #ffffff;
+  text-shadow:0px 0px 20px #fdec6e;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  font-size: 19px;
+}
+
 
 
 </style>

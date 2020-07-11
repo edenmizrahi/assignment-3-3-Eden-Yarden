@@ -1,7 +1,42 @@
 <template>
-<div class="border">
+<b-container fluid   style="background-image: url(https://i.ibb.co/0cP75KS/bg10.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
+  <b-row>
+    <b-col cols="8"  style="background-image: url(https://images.creativemarket.com/0.1.0/ps/7353024/300/200/m2/fpc/wm0/ahp0l9ecx0vfwsdo1rwxcdtynfyzn4gweomwnblntp5glupfrmnapoab88tzxyjd-.jpg?1574572829&s=07278d4d356bb14b0c49de573edd8fd7);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">>
+  <h1 class="title">Welcome To Our Recipes Website!</h1>
+                <RecipesPreviewList
+            :isLogin="!!$root.store.username"
+            type="random"
+          ></RecipesPreviewList>
+          </b-col>
+      <b-col  style="background-image: url(https://i.ibb.co/0cP75KS/bg10.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">>
+         <div v-if="!$root.store.username">
+          <LoginPage></LoginPage>
+        </div>
+        <div v-else>
+
+            <RecipesPreviewList
+            :isLogin="!!$root.store.username"
+            type="lastWatch"
+          
+          ></RecipesPreviewList>
+      </div>
+        </b-col>
+  </b-row>
+</b-container>
+<!-- <div class="border">
   <div class="d-md-flex h-md-100 align-items-center">
-    <!-- left Half -->
 
     <div class="col-md-7 p-0 bg-indigo h-md-100">
       <div
@@ -14,9 +49,10 @@
           ></RecipesPreviewList>
         </div>
       </div>
+      <RecprecTest></RecprecTest>
+    
     </div>
 
-    <!-- Second Half -->
 
     <div class="col-md-5 p-0 bg-white h-md-100 loginarea">
       <div
@@ -39,7 +75,7 @@
     <div v-if="!$root.store.username">
       <router-link to="/family" tag="button" />
     </div>
-  </div>
+  </div> -->
 
   <!-- <div class="container-fluid">
     
@@ -87,11 +123,12 @@
       Centeredasdasdad
     </div>
   </div> -->
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
 import RecipesPreviewList from "../components/RecipesPreviewList";
+import RecprecTest from "../components/recprecTest";
 
 import LoginPage from "../pages/LoginPage.vue";
 
@@ -100,6 +137,7 @@ export default {
     // RecipePreviewList,
     RecipesPreviewList,
     LoginPage,
+    // RecprecTest,
     // RecipePreviewListLastWatch,
   },
 };
@@ -247,5 +285,17 @@ export default {
 .border{
     background-color: #2c3e50;
   // background-image: url("../images/bg1.jpg");
+}
+
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+.title{
+    font-family: 'Cookie', cursive;
+    font-size: 60px;
+    color:wheat;
+}
+p{
+  font-family: 'Do Hyeon', sans-serif;
+
 }
 </style>
