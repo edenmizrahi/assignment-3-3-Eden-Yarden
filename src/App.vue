@@ -23,11 +23,18 @@
 
           <b-navbar-nav v-if="$root.store.username">
             <b-nav-item-dropdown text="Personal" right>
-              <b-dropdown-item :to="{ name: 'family' }"
+              <!-- <b-dropdown-item :to="{ name: 'family' }"
+                >Family recipes</b-dropdown-item
+              > -->
+              <b-dropdown-item  @click="clickHandler('Family Recipes')"
+                :to="{
+                  name: 'familyRecipes',
+                  params: { title: 'Family Recipes', numberOfColumns: 3 },
+                }"
                 >Family recipes</b-dropdown-item
               >
               <b-dropdown-item
-                @click="clickHandler()"
+                @click="clickHandler('Favorite Recipes')"
                 :to="{
                   name: 'recipesPage',
                   params: { title: 'Favorite Recipes', numberOfColumns: 4 },
@@ -35,10 +42,10 @@
               >
                 Favorite recipes <b-icon-star-fill></b-icon-star-fill
               ></b-dropdown-item>
-              <b-dropdown-item
+              <b-dropdown-item  @click="clickHandler('My Recipes')"
                 :to="{
                   name: 'myRecipesPage',
-                  params: { title: 'My Recipes', numberOfColumns: 4 },
+                  params: { title: 'My Recipes', numberOfColumns: 3 },
                 }"
                 >My recipes</b-dropdown-item
               >
@@ -86,9 +93,9 @@ export default {
     console.log(this.$cookies.get("session"));
   },
   methods: {
-    clickHandler() {
+    clickHandler(toReturn) {
       console.log("**********************clickHandler");
-      this.$root.store.recipePage = "Favorite Recipes";
+      this.$root.store.recipePage = toReturn;
     },
     Logout() {
       this.$root.store.logout();
