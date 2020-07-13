@@ -5,7 +5,7 @@
     </p>
     <ul :style="gridStyle" class="card-list">
       <li v-for="(card, index) in recipes" class="card-item" :key="index">
-        <RecipePreview :recipe="card" :type="title"></RecipePreview>
+        <RecipePreview :recipe="card" :type="title_"></RecipePreview>
       </li>
     </ul>
   </div>
