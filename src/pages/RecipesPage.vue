@@ -5,19 +5,19 @@
     </p>
     <ul :style="gridStyle" class="card-list">
       <li v-for="(card, index) in recipes" class="card-item" :key="index">
-        <RecipePreview :recipe="card" :type="title"></RecipePreview>
+        <RecipePreviewWrapper :recipe="card" :type="title_"></RecipePreviewWrapper>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import RecipePreview from "../components/RecipePreview.vue";
+import RecipePreviewWrapper from "../components/RecipePreviewWrapper.vue";
 
 export default {
   name: "RecipesPage",
   components: {
-    RecipePreview,
+    RecipePreviewWrapper,
     // RecipePreviewList,
   },
   watch: {

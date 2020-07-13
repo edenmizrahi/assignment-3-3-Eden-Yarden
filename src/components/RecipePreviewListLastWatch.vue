@@ -5,17 +5,17 @@
       <slot></slot>
     </h3>
     <b-col v-for="r in recipes" :key="r.id">
-      <RecipePreview class="recipePreview" :recipe="r" />
+      <RecipePreviewWrapper class="recipePreview" :recipe="r" />
     </b-col>
   </b-container>
 </template>
 
 <script>
-import RecipePreview from "./RecipePreview.vue";
+import RecipePreviewWrapper from "./RecipePreviewWrapper.vue";
 export default {
   name: "RecipePreviewListLastWatch",
   components: {
-    RecipePreview,
+    RecipePreviewWrapper,
   },
   props: {
     title: {
