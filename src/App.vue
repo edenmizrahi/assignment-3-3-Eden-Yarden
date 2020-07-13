@@ -12,12 +12,12 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item :to="{ name: 'main' }"
-              >Main <b-icon-house-fill></b-icon-house-fill
-            ></b-nav-item>
+            <b-nav-item :to="{ name: 'main' }">
+              <b-icon-house-fill></b-icon-house-fill> Main
+            </b-nav-item>
             <b-nav-item :to="{ name: 'search' }">
-              Search <b-icon-search></b-icon-search
-            ></b-nav-item>
+              <b-icon-search></b-icon-search> Search
+            </b-nav-item>
             <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
           </b-navbar-nav>
 
@@ -47,11 +47,13 @@
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
+            <b-nav-item :to="{ name: 'about' }"
+              ><b-icon-info-square></b-icon-info-square> About</b-nav-item
+            >
 
             <b-nav-item-dropdown v-if="!$root.store.username" right>
               <template v-slot:button-content>
-                Hello Guest <b-icon-person></b-icon-person>
+                <b-icon-person></b-icon-person> Hello Guest
               </template>
               <b-dropdown-item :to="{ name: 'register' }"
                 >Register
@@ -60,12 +62,12 @@
             </b-nav-item-dropdown>
             <b-nav-item-dropdown v-else right>
               <template v-slot:button-content>
-                {{ $root.store.username }}
                 <b-icon-person-fill></b-icon-person-fill>
+                {{ $root.store.username }}
               </template>
               <b-dropdown-item @click="Logout()"
-                >Log-out
-                <b-icon-power></b-icon-power></b-dropdown-item>
+                >Log-out <b-icon-power></b-icon-power
+              ></b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -111,6 +113,32 @@ export default {
   min-height: 100vh;
 
 }
+
+// #app::before {
+//   content: '';
+//   display: block;
+//   position: absolute;
+//   min-height: 100%;
+//   min-width: 1024px;
+//   // position: fixed;
+//   background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-attachment: fixed;
+//   z-index: -1;
+//   // color: #2c3e50;
+//   width: 100%;
+//   height: auto;
+//   top: 0;
+//   left: -100;
+// }
+
+// .jumbotron {
+//   background-image: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
+//   background-size: cover;
+//   background-repeat: no-repeat;
+// }
 
 // #nav {
 //   padding: 30px;

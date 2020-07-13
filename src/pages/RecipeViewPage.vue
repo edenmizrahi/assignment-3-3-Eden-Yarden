@@ -10,7 +10,6 @@
       rel="stylesheet"
     />
     <div v-if="recipe">
-
       <div class="recipe-body">
         <div id="recipe__presentation" :style="bg">
           <div class="description">
@@ -86,7 +85,7 @@
                   style="width:40px; border-style:none;height:40px; margin-top: 10px;border-radius: 50%; margin-left: 26px;display:block;font-size: 20px; background-color: #e2c904;"
                   ref="btnFavorite"
                 >
-                  <!-- Already In Favorite -->
+                  <!-- In Favorite -->
                 </button>
               </div>
               <br />
@@ -109,12 +108,7 @@
           <!-- </div> -->
 
           <div class="content">
-            <b-tabs
-              class="content"
-              content-class="mt-4"
-              align="center"
-             
-            >
+            <b-tabs class="content" content-class="mt-4" align="center">
               <b-tab
                 v-if="recipe.ingredients.length > 0"
                 title="Ingredients"
@@ -123,7 +117,7 @@
                 <div>
                   <!-- <div class="mb-3"></div> -->
                   <h3 style="margin-left: 30px;">Ingredients:</h3>
-                  <hr>
+                  <hr />
                   <ul class="checkmark">
                     <li
                       v-for="r in recipe.ingredients"
@@ -132,25 +126,24 @@
                       {{ r.amount + " " + r.name }}
                     </li>
                   </ul>
-                  <br/>
+                  <br />
                 </div>
               </b-tab>
-              <b-tab v-if="recipe.ingredients.length > 0" title="Instructions"  >
+              <b-tab v-if="recipe.ingredients.length > 0" title="Instructions">
                 <div>
                   <h3 style="margin-left: 30px;">Instructions:</h3>
-                  <hr>
+                  <hr />
                   <ol>
                     <li v-for="s in recipe._instructions" :key="s.number">
                       {{ s.step }}
                     </li>
                   </ol>
-                  <br/>
+                  <br />
                 </div>
               </b-tab>
             </b-tabs>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -341,7 +334,7 @@ export default {
       };
       this.recipe = _recipe;
 
-      this.$refs.btnFavorite.innerText = "Already In Favorite";
+      // this.$refs.btnFavorite.innerText = "In Favorite";
       this.$refs.btnFavorite.className = "fa fa-star";
     },
   },
@@ -349,21 +342,30 @@ export default {
 </script>
 
 <style scoped>
+.recipe-body {
+  /* background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg"); */
+  background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* width: 400%; */
+  height: 200%;
+}
+
 .wrapper {
   display: flex;
   /* grid-gap: 10px;
   grid-auto-flow: column;
   grid-template-columns: 186px 186px 186px 186px; */
 }
-.wrapped {
-  width: 40%;
+/* .wrapped { */
+  /* width: 40%; */
   /* border: 1px solid red; */
-}
+/* } */
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  /* width: 50%; */
 }
 
 /* .recipe-body{
@@ -456,13 +458,13 @@ h3 {
   color: dimgrey;
 }
 
-hr{
-  color:dimgrey;
+hr {
+  color: dimgrey;
   margin-left: 4%;
   width: 200px;
-  height:2px;
-  border-width:0;
-  background-color:dimgrey;
+  height: 2px;
+  border-width: 0;
+  background-color: dimgrey;
 }
 
 h5 {
