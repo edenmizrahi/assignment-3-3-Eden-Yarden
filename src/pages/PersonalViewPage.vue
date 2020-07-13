@@ -6,8 +6,8 @@
         <img :src="familyRecipe.image" class="center" />
       </div> -->
       <div class="recipe-body">
-        <br />
-        <br />
+        <br/>
+        <br/>
         <div id="recipe__presentation" :style="bg">
           <div class="description">
             <h1>{{ familyRecipe.title }}</h1>
@@ -24,8 +24,8 @@
           <div class="circle__recipe">
             <h2>This recipe made by: {{ familyRecipe.owner }}</h2>
           </div>
-          <br />
-
+          <br/>
+     
           <h5>
             <b>Vegan:</b> {{ familyRecipe.vegan }} |
             <b>Vegetarian:</b>
@@ -33,6 +33,7 @@
             <b>Gluten Free:</b>
             {{ familyRecipe.glutenFree }}
           </h5>
+   
 
           <div class="content">
             <b-tabs class="content" content-class="mt-4" align="center">
@@ -157,7 +158,8 @@ export default {
 </script>
 
 <style scoped>
-.containr {
+
+.containr{
   height: auto;
 }
 

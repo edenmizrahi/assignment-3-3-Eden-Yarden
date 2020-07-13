@@ -1,5 +1,11 @@
 <template>
-  <div class="container">
+  <div class="search">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <br />
+    <br />
     <h1 class="title">{{ header }}:</h1>
 
     <FormSearch v-on:search-click-event="Search" v-on:reset-click-event="Reset">
@@ -64,9 +70,10 @@ export default {
       aftersearch: "",
     };
   },
-  async created() {
+  async mounted() {
     console.log("beforeCreated");
-    this.aftersearch = "false";
+    // this.aftersearch = "false";
+    this.ShowLastSearch();
     // console.log(this.$store.recipes);
     // if (this.$store.recipes != "") {
     //   this.recipes = this.$store.recipes;
@@ -83,6 +90,20 @@ export default {
     // },
   },
   methods: {
+    ShowLastSearch() {
+      try {
+        if (this.$root.store.username) {
+          if (localStorage.loadRecipes) {
+            this.recipes = JSON.parse(localStorage.loadRecipes);
+            // this.recipes = localStorage.recipes;
+          } else {
+            if (localStorage.loadRecipes) {
+              localStorage.removeItem("loadRecipes");
+            }
+          }
+        }
+      } catch (error) {}
+    },
     async Search(query, amount, cuisine, diet, intolerance) {
       let response;
       try {
@@ -116,15 +137,22 @@ export default {
           this.recipes = [];
           this.recipes.push(...recipes_);
 
-          console.log(this.$root.store.search);
-          this.$root.store.search(
-            this.recipes,
-            query,
-            amount,
-            cuisine,
-            diet,
-            intolerance
-          );
+          localStorage.setItem("loadRecipes", JSON.stringify(this.recipes));
+          localStorage.setItem("query", query);
+          localStorage.setItem("amount", amount);
+          localStorage.setItem("cuisine", cuisine);
+          localStorage.setItem("diet", diet);
+          localStorage.setItem("intolerance", intolerance);
+          // localStorage.setItem("LoadRecipes", JSON.stringify(this.recipes));
+          // console.log(this.$root.store.search);
+          // this.$root.store.search(
+          //   this.recipes,
+          //   query,
+          //   amount,
+          //   cuisine,
+          //   diet,
+          //   intolerance
+          // );
           /**show sort option**/
           this.aftersearch = "true";
 
@@ -177,8 +205,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.search {
   // max-width: 500px;
   width: 100%;
+  height: auto;
+  font-family: "Raleway", cursive;
+  // background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561158/background/36811008-raw-pasta-with-ingredients-on-wooden-background_fsytts.jpg");
+   background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594563633/background/various-fresh-vegetables-organic-food-healthy-rustic-background_44537-627_bup06t.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  // position: fixed;
+  // background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg")
+  //   no-repeat;
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // -webkit-background-size: contain;
+  // -moz-background-size: contain;
+  // -o-background-size: contain;
+  // background-size: cover;
 }
+
+.title{
+  margin-left: 100px;
+}
+
+// .container::before {
+//   content: '';
+//   display: block;
+//   position: absolute;
+//   min-height: 100%;
+//   min-width: 1024px;
+//   // position: fixed;
+//   background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-attachment: fixed;
+//   z-index: -1;
+//   // color: #2c3e50;
+//   width: 100%;
+//   height: auto;
+//   top: 0;
+//   left: -100;
+// }
 </style>
