@@ -59,6 +59,13 @@ const shared_data = {
   BASE_URL: "http://localhost:4000",
   username: localStorage.username,
   recipePage: "",
+  lastWatch: localStorage.watchedList,
+
+  addWatchedList(watchedList) {
+    localStorage.setItem("watchedList", watchedList);
+    this.lastWatch = watchedList;
+  },
+  
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -75,6 +82,8 @@ const shared_data = {
     // localStorage.removeItem("cuisine");
     // localStorage.removeItem("intolerance");
     this.username = undefined;
+    localStorage.removeItem("watchedList");
+    this.lastWatch = undefined;
   },
   // search(recipes, query, amount, cuisine, diet, intolerance){
   //   console.log("search");

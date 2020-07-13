@@ -5,17 +5,17 @@
       <slot></slot>
     </h3> -->
     <b-col v-for="r in familyRecipes" :key="r.id">
-      <FamilyRecipePreview class="familyRecipePreview" :recipe="r" />
+      <RecipePreview class="familyRecipePreview" :recipe="r" type="My Recipes" />
     </b-col>
   </b-container>
 </template>
 
 <script>
-import FamilyRecipePreview from "./FamilyRecipePreview.vue";
+import RecipePreview from "./RecipePreview";
 export default {
   name: "FamilyRecipePreviewList",
   components: {
-    FamilyRecipePreview,
+    RecipePreview,
   },
   //   props: {
   //     title: {

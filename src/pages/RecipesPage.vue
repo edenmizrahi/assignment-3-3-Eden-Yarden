@@ -44,61 +44,62 @@ export default {
   data() {
     return {
       recipes: [],
-      title_:"",
+      title_: "",
       numberOfColumns_: 3,
     };
   },
-  async mounted(){
+  async mounted() {
     await this.inStart();
   },
-  methods:{
+  methods: {
     async inStart() {
-    console.log(1234567890000, this.title);
-    console.log(1234567890000, this.numberOfColumns);
+      console.log(1234567890000, this.title);
+      console.log(1234567890000, this.numberOfColumns);
 
-    try {
-      let response = [];
-      console.log("title",this.title);
-     console.log("title_",this.title_);
+      try {
+        let response = [];
+        console.log("title", this.title);
+        console.log("title_", this.title_);
 
-    if(this.title){
-       this.$root.store.recipePage=this.title;
-    }
-    //   if(!!this.title){
-    //     this.title_=this.title;
-    //   }
-    //  console.log("title_",this.title_);
+        if (this.title) {
+          this.$root.store.recipePage = this.title;
+        }
+        //   if(!!this.title){
+        //     this.title_=this.title;
+        //   }
+        //  console.log("title_",this.title_);
 
-    //   if(!!this.numberOfColumns){
-    //     this.numberOfColumns_=this.numberOfColumns;
-    //   }
-      this.title_=this.$root.store.recipePage;
-        console.log("title_",this.title_);
-      if (this.title_ == "Favorite Recipes") {
-        response = await this.axios.get(
-          this.$root.store.BASE_URL + "/profile/favorite"
-        );
+        //   if(!!this.numberOfColumns){
+        //     this.numberOfColumns_=this.numberOfColumns;
+        //   }
+        this.title_ = this.$root.store.recipePage;
+        console.log("title_", this.title_);
+        if (this.title_ == "Favorite Recipes") {
+          response = await this.axios.get(
+            this.$root.store.BASE_URL + "/profile/favorite"
+          );
+        }
+        if (this.title_ == "My Recipes") {
+          response = await this.axios.get(
+            this.$root.store.BASE_URL + "/profile/myRecipes"
+          );
+
+          console.log(123123123, response);
+        }
+
+        let recipes_ = response.data;
+        console.log(1111, response.data);
+        console.log(1111, recipes_);
+        this.recipes.push;
+        this.recipes = [];
+        // this.$forceUpdate();
+        this.recipes.push(...recipes_);
+        console.log(1111, this.recipes);
+      } catch (error) {
+        console.log(error);
       }
-      if (this.title_ == "My Recipes") {
-        response = await this.axios.get(
-          this.$root.store.BASE_URL + "/profile/myRecipes"
-        );
-
-        console.log(123123123, response);
-      }
-
-      this.recipes_ = response.data;
-      console.log(response);
-      console.log(this.recipes_);
-      this.recipes.push;
-      this.recipes = [];
-      // this.$forceUpdate();
-      this.recipes.push(...this.recipes_);
-    } catch (error) {
-      console.log(error);
-    }
+    },
   },
-  }
 };
 </script>
 
@@ -113,11 +114,11 @@ export default {
   padding: 2em;
 }
 
-body {
+/* body {
   background: #20262e;
   padding: 20px;
   font-family: Helvetica;
-}
+} */
 
 #app {
   background: #fff;
