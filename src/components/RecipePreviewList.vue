@@ -7,18 +7,18 @@
 
     <b-row>
       <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+        <RecipePreviewWrapper class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import RecipePreview from "./RecipePreview.vue";
+import RecipePreviewWrapper from "./RecipePreviewWrapper.vue";
 export default {
   name: "RecipePreviewList",
   components: {
-    RecipePreview,
+    RecipePreviewWrapper,
   },
   props: {
     recipes: Array,

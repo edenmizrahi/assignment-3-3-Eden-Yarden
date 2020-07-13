@@ -12,7 +12,7 @@
 
     <b-row>
       <b-col v-for="r in this.recipes" :key="r.recipe_id">
-        <RecipePreview class="recipePreview" v-bind:recipe="r" />
+        <RecipePreviewWrapper class="recipePreview" v-bind:recipe="r" />
       </b-col>
     </b-row>
   </b-container>
@@ -30,7 +30,7 @@
       <slot></slot>
     </h3>
     <b-col v-for="r in recipes" :key="r.id">
-      <RecipePreview class="recipePreview" :recipe="r" />
+      <RecipePreviewWrapper class="recipePreview" :recipe="r" />
     </b-col>
   </b-container>
 
@@ -42,12 +42,12 @@
 
 <script >
 import RandomRecipesAction from "./RandomRecipesAction.vue";
-import RecipePreview from "./RecipePreview.vue";
+import RecipePreviewWrapper from "./RecipePreviewWrapper.vue";
 
 export default {
   name: "RecipesPreviewList",
   components: {
-    RecipePreview,
+    RecipePreviewWrapper,
     // RecipePreviewList,
     RandomRecipesAction,
   },
