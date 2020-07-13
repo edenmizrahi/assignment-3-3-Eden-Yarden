@@ -53,10 +53,6 @@
        style=" position: absolute;
   top: 60px;
   left: 0;"></b-icon-heart-fill></p> -->
-  
-  
-
-
       <!-- <img
             :src="recipe.image"
             class="recipe-image"
@@ -64,7 +60,6 @@
           /> -->
           </td>
   </tr>
-         
           <tr style="height:100px">
             <th><b-icon-alarm></b-icon-alarm>{{ cur_recipe.readyInMinutes }} Min</th>
             <th><b-icon-hand-thumbs-up variant="primary"></b-icon-hand-thumbs-up>{{ cur_recipe.aggregateLikes }} </th>
@@ -83,9 +78,6 @@
           </tr>
         </table>
                 </router-link>
-
-
-
 <!--          
     <article class="recipe-card">
       <div id="carousel" class="recipe-pic-frame">
