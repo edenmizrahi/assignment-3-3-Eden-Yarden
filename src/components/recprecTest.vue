@@ -1,53 +1,105 @@
 <template>
-<div>
-<div class="ft-recipe"> 
-    
-  <div class="ft-recipe__thumb"><span id="close-modal"><i class="ion ion-md-close"></i></span>
-    <h3>Today's Featured Recipe</h3><img src="https://zippypaws.com/app/uploads/2018/05/strawberry-waffles-1024x668.jpg" alt="Strawberry Waffle"/>
-  </div>
-  <div class="ft-recipe__content">
-    <header class="content__header">
-      <div class="row-wrapper">
-        <h2 class="recipe-title">Strawberry Waffle</h2>
-        
-        <div class="user-rating"></div>
-      </div>
-      <ul class="recipe-details">
-        <li class="recipe-details-item time"><i class="ion ion-ios-clock-outline"></i><span class="value">20</span><span class="title">Minutes</span></li>
-        <li class="recipe-details-item ingredients"><i class="ion ion-ios-book-outline"></i><span class="value">5</span><span class="title">Ingredients</span></li>
-        <li class="recipe-details-item servings"><i class="ion ion-ios-person-outline"></i><span class="value">4-6</span><span class="title">Serving</span></li>
-      </ul>
-    </header>
-    <p class="description">
-    <footer class="content__footer"><a href="#">add to favorite</a></footer>
-  </div>
-</div>
+  <div class="ft-recipe">
+    <div class="ft-recipe__thumb">
+      <span id="close-modal"><i class="ion ion-md-close"></i></span>
+      <h3>Today's Featured Recipe</h3>
+      <img
+        src="https://zippypaws.com/app/uploads/2018/05/strawberry-waffles-1024x668.jpg"
+        alt="Strawberry Waffle"
+      />
+    </div>
+    <div class="ft-recipe__content">
+      <header class="content__header">
+        <div class="row-wrapper">
+          <h2 class="recipe-title">Strawberry Waffle</h2>
 
+          <div class="user-rating"></div>
+        </div>
+        <ul class="recipe-details">
+          <li class="recipe-details-item time">
+            <i class="ion ion-ios-clock-outline"></i
+            ><span class="value">20</span><span class="title">Minutes</span>
+          </li>
+          <li class="recipe-details-item ingredients">
+            <i class="ion ion-ios-book-outline"></i><span class="value">5</span
+            ><span class="title">Ingredients</span>
+          </li>
+          <li class="recipe-details-item servings">
+            <i class="ion ion-ios-person-outline"></i
+            ><span class="value">4-6</span><span class="title">Serving</span>
+          </li>
+        </ul>
+      </header>
+      <p class="description"></p>
+      <footer class="content__footer"><a href="#">add to favorite</a></footer>
+    </div>
+  </div>
 </template>
-<script >
+<script>
 export default {
   name: "test",
-  components:{
-  },
+  components: {},
   data: () => ({
     //sample data
     items: [
-      { _id: "1", product: "Margherita", fullprice: 22, sale: 0 , category: "Sliced Pizza" , description: "<span style='color:#ccc'>my description width a style injected</span>" ,image: "https://storage.googleapis.com/ghostfood-539ae.appspot.com/images/pizza_2.jpg" , fav: false},
-      { _id: "2", product: "Capricciosa", fullprice: 25, sale: 22 , category: "Sliced Pizza" , description: "my description" , image: "https://storage.googleapis.com/ghostfood-539ae.appspot.com/images/pizza_3.jpg" , fav: false , stars: 3.5},
-      { _id: "3", product: "Napoli", fullprice: 20, sale: 0 , category: "Sliced Pizza" , description: "my description" , image: "https://storage.googleapis.com/ghostfood-539ae.appspot.com/images/pizza_4.jpg" , fav: false },
-      { _id: "3", product: "Salame Piccante", fullprice: 19, sale: 0 , category: "Sliced Pizza" , description: "my description" ,image: "https://storage.googleapis.com/ghostfood-539ae.appspot.com/images/pizza_5.jpg" , fav: false }
+      {
+        _id: "1",
+        product: "Margherita",
+        fullprice: 22,
+        sale: 0,
+        category: "Sliced Pizza",
+        description:
+          "<span style='color:#ccc'>my description width a style injected</span>",
+        image:
+          "https://storage.googleapis.com/ghostfood-539ae.appspot.com/images/pizza_2.jpg",
+        fav: false,
+      },
+      {
+        _id: "2",
+        product: "Capricciosa",
+        fullprice: 25,
+        sale: 22,
+        category: "Sliced Pizza",
+        description: "my description",
+        image:
+          "https://storage.googleapis.com/ghostfood-539ae.appspot.com/images/pizza_3.jpg",
+        fav: false,
+        stars: 3.5,
+      },
+      {
+        _id: "3",
+        product: "Napoli",
+        fullprice: 20,
+        sale: 0,
+        category: "Sliced Pizza",
+        description: "my description",
+        image:
+          "https://storage.googleapis.com/ghostfood-539ae.appspot.com/images/pizza_4.jpg",
+        fav: false,
+      },
+      {
+        _id: "3",
+        product: "Salame Piccante",
+        fullprice: 19,
+        sale: 0,
+        category: "Sliced Pizza",
+        description: "my description",
+        image:
+          "https://storage.googleapis.com/ghostfood-539ae.appspot.com/images/pizza_5.jpg",
+        fav: false,
+      },
     ],
     //mapping fields
     mapping: {
-      id:   '_id',
-      name: 'product',
-      label: 'category',
-      abstract: 'description',
-      price: 'fullprice',
-      sale_price: 'sale',
-      image: 'image',
-      isfavorite: 'fav',
-      rating: 'stars'
+      id: "_id",
+      name: "product",
+      label: "category",
+      abstract: "description",
+      price: "fullprice",
+      sale_price: "sale",
+      image: "image",
+      isfavorite: "fav",
+      rating: "stars",
     },
     //sample configuration
     options: {
@@ -63,7 +115,7 @@ export default {
       favorite: true,
       currency: "€",
       salebox: true,
-      elevation: '1',
+      elevation: "1",
       btn_1: '<i class="material-icons">favorite_border</i>',
       btn_1_on: '<i class="material-icons">favorite</i>',
       btn_2: '<i class="material-icons">shopping_cart</i>',
@@ -86,14 +138,15 @@ export default {
       //.. do your logic ...
       this.items[index].isfavorite = status;
       console.log("favorite product=>", product, "status=>", status);
-    }
-  }
+    },
+  },
 };
 </script>
-<style>@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
+<style>
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
 :root {
-  --headlinesFont: 'Josefin Sans', sans-serif;
-  --bodyFont: 'Work Sans', sans-serif;
+  --headlinesFont: "Josefin Sans", sans-serif;
+  --bodyFont: "Work Sans", sans-serif;
   --wildWatermelon: #ff4f87;
   --fuelYellow: #f0a035;
   --textColor: #323232;
@@ -134,7 +187,7 @@ a {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: column;
+  flex-direction: column;
   box-shadow: 0 0 88px 0 rgba(0, 0, 0, 0.1607843137);
   overflow: hidden;
   top: 50%;
@@ -179,7 +232,13 @@ a {
   font-family: var(--headlinesFont);
   font-size: 25px;
   height: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.25)), to(transparent));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 0.25)),
+    to(transparent)
+  );
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), transparent);
   padding: 2.4rem 0 0;
 }
@@ -187,19 +246,19 @@ a {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: 50% 50%;
-     object-position: 50% 50%;
+  object-position: 50% 50%;
 }
 .ft-recipe .ft-recipe__content {
   -webkit-box-flex: 1;
-          flex: 1;
+  flex: 1;
   padding: 0 2em 1em;
 }
 .ft-recipe .ft-recipe__content .content__header .row-wrapper {
   display: -webkit-box;
   display: flex;
-  padding: .55em 0 .3em;
+  padding: 0.55em 0 0.3em;
   border-bottom: 1px solid #d8d8d8;
 }
 .ft-recipe .ft-recipe__content .content__header .row-wrapper .recipe-title {
@@ -213,23 +272,42 @@ a {
   padding: 1.4em 0 1em;
   margin: 0;
   -webkit-box-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
-.ft-recipe .ft-recipe__content .content__header .recipe-details .recipe-details-item {
+.ft-recipe
+  .ft-recipe__content
+  .content__header
+  .recipe-details
+  .recipe-details-item {
   -webkit-box-flex: 1;
-          flex: 1;
+  flex: 1;
 }
-.ft-recipe .ft-recipe__content .content__header .recipe-details .recipe-details-item i {
+.ft-recipe
+  .ft-recipe__content
+  .content__header
+  .recipe-details
+  .recipe-details-item
+  i {
   font-size: 30px;
 }
-.ft-recipe .ft-recipe__content .content__header .recipe-details .recipe-details-item .value {
+.ft-recipe
+  .ft-recipe__content
+  .content__header
+  .recipe-details
+  .recipe-details-item
+  .value {
   color: #ff4f87;
-  margin-left: .35em;
+  margin-left: 0.35em;
   vertical-align: bottom;
   font-size: 24px;
   font-weight: 600;
 }
-.ft-recipe .ft-recipe__content .content__header .recipe-details .recipe-details-item .title {
+.ft-recipe
+  .ft-recipe__content
+  .content__header
+  .recipe-details
+  .recipe-details-item
+  .title {
   display: block;
   margin-top: -4px;
   font-family: var(--headlinesFont);
@@ -237,7 +315,7 @@ a {
   font-weight: 300;
 }
 .ft-recipe .ft-recipe__content .description {
-  margin: .3em 0 1.8em;
+  margin: 0.3em 0 1.8em;
 }
 .ft-recipe .ft-recipe__content .content__footer {
   text-align: center;
@@ -247,23 +325,23 @@ a {
   font-family: var(--headlinesFont);
   display: inline-block;
   background: var(--wildWatermelon);
-  padding: .45em 1em;
+  padding: 0.45em 1em;
   width: 100%;
   text-align: center;
   border-radius: 5px;
   color: #fff;
   font-weight: 500;
-  letter-spacing: .2px;
+  letter-spacing: 0.2px;
   font-size: 17px;
   -webkit-transition: box-shadow 250ms ease, -webkit-transform 250ms ease;
   transition: box-shadow 250ms ease, -webkit-transform 250ms ease;
   transition: transform 250ms ease, box-shadow 250ms ease;
-  transition: transform 250ms ease, box-shadow 250ms ease, -webkit-transform 250ms ease;
+  transition: transform 250ms ease, box-shadow 250ms ease,
+    -webkit-transform 250ms ease;
 }
 .ft-recipe .ft-recipe__content .content__footer a:hover {
   -webkit-transform: translateY(-3px);
-          transform: translateY(-3px);
+  transform: translateY(-3px);
   box-shadow: 0 10px 34px 0 rgba(255, 79, 135, 0.32);
 }
-
 </style>
