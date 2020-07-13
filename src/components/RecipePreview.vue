@@ -5,8 +5,8 @@
         <b-icon-eye-fill
           v-if="recipe.watched == true"
           style=" position: absolute;
-  top: 270px;
-  left: 20;"
+             top: 270px;
+             left: 20;"
         ></b-icon-eye-fill>
       </p>
       <div
@@ -14,14 +14,14 @@
         v-if="$root.store.username && cur_recipe.favorite == false"
         class="circle"
         style=" position: absolute;
-  top: 50px;
-  left: -10px;  "
+                 top: 50px;
+               left: -10px;  "
       >
         <p class="h1 mb-2">
           <b-icon-heart-fill
             style="color:white; position: absolute;
-  top: 12px;
-  left: 8;"
+            top: 12px;
+                left: 8;"
           ></b-icon-heart-fill>
         </p>
       </div>
@@ -31,8 +31,8 @@
           variant="danger"
           v-if="$root.store.username && cur_recipe.favorite == true"
           style=" position: absolute;
-   top: 60px;
-  left: 0px;  "
+                top: 60px;
+                left: 0px;  "
         ></b-icon-heart-fill>
       </p>
 
@@ -47,7 +47,7 @@
         <table
           class="center"
           style="  border: 2px solid red;
-  border-radius: 50px 20px; width:300px;height:300px;"
+          border-radius: 50px 20px; width:300px;height:300px;"
         >
           <tr>
             <td colspan="5" style="height:80px">
@@ -62,15 +62,12 @@
                 'background-image': 'url(' + cur_recipe.image + ')',
               }"
               style="width:300px;height:200px;background-size: 300px 200px;"
-            >
-            </td>
+            ></td>
           </tr>
 
           <tr style="height:100px">
             <th>
-              <b-icon-alarm></b-icon-alarm><br />{{
-                cur_recipe.readyInMinutes
-              }}
+              <b-icon-alarm></b-icon-alarm><br />{{ cur_recipe.readyInMinutes }}
               Min
             </th>
             <th>
@@ -141,8 +138,7 @@
                 'background-image': 'url(' + cur_recipe.image + ')',
               }"
               style="width:300px;height:200px;background-size: 300px 200px;"
-            >
-            </td>
+            ></td>
           </tr>
 
           <tr style="height:100px">
@@ -296,7 +292,6 @@ export default {
 </script>
 
 <style scoped>
-
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
 table {
   border-collapse: collapse;

@@ -106,7 +106,7 @@ export default {
 @import "@/scss/form-style.scss";
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // color: #2c3e50;
@@ -114,25 +114,25 @@ export default {
 
 }
 
-// #app::before {
-//   content: '';
-//   display: block;
-//   position: absolute;
-//   min-height: 100%;
-//   min-width: 1024px;
-//   // position: fixed;
-//   background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
-//   background-size: cover;
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   background-attachment: fixed;
-//   z-index: -1;
-//   // color: #2c3e50;
-//   width: 100%;
-//   height: auto;
-//   top: 0;
-//   left: -100;
-// }
+#app::before {
+  content: '';
+  display: block;
+  position: absolute;
+  min-height: 100%;
+  min-width: 1024px;
+  // position: fixed;
+  background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594563633/background/various-fresh-vegetables-organic-food-healthy-rustic-background_44537-627_bup06t.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: -1;
+  // color: #2c3e50;
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: -100;
+}
 
 // .jumbotron {
 //   background-image: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");

@@ -206,8 +206,8 @@ ul {
 
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
 div{
-  font-family: 'Do Hyeon', sans-serif;
-   text-align: center;
+  /* font-family: 'Do Hyeon', sans-serif;
+   text-align: center; */
 
 }
 .title_left{

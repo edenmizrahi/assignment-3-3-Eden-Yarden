@@ -121,11 +121,11 @@
                   /></a>
                 </th>
                 <th>
-                  <img
+                  <img class="icons"
                     v-if="recipe.glutenFree"
                     src="https://img.icons8.com/office/40/000000/no-gluten.png"
                   />
-                  <img
+                  <img class="icons"
                     v-else
                     src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
                   />
@@ -386,7 +386,7 @@ export default {
 <style scoped>
 .recipe-body {
   /* background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg"); */
-  /* background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg"); */
+  background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   /* width: 400%; */

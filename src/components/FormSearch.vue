@@ -153,7 +153,7 @@
           </b-form-invalid-feedback>
         </b-form-group>
 
-        <b-form-group
+        <!-- <b-form-group
           id="input-group-lastname"
           label-cols-sm="4"
           label-cols-lg="3"
@@ -172,6 +172,23 @@
           <b-form-invalid-feedback v-if="!$v.form.amount.numeric">
             Amount must contain only numbers.
           </b-form-invalid-feedback>
+        </b-form-group> -->
+
+        <b-form-group
+          label="Amount of result back:"
+          label-for="amount"
+          label-cols-lg="4"
+        >
+          <b-form-radio-group
+            id="amount"
+            v-model="amount_selected"
+            name="radio-sub-component"
+            style="padding-top: 7px;"
+          >
+            <b-form-radio value="first" >5</b-form-radio>
+            <b-form-radio value="second">10</b-form-radio>
+            <b-form-radio value="third">15</b-form-radio>
+          </b-form-radio-group>
         </b-form-group>
 
         <!-- <b-button-group> -->
@@ -324,7 +341,9 @@
         <br />
         <b-button type="reset" variant="danger">Reset</b-button>
         &nbsp;&nbsp;
-        <b-button type="submit" variant="primary">Search</b-button>
+        <b-button type="submit" variant="primary"
+          >Search <b-icon-search></b-icon-search
+        ></b-button>
       </b-form>
       <!-- </b-form-group> -->
     </b-card>
@@ -360,6 +379,7 @@ export default {
   data() {
     return {
       header: "Search Page",
+      amount_selected: "first",
       form: {
         query: "",
         amount: "",
@@ -384,7 +404,7 @@ export default {
       },
       amount: {
         // required,
-        numeric,
+        // numeric,
       },
       cuisine: {},
       diet: {},
