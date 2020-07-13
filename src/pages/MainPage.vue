@@ -1,41 +1,83 @@
 <template>
-<b-container fluid   style="background-image: url(https://i.ibb.co/0cP75KS/bg10.jpg);
+  <b-container
+    fluid
+    style="background-image: url(https://i.ibb.co/0cP75KS/bg10.jpg);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;">
-  <b-row>
-    <b-col cols="8"  style="background-image: url(https://images.creativemarket.com/0.1.0/ps/7353024/300/200/m2/fpc/wm0/ahp0l9ecx0vfwsdo1rwxcdtynfyzn4gweomwnblntp5glupfrmnapoab88tzxyjd-.jpg?1574572829&s=07278d4d356bb14b0c49de573edd8fd7);
+  background-size: cover;"
+  >
+    <b-row>
+      <b-col
+        cols="8"
+        style="background-image: url(https://res.cloudinary.com/dc9fdssoo/image/upload/v1594554766/bg22_eo2k7l.jpg);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;">>
-  <h1 class="title">Welcome To Our Recipes Website!</h1>
-                <RecipesPreviewList
-            :isLogin="!!$root.store.username"
-            type="random"
-          ></RecipesPreviewList>
-          </b-col>
-      <b-col  style="background-image: url(https://i.ibb.co/0cP75KS/bg10.jpg);
+  background-size: cover;"
+        >>
+        <h1 class="title" style="font-size:80px">
+          Welcome To Our Recipes Website!
+        </h1>
+        <RecipesPreviewList
+          :isLogin="!!$root.store.username"
+          type="random"
+        ></RecipesPreviewList>
+
+        <div v-if="!!$root.store.username">
+          <div class="separator"></div>
+          <h1 class="title" style=" margin-top: 100px;">Only Yours:</h1>
+
+          <p class="btn-profile">
+            <router-link style="color: thistle;" :to="{ name: 'family' }">
+              Family Recipes
+            </router-link>
+            |
+            <router-link
+              style="color: thistle;"
+              @click="clickHandler()"
+              :to="{
+                name: 'myRecipesPage',
+                params: { title: 'My Recipes', numberOfColumns: 4 },
+              }"
+              >My Recipes
+            </router-link>
+            |
+            <router-link
+              style="color: thistle;"
+              @click="clickHandler()"
+              :to="{
+                name: 'recipesPage',
+                params: { title: 'Favorite Recipes', numberOfColumns: 4 },
+              }"
+            >
+              Favorite Recipes
+            </router-link>
+          </p>
+        </div>
+      </b-col>
+      <b-col
+        style="background-image: url(https://i.ibb.co/0cP75KS/bg10.jpg);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;">>
-         <div v-if="!$root.store.username">
-          <LoginPage></LoginPage>
+  background-size: cover;"
+        >>
+        <div v-if="!$root.store.username">
+          <div>
+            <LoginPage style="margin-top:30%"></LoginPage>
+          </div>
         </div>
         <div v-else>
-
-            <RecipesPreviewList
+          <RecipesPreviewList
             :isLogin="!!$root.store.username"
             type="lastWatch"
-          
           ></RecipesPreviewList>
-      </div>
-        </b-col>
-  </b-row>
-</b-container>
-<!-- <div class="border">
+        </div>
+      </b-col>
+    </b-row>
+  </b-container>
+  <!-- <div class="border">
   <div class="d-md-flex h-md-100 align-items-center">
 
     <div class="col-md-7 p-0 bg-indigo h-md-100">
@@ -49,7 +91,6 @@
           ></RecipesPreviewList>
         </div>
       </div>
-      <RecprecTest></RecprecTest>
     
     </div>
 
@@ -128,7 +169,6 @@
 
 <script>
 import RecipesPreviewList from "../components/RecipesPreviewList";
-import RecprecTest from "../components/recprecTest";
 
 import LoginPage from "../pages/LoginPage.vue";
 
@@ -137,7 +177,7 @@ export default {
     // RecipePreviewList,
     RecipesPreviewList,
     LoginPage,
-    // RecprecTest,
+
     // RecipePreviewListLastWatch,
   },
 };
@@ -282,20 +322,34 @@ export default {
 //   }
 // }
 
-.border{
-    background-color: #2c3e50;
+.border {
+  background-color: #2c3e50;
   // background-image: url("../images/bg1.jpg");
 }
 
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
-@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
-.title{
-    font-family: 'Cookie', cursive;
-    font-size: 60px;
-    color:wheat;
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon");
+@import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
+.title {
+  font-family: "Cookie", cursive;
+  font-size: 60px;
+  color: wheat;
 }
-p{
-  font-family: 'Do Hyeon', sans-serif;
+p {
+  font-family: "Do Hyeon", sans-serif;
+}
+.btn-profile {
+  font-size: 40px;
+  color: thistle;
 
+  max-width: 80%;
+  margin: auto;
+  width: 80%;
+  border: 3px solid white;
+  margin-top: 50px;
+  padding: 10px;
+}
+.separator {
+  margin-top: 100px;
+  border-bottom: 5px solid #6182ae;
 }
 </style>

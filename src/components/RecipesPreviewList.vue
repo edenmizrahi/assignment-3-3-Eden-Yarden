@@ -19,7 +19,6 @@
 
     <br />
     <br />
-    <br />
     <RandomRecipesAction
       v-on:random-click-event="updateRecipes"
     ></RandomRecipesAction>
@@ -144,8 +143,22 @@ export default {
           if(this.type=='lastWatch'){
               response = await this.axios.get(
           this.$root.store.BASE_URL + "/profile/watchedList/top"
-        );
+          
+          );
           }
+          // if(this.type=='lastWatch'&& !this.$root.store.lastWatch){
+          //     response = await this.axios.get(
+          // this.$root.store.BASE_URL + "/profile/watchedList/top"
+          
+          // );
+          
+          // }
+          // if(this.type=='lastWatch'&& !!this.$root.store.lastWatch){
+          //     response = {};
+          //     response.data=this.$root.store.lastWatch;
+          
+          // }
+
         }
 
          this.recipes_ = response.data;
@@ -163,7 +176,10 @@ export default {
         let x = await Promise.all(this.promises);
         // this.$forceUpdate();
         this.recipes.push(...this.recipes_);
-
+        // if(!this.$root.store.lastWatch){
+        //  console.log(this.$root.store.login);
+        // this.$root.store.addWatchedList(this.recipes)
+        // }
         console.log(123123, this.recipes_);
         console.log(11121212, this.recipes);
       } catch (error) {

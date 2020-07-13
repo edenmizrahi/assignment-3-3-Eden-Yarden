@@ -54,6 +54,13 @@ const shared_data = {
   BASE_URL: "http://localhost:4000",
   username: localStorage.username,
   recipePage: "",
+  lastWatch: localStorage.watchedList,
+
+  addWatchedList(watchedList) {
+    localStorage.setItem("watchedList", watchedList);
+    this.lastWatch = watchedList;
+  },
+  
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -64,8 +71,10 @@ const shared_data = {
     Vue.$cookies.remove("session");
     localStorage.removeItem("username");
     this.username = undefined;
+    localStorage.removeItem("watchedList");
+    this.lastWatch = undefined;
   },
-  search(recipes, query, amount, cuisine, diet, intolerance){
+  search(recipes, query, amount, cuisine, diet, intolerance) {
     console.log("search");
     localStorage.setItem("recipes", recipes);
     this.recipes = recipes;
@@ -85,7 +94,7 @@ const shared_data = {
     localStorage.setItem("intolerance", intolerance);
     this.intolerance = intolerance;
     console.log("search", this.intolerance);
-  }
+  },
 };
 
 router.beforeEach((to, from, next) => {

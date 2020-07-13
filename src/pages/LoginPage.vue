@@ -44,8 +44,8 @@
         >Login</b-button
       >
       <div class="mt-2">
-        Do not have an account yet?
-        <router-link to="register"> Register in here</router-link>
+        DON'T HAVE AN ACCOUNT?
+        <router-link to="register">SIGN UP</router-link>
       </div>
     </b-form>
     <b-alert
@@ -127,7 +127,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css?family=Pangolin:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
+
 .container {
   max-width: 400px;
+  color: wheat;
+  background-color: rgba(1, 1, 1, 0.6);
+  border-radius: 20px;
+  height: 300px;
+  padding-top: 10px;
+  font-family: Pangolin;
+  margin-top: 7%;
 }
 </style>
