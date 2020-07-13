@@ -3,8 +3,8 @@
     <div  v-if="type=='random'">
       
   <b-container>
-    <h3>
-     Random Recipes:
+    <h3 class="title_left">
+    Explore Our Recipes:
       <slot></slot>
     </h3>
 
@@ -27,7 +27,7 @@
   <div  v-if="type=='lastWatch'" >
         <b-container>
     <h3>
-   Last watched:
+   Last Watched:
       <slot></slot>
     </h3>
     <b-col v-for="r in recipes" :key="r.id">
@@ -64,26 +64,14 @@ export default {
   watch: {
     isLogin: async function(newVal, lastVal) {
       if (newVal){
-        // this.recipes_.map((r) => {
-        //   // this.recipes.map((r) => {
-        //   this.promises.push(this.checkIfLogin(r));
-        // });
-        // let x = await Promise.all(this.promises);
-        // console.log(7777,this.recipes_)
-        // this.recipes=[];
-        // this.recipes.push(...this.recipes_);
         this.recipes.push;
         this.recipes = [];
 
         this.recipes_.map((r) => {
-          // this.recipes.map((r) => {
           this.promises.push(this.checkIfLogin(r));
         });
         let x = await Promise.all(this.promises);
-        // this.$forceUpdate();
         this.recipes.push(...this.recipes_);
-
-         console.log(8888,this.recipes)
 
       } 
       // console.log(1234567, { newVal, lastVal });
@@ -125,16 +113,10 @@ export default {
               rec.recipe_id +
               "]"
           );
-          console.log("after");
-          console.log(responewatchedorfav);
           // console.log("response.status", response.status);
           if (responewatchedorfav.status !== 200)
             this.$router.replace("/NotFound");
         } catch (error) {
-          console.log(
-            "error.respone_watchedOrFav.status",
-            error.responewatchedorfav.status
-          );
           this.$router.replace("/NotFound");
           return;
         }
@@ -204,5 +186,15 @@ export default {
 
 ul {
   list-style-type: none;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+div{
+  font-family: 'Do Hyeon', sans-serif;
+   text-align: center;
+
+}
+.title_left{
+  color:thistle;
 }
 </style>
