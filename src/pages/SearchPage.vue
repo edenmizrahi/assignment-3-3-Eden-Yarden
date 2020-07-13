@@ -6,7 +6,7 @@
     />
     <br />
     <br />
-    <h1 class="title">{{ header }}:</h1>
+    <h1 class="searchTitle">{{ header }}:</h1>
 
     <FormSearch v-on:search-click-event="Search" v-on:reset-click-event="Reset">
     </FormSearch>
@@ -19,8 +19,8 @@
     <div class="sort" v-if="this.aftersearch == 'true'">
       Sort By:
       <b-button-group>
-        <b-button v-on:click="orderByLikes()">Likes</b-button>
-        <b-button v-on:click="orderByTime()">Duration</b-button>
+        <b-button class="btn-sort" style=" margin: 10px;" v-on:click="orderByLikes()">Likes</b-button>
+        <b-button class="btn-sort" style=" margin: 10px;" v-on:click="orderByTime()">Duration</b-button>
       </b-button-group>
     </div>
     <!-- <div v-if="recipes.length == 0">No Search Results.</div> -->
@@ -93,18 +93,19 @@ export default {
     ShowLastSearch() {
       try {
         if (this.$root.store.username) {
-          if (localStorage.loadRecipes) {
-            this.recipes = JSON.parse(localStorage.loadRecipes);
+          if (localStorage.search) {
+            this.recipes = JSON.parse(localStorage.search);
             // this.recipes = localStorage.recipes;
-          } else {
-            if (localStorage.loadRecipes) {
-              localStorage.removeItem("loadRecipes");
-            }
+          }
+        } else {
+          if (localStorage.search) {
+            localStorage.removeItem("search");
           }
         }
       } catch (error) {}
     },
     async Search(query, amount, cuisine, diet, intolerance) {
+      // this.ShowLastSearch();
       let response;
       try {
         this.results = "";
@@ -137,22 +138,9 @@ export default {
           this.recipes = [];
           this.recipes.push(...recipes_);
 
-          localStorage.setItem("loadRecipes", JSON.stringify(this.recipes));
-          localStorage.setItem("query", query);
-          localStorage.setItem("amount", amount);
-          localStorage.setItem("cuisine", cuisine);
-          localStorage.setItem("diet", diet);
-          localStorage.setItem("intolerance", intolerance);
-          // localStorage.setItem("LoadRecipes", JSON.stringify(this.recipes));
-          // console.log(this.$root.store.search);
-          // this.$root.store.search(
-          //   this.recipes,
-          //   query,
-          //   amount,
-          //   cuisine,
-          //   diet,
-          //   intolerance
-          // );
+          if (this.$root.store.username) {
+            localStorage.setItem("search", JSON.stringify(this.recipes));
+          }
           /**show sort option**/
           this.aftersearch = "true";
 
@@ -211,7 +199,7 @@ export default {
   height: auto;
   font-family: "Raleway", cursive;
   // background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561158/background/36811008-raw-pasta-with-ingredients-on-wooden-background_fsytts.jpg");
-   background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594563633/background/various-fresh-vegetables-organic-food-healthy-rustic-background_44537-627_bup06t.jpg");
+  background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594563633/background/various-fresh-vegetables-organic-food-healthy-rustic-background_44537-627_bup06t.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   // position: fixed;
@@ -225,10 +213,20 @@ export default {
   // background-size: cover;
 }
 
-.title{
-  margin-left: 100px;
+.searchTitle {
+  // margin-left: 100px;
+  text-align: center;
+  font-family: "Cookie", cursive;
+  font-size: 80px;
+  font-weight: bolder;
+  // color: wheat;
 }
 
+.sort{
+  text-align: center;
+  font-size: 20px;
+   font-weight: bold;
+}
 // .container::before {
 //   content: '';
 //   display: block;
@@ -248,4 +246,27 @@ export default {
 //   top: 0;
 //   left: -100;
 // }
+
+// sort buttons style //
+
+.btn-sort {
+  border: 0 solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid;
+  outline-color: rgba(255, 255, 255, .5);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+} 
+
+.btn-sort:hover {
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388; 
+}
+
+
+
 </style>

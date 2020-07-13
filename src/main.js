@@ -84,27 +84,31 @@ const shared_data = {
     this.username = undefined;
     localStorage.removeItem("watchedList");
     this.lastWatch = undefined;
+
+    if(localStorage.search){
+      localStorage.removeItem("search")
+    }
   },
-  // search(recipes, query, amount, cuisine, diet, intolerance){
+  // search(recipes){
   //   console.log("search");
   //   localStorage.setItem("recipes", recipes);
   //   this.recipes = recipes;
-  //   console.log("search", this.recipes);
-  //   localStorage.setItem("query", query);
-  //   this.query = query;
-  //   console.log("search", this.query);
-  //   localStorage.setItem("amount", amount);
-  //   this.amount = amount;
-  //   console.log("search", this.amount);
-  //   localStorage.setItem("cuisine", cuisine);
-  //   this.cuisine = cuisine;
-  //   console.log("search", this.cuisine);
-  //   localStorage.setItem("diet", diet);
-  //   this.diet = diet;
-  //   console.log("search", this.diet);
-  //   localStorage.setItem("intolerance", intolerance);
-  //   this.intolerance = intolerance;
-  //   console.log("search", this.intolerance);
+  //   // console.log("search", this.recipes);
+  //   // localStorage.setItem("query", query);
+  //   // this.query = query;
+  //   // console.log("search", this.query);
+  //   // localStorage.setItem("amount", amount);
+  //   // this.amount = amount;
+  //   // console.log("search", this.amount);
+  //   // localStorage.setItem("cuisine", cuisine);
+  //   // this.cuisine = cuisine;
+  //   // console.log("search", this.cuisine);
+  //   // localStorage.setItem("diet", diet);
+  //   // this.diet = diet;
+  //   // console.log("search", this.diet);
+  //   // localStorage.setItem("intolerance", intolerance);
+  //   // this.intolerance = intolerance;
+  //   // console.log("search", this.intolerance);
   // }
 };
 
