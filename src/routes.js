@@ -73,6 +73,17 @@ const routes = [
       requiresAuth: true,
     },
   },
+
+    {
+    path: "/recipes/family",
+    name: "familyRecipes",
+    component: () => import("./pages/RecipesPage"),
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+    
   {
     path: "*",
     name: "notFound",

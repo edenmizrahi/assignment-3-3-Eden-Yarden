@@ -23,7 +23,14 @@
 
           <b-navbar-nav v-if="$root.store.username">
             <b-nav-item-dropdown text="Personal" right>
-              <b-dropdown-item :to="{ name: 'family' }"
+              <!-- <b-dropdown-item :to="{ name: 'family' }"
+                >Family recipes</b-dropdown-item
+              > -->
+              <b-dropdown-item  @click="clickHandler()"
+                :to="{
+                  name: 'familyRecipes',
+                  params: { title: 'Family Recipes', numberOfColumns: 3 },
+                }"
                 >Family recipes</b-dropdown-item
               >
               <b-dropdown-item
@@ -38,7 +45,7 @@
               <b-dropdown-item
                 :to="{
                   name: 'myRecipesPage',
-                  params: { title: 'My Recipes', numberOfColumns: 4 },
+                  params: { title: 'My Recipes', numberOfColumns: 3 },
                 }"
                 >My recipes</b-dropdown-item
               >

@@ -79,6 +79,11 @@ export default {
             this.$root.store.BASE_URL + "/profile/favorite"
           );
         }
+        if (this.title_ == "Family Recipes") {
+          response = await this.axios.get(
+            this.$root.store.BASE_URL + "/profile/familyRecipes"
+          );
+        }
         if (this.title_ == "My Recipes") {
           response = await this.axios.get(
             this.$root.store.BASE_URL + "/profile/myRecipes"
