@@ -17,6 +17,7 @@
           </div>
           <br />
           <div class="circle__recipe">
+            <!-- <b-icon-alarm></b-icon-alarm> {{ recipe.readyInMinutes }} Min -->
             <i class="fa fa-clock-o"
               ><h2>{{ recipe.readyInMinutes }} min</h2></i
             >
@@ -73,9 +74,7 @@
                   style="width:40px;height:40px;border-style:none;margin-top: 10px; border-radius: 50%; margin-left: 26px;display:block;font-size: 20px; background-color: #e2c904;"
                   @click="AddToFavoriteAction(recipe)"
                   ref="btnFavorite"
-                >
-                  <!-- Add To Favorite -->
-                </button>
+                ></button>
               </div>
               <div v-else>
                 <button
@@ -84,9 +83,7 @@
                   variant="primary"
                   style="width:40px; border-style:none;height:40px; margin-top: 10px;border-radius: 50%; margin-left: 26px;display:block;font-size: 20px; background-color: #e2c904;"
                   ref="btnFavorite"
-                >
-                  <!-- In Favorite -->
-                </button>
+                ></button>
               </div>
               <br />
             </div>
@@ -97,15 +94,60 @@
             </div>
           </div>
 
-          <!-- <div class="recipe__presentation"> -->
-          <h5>
+          <!-- <h5>
             <b>Vegan:</b> {{ recipe.vegan }} |
             <b>Vegetarian:</b>
             {{ recipe.vegetarian }} |
             <b>Gluten Free:</b>
             {{ recipe.glutenFree }}
+          </h5> -->
+          <h5>
+            <table>
+              <tr style="height:40px">
+                <th>
+                  <a v-if="recipe.vegan" href="https://imgbb.com/"
+                    ><img
+                      src="https://i.ibb.co/PgHSV4t/leaf.png"
+                      alt="leaf"
+                      border="0"
+                      style=" width:30px;height:30px;"
+                  /></a>
+                  <a v-if="recipe.vegetarian" href="https://imgbb.com/"
+                    ><img
+                      src="https://i.ibb.co/PgHSV4t/leaf.png"
+                      alt="leaf"
+                      border="0"
+                      style=" width:30px;height:30px;"
+                  /></a>
+                </th>
+                <th>
+                  <img
+                    v-if="recipe.glutenFree"
+                    src="https://img.icons8.com/office/40/000000/no-gluten.png"
+                  />
+                  <img
+                    v-else
+                    src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
+                  />
+                </th>
+              </tr>
+            </table>
           </h5>
-          <!-- </div> -->
+          <!-- <h5>
+            <b>Vegan:</b> {{ recipe.vegan }} |
+            <b>Vegetarian:</b>
+            {{ recipe.vegetarian }} |
+            <img
+              class="icons"
+              v-if="recipe.glutenFree"
+              src="https://img.icons8.com/office/40/000000/no-gluten.png"
+            />
+            <img
+              class="icons"
+              v-else
+              src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
+            />
+          </h5> -->
 
           <div class="content">
             <b-tabs class="content" content-class="mt-4" align="center">
@@ -344,7 +386,7 @@ export default {
 <style scoped>
 .recipe-body {
   /* background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg"); */
-  background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
+  /* background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   /* width: 400%; */
@@ -358,8 +400,8 @@ export default {
   grid-template-columns: 186px 186px 186px 186px; */
 }
 /* .wrapped { */
-  /* width: 40%; */
-  /* border: 1px solid red; */
+/* width: 40%; */
+/* border: 1px solid red; */
 /* } */
 .center {
   display: block;
@@ -377,6 +419,12 @@ export default {
   /* width: 550px; */
 }
 
+.icons {
+  /* border: 1px solid #ddd; */
+  /* border-radius: 4px; */
+  /* padding: 5px; */
+  width: 60px;
+}
 #recipe__presentation {
   background-repeat: no-repeat;
   background-position: center;
@@ -468,14 +516,35 @@ hr {
 }
 
 h5 {
-  background-color: rgba(30, 28, 28, 0.5);
+  background-color: rgba(35, 30, 28, 0.5);
   /* font-family: "Roboto", sans-serif; */
   font-family: "Raleway", cursive;
   /* font-weight: 900; */
   font-size: 18px;
-  padding-top: 10px;
+  padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 30px;
   color: white;
+  height: 44px;
+}
+
+table {
+  /* border-collapse: collapse; */
+  border-radius: 1em;
+  overflow: hidden;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 40px 0;
+}
+
+th,
+td {
+  /* padding: 1em; */
+  /* margin: 1em; */
+  text-align: center;
+  /* background: #ddd; */
+  /* border-bottom: 2px solid white; */
 }
 </style>
