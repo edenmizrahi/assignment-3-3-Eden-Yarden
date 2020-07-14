@@ -2,7 +2,7 @@
   <div>
     <table
       class="center"
-      style="  border: 2px solid red;border-radius: 50px 20px; width:300px;height:300px;"
+      style="border: 2px solid red;border-radius: 50px 20px; width:300px;height:300px;"
     >
       <tr>
         <td colspan="5" style="height:80px">
@@ -80,7 +80,7 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
-table {
+.center {
   border-collapse: collapse;
   border-radius: 1em;
   overflow: hidden;
@@ -88,8 +88,8 @@ table {
   background-color: #faf7d7;
 }
 
-th,
-td {
+.center th,
+.center td {
   padding: 1em;
   background: #ddd;
   border-bottom: 2px solid white;
@@ -104,7 +104,7 @@ td {
 body {
   margin: 1.5em;
 }
-table:hover {
+.center :hover {
   color: #000000;
   border: 10px solid #ffffff;
   text-shadow: 0px 0px 20px #ffffff;

@@ -64,26 +64,31 @@
                   </div>
                 </div>
               </div> -->
-          <div>
-            <div class="btnFav" v-if="$root.store.username">
-              <div class="favBtn" v-if="recipe.favorite == false">
+          <div style="margin-left:-28px; text-align: center;">
+            <div v-if="$root.store.username">
+              <br />
+              <div class="btnFav" v-if="recipe.favorite == false">
                 <button
-                  class="fa fa-star-o"
+                  class="favBtn"
                   type="button"
                   variant="primary"
-                  style="width:40px;height:40px;border-style:none;margin-top: 10px; border-radius: 50%; margin-left: 26px;display:block;font-size: 20px; background-color: #e2c904;"
+                  style="width:50px; height:50px; border-style:none; margin-top: 5px; font-size: 28px; background-color: transparent;"
                   @click="AddToFavoriteAction(recipe)"
                   ref="btnFavorite"
-                ></button>
+                >
+                  <b-icon-heart-fill style="color:white;"></b-icon-heart-fill>
+                </button>
               </div>
-              <div v-else>
+              <div class="btnInFav" v-else>
                 <button
                   disabled
-                  class="fa fa-star"
-                  variant="primary"
-                  style="width:40px; border-style:none;height:40px; margin-top: 10px;border-radius: 50%; margin-left: 26px;display:block;font-size: 20px; background-color: #e2c904;"
+                  class="favBtn"
+                  variant="danger"
+                  style="width:50px; border-style:none; height:50px; margin-top: 5px; font-size: 28px; background-color: transparent;"
                   ref="btnFavorite"
-                ></button>
+                >
+                  <b-icon-heart-fill style="color:red;"></b-icon-heart-fill>
+                </button>
               </div>
               <br />
             </div>
@@ -94,49 +99,55 @@
             </div>
           </div>
 
+          <!-- <div style="margin-left:1px;">
+            <div class="btnFav" v-if="$root.store.username">
+              <div class="favBtn" v-if="recipe.favorite == false">
+                <button
+                  class="fa fa-star-o"
+                  type="button"
+                  variant="primary"
+                  style="width:40px;height:40px;border-style:none;margin-top: 10px; border-radius: 50%; margin-left: -26px;display:block;font-size: 20px; background-color: #e2c904;"
+                  @click="AddToFavoriteAction(recipe)"
+                  ref="btnFavorite"
+                ></button>
+              </div>
+              <div v-else>
+                <button
+                  disabled
+                  class="fa fa-star"
+                  variant="primary"
+                  style="width:40px; border-style:none;height:40px; margin-top: 10px;border-radius: 50%; margin-left: -26px;display:block;font-size: 20px; background-color: #e2c904;"
+                  ref="btnFavorite"
+                ></button>
+              </div>
+              <br />
+            </div>
+            <div v-else>
+              <br />
+              <br />
+              <br />
+            </div>
+          </div> -->
+
           <!-- <h5>
-            <b>Vegan:</b> {{ recipe.vegan }} |
-            <b>Vegetarian:</b>
-            {{ recipe.vegetarian }} |
-            <b>Gluten Free:</b>
-            {{ recipe.glutenFree }}
-          </h5> -->
-          <h5>
-            <table>
-              <tr style="height:40px">
-                <th>
-                  <a v-if="recipe.vegan" href="https://imgbb.com/"
-                    ><img
-                      src="https://i.ibb.co/PgHSV4t/leaf.png"
-                      alt="leaf"
-                      border="0"
-                      style=" width:30px;height:30px;"
-                  /></a>
-                  <a v-if="recipe.vegetarian" href="https://imgbb.com/"
-                    ><img
-                      src="https://i.ibb.co/PgHSV4t/leaf.png"
-                      alt="leaf"
-                      border="0"
-                      style=" width:30px;height:30px;"
-                  /></a>
-                </th>
-                <th>
-                  <img class="icons"
-                    v-if="recipe.glutenFree"
-                    src="https://img.icons8.com/office/40/000000/no-gluten.png"
-                  />
-                  <img class="icons"
-                    v-else
-                    src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
-                  />
-                </th>
-              </tr>
-            </table>
-          </h5>
-          <!-- <h5>
-            <b>Vegan:</b> {{ recipe.vegan }} |
-            <b>Vegetarian:</b>
-            {{ recipe.vegetarian }} |
+            <div>
+              <a v-if="recipe.vegan" href="https://imgbb.com/"
+                ><img
+                  src="https://i.ibb.co/PgHSV4t/leaf.png"
+                  alt="leaf"
+                  border="0"
+                  style="width:18px;height:18px;"
+              /></a>
+              <br />
+              <a v-if="recipe.vegetarian" href="https://imgbb.com/"
+                ><img
+                  src="https://i.ibb.co/PgHSV4t/leaf.png"
+                  alt="leaf"
+                  border="0"
+                  style="width:18px;height:18px;"
+              /></a>
+            </div>
+            <div>
             <img
               class="icons"
               v-if="recipe.glutenFree"
@@ -146,8 +157,49 @@
               class="icons"
               v-else
               src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
+              style=" margin: 1px; width:55px;height:44px;"
             />
+            </div>
           </h5> -->
+          
+          <h5>
+            <table
+              class="middle" style="border-radius: 50px 20px; width:200px;height:50px; background-color: transparent;"
+            >
+              <tr style="background-color: transparent;">
+                <th style="background-color: transparent;">
+                  <a v-if="recipe.vegan" href="https://imgbb.com/"
+                    ><img
+                      src="https://i.ibb.co/PgHSV4t/leaf.png"
+                      alt="leaf"
+                      border="0"
+                      style=" width:22px;height:22px;"
+                  /></a>
+                  <br/>
+                  <a v-if="recipe.vegetarian" href="https://imgbb.com/"
+                    ><img
+                      src="https://i.ibb.co/PgHSV4t/leaf.png"
+                      alt="leaf"
+                      border="0"
+                      style=" width:22px;height:22px;"
+                  /></a>
+                </th>
+                <th style="background-color: transparent;">
+                  <img
+                    class="icons"
+                    v-if="recipe.glutenFree"
+                    src="https://img.icons8.com/office/40/000000/no-gluten.png"
+                  />
+                  <img
+                    class="icons"
+                    v-else
+                    src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
+                    style="height: 50px; width:56px"
+                  />
+                </th>
+              </tr>
+            </table>
+          </h5>
 
           <div class="content">
             <b-tabs class="content" content-class="mt-4" align="center">
@@ -377,7 +429,7 @@ export default {
       this.recipe = _recipe;
 
       // this.$refs.btnFavorite.innerText = "In Favorite";
-      this.$refs.btnFavorite.className = "fa fa-star";
+      // this.$refs.btnFavorite.className = "fa fa-star";
     },
   },
 };
@@ -386,7 +438,7 @@ export default {
 <style scoped>
 .recipe-body {
   /* background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg"); */
-  background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
+  /* background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   /* width: 400%; */
@@ -410,6 +462,11 @@ export default {
   /* width: 50%; */
 }
 
+.middle{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* .recipe-body{
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 } */
@@ -421,9 +478,10 @@ export default {
 
 .icons {
   /* border: 1px solid #ddd; */
-  /* border-radius: 4px; */
-  /* padding: 5px; */
-  width: 60px;
+  /* border-radius: 8px 2px; */
+  /* padding-top: -1px; */
+  width: 40px;
+  /* border: 1.5px solid black; */
 }
 #recipe__presentation {
   background-repeat: no-repeat;
@@ -486,7 +544,8 @@ li {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;
-  background-color: rgba(30, 28, 28, 0.5);
+  background-color: rgba(28, 28, 28, 0.5);
+  height: 50px;
 }
 h1 {
   /* font-family: "Roboto", sans-serif; */
@@ -516,35 +575,34 @@ hr {
 }
 
 h5 {
-  background-color: rgba(35, 30, 28, 0.5);
+  /* background-color: rgba(35, 30, 28, 0.5); */
+  background-color: rgba(0, 0, 0, 0.69);
   /* font-family: "Roboto", sans-serif; */
   font-family: "Raleway", cursive;
   /* font-weight: 900; */
   font-size: 18px;
-  padding-top: 5px;
-  padding-bottom: 10px;
+  /* padding-top: 5px; */
+  /* padding-bottom: 10px; */
   padding-left: 30px;
   color: white;
-  height: 44px;
+  height: 48px;
+  text-align: center;
 }
 
-table {
-  /* border-collapse: collapse; */
-  border-radius: 1em;
-  overflow: hidden;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  border-collapse: separate;
-  border-spacing: 40px 0;
+.btnFav:hover,
+.btnInFav:hover {
+  background-color: rgb(0, 0, 0, 0.7);
+  border: 1px solid rgb(0, 0, 0, 0.7);
 }
-
-th,
-td {
-  /* padding: 1em; */
-  /* margin: 1em; */
-  text-align: center;
-  /* background: #ddd; */
-  /* border-bottom: 2px solid white; */
+.btnFav,
+.btnInFav {
+  background-color: rgb(120, 120, 120, 0.7);
+  border: 1px solid rgb(120, 120, 120, 0.7);
+  height: 60px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 60px;
+  left: -100px;
 }
 </style>

@@ -219,7 +219,7 @@ export default {
   font-family: "Cookie", cursive;
   font-size: 80px;
   font-weight: bolder;
-  // color: wheat;
+  color: white;
 }
 
 .sort{

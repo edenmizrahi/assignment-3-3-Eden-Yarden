@@ -6,8 +6,8 @@
         <img :src="familyRecipe.image" class="center" />
       </div> -->
       <div class="recipe-body">
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div id="recipe__presentation" :style="bg">
           <div class="description">
             <h1>{{ familyRecipe.title }}</h1>
@@ -22,18 +22,45 @@
             <h2>Where: {{ familyRecipe.where }}</h2>
           </div>
           <div class="circle__recipe">
-            <h2>This recipe made by: {{ familyRecipe.owner }}</h2>
+            <h2>Made by: {{ familyRecipe.owner }}</h2>
           </div>
-          <br/>
-     
-          <h5>
+          <br />
+
+          <!-- <h5>
             <b>Vegan:</b> {{ familyRecipe.vegan }} |
             <b>Vegetarian:</b>
             {{ familyRecipe.vegetarian }} |
             <b>Gluten Free:</b>
             {{ familyRecipe.glutenFree }}
+          </h5> -->
+          <h5>
+            <a v-if="familyRecipe.vegan" href="https://imgbb.com/"
+              ><img
+                src="https://i.ibb.co/PgHSV4t/leaf.png"
+                alt="leaf"
+                border="0"
+                style=" width:33px;height:33px;margin: 6px;"
+            /></a>
+            <a v-if="familyRecipe.vegetarian" href="https://imgbb.com/"
+              ><img
+                src="https://i.ibb.co/PgHSV4t/leaf.png"
+                alt="leaf"
+                border="0"
+                style=" width:33px;height:33px;margin: 6px;"
+            /></a>
+            &nbsp;&nbsp;
+            <img
+              class="icons"
+              v-if="familyRecipe.glutenFree"
+              src="https://img.icons8.com/office/40/000000/no-gluten.png"
+            />
+            <img
+              class="icons"
+              v-else
+              src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
+              style=" margin: 1px; width:55px;height:44px;"
+            />
           </h5>
-   
 
           <div class="content">
             <b-tabs class="content" content-class="mt-4" align="center">
@@ -158,8 +185,7 @@ export default {
 </script>
 
 <style scoped>
-
-.containr{
+.containr {
   height: auto;
 }
 
@@ -272,7 +298,7 @@ hr {
 }
 
 h5 {
-  background-color: rgba(30, 28, 28, 0.5);
+  background-color: rgba(0, 0, 0, 0.59);
   /* font-family: "Roboto", sans-serif; */
   font-family: "Raleway", cursive;
   /* font-weight: 900; */
@@ -281,5 +307,6 @@ h5 {
   padding-bottom: 10px;
   padding-left: 30px;
   color: white;
+  text-align: center;
 }
 </style>
