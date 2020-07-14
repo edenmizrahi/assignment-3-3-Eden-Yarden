@@ -19,13 +19,30 @@
     <div class="sort" v-if="this.aftersearch == 'true'">
       Sort By:
       <b-button-group>
-        <b-button class="btn-sort" style=" margin: 10px;" v-on:click="orderByLikes()">Likes</b-button>
-        <b-button class="btn-sort" style=" margin: 10px;" v-on:click="orderByTime()">Duration</b-button>
+        <b-button
+          class="btn-sort"
+          style=" margin: 10px;"
+          v-on:click="orderByLikes()"
+          >Likes</b-button
+        >
+        <b-button
+          class="btn-sort"
+          style=" margin: 10px;"
+          v-on:click="orderByTime()"
+          >Duration</b-button
+        >
       </b-button-group>
     </div>
     <!-- <div v-if="recipes.length == 0">No Search Results.</div> -->
     <div class="noresults" :style="'display: `${resAns}`'">
-      {{ this.results }}
+      <b-button
+        v-if="this.resAns == 'block'"
+        class="btn-sort"
+        style="font-size: 30px; width:40%;font-weight:bold;"
+        disabled
+      >
+        {{ this.results }}
+      </b-button>
     </div>
     <br />
     <div>
@@ -105,6 +122,7 @@ export default {
       } catch (error) {}
     },
     async Search(query, amount, cuisine, diet, intolerance) {
+      this.resAns = "none";
       // this.ShowLastSearch();
       let response;
       try {
@@ -130,7 +148,7 @@ export default {
         } else {
           console.log("after endpoint search");
           console.log(response);
-          this.resAns = "none";
+
           const recipes_ = response.data;
           console.log(recipes_);
 
@@ -222,10 +240,10 @@ export default {
   color: white;
 }
 
-.sort{
+.sort {
   text-align: center;
   font-size: 20px;
-   font-weight: bold;
+  font-weight: bold;
 }
 // .container::before {
 //   content: '';
@@ -253,20 +271,24 @@ export default {
   border: 0 solid;
   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
   outline: 1px solid;
-  outline-color: rgba(255, 255, 255, .5);
+  outline-color: rgba(255, 255, 255, 0.5);
   outline-offset: 0px;
   text-shadow: none;
   transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-} 
+}
 
 .btn-sort:hover {
   border: 1px solid;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.2);
   outline-color: rgba(255, 255, 255, 0);
   outline-offset: 15px;
-  text-shadow: 1px 1px 2px #427388; 
+  text-shadow: 1px 1px 2px #427388;
 }
 
-
-
+.noresults {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+}
 </style>

@@ -1,9 +1,8 @@
 <template>
-  <div class="container">
+  <div class="container" style="width:2500px;">
     <br />
     <!-- <h1 class="title">{{ header }}</h1> -->
     <b-card bg-variant="light">
-
       <b-form @submit.prevent="onSearch" @reset.prevent="onReset">
         <!-- <b-form @reset.prevent="onReset"> -->
         <b-form-group
@@ -12,26 +11,37 @@
           label-cols-lg="3"
           label="Query for search:"
           label-for="query"
+          style="font-weight:bold;"
         >
           <b-form-input
             id="query"
             v-model="$v.form.query.$model"
             type="text"
-            :state="validateState('query')"
+            :state="queryState && queryparams"
+            aria-describedby="query-feedback query-params"
           ></b-form-input>
 
           <b-form-invalid-feedback v-if="!$v.form.query.required">
             query search is required
           </b-form-invalid-feedback>
-          <b-form-invalid-feedback v-if="!$v.form.query.alpha">
-            query search must contain only letters.
+
+          <b-form-invalid-feedback id="query-feedback">
+            Enter at least 2 letters
           </b-form-invalid-feedback>
+          
+           <b-form-invalid-feedback id="query-params">
+            Enter just engilsh letters and space
+          </b-form-invalid-feedback>
+          <!-- <b-form-invalid-feedback v-if="!$v.form.query.alpha">
+            query search must contain only letters.
+          </b-form-invalid-feedback> -->
         </b-form-group>
 
         <b-form-group
           label="Amount of result back:"
           label-for="amount"
           label-cols-lg="4"
+          style="font-weight:bold;"
         >
           <b-form-radio-group
             id="amount"
@@ -45,8 +55,63 @@
           </b-form-radio-group>
         </b-form-group>
 
-        <!-- <b-button-group> -->
-        <b-form-group
+        <table class="middle" style="width:90%;">
+          <tr>
+            <th style="width:28%;">
+              <b-form-group
+                id="input-group-cuisine"
+                label-cols-xl="4"
+                label="Cuisine"
+                label-for="cuisine"
+                label-align-lg="center"
+              >
+                <b-form-select
+                  id="cuisine"
+                  v-model="$v.form.cuisine.$model"
+                  :options="cuisines"
+                >
+                </b-form-select>
+              </b-form-group>
+            </th>
+
+            <th style="width:28%;">
+              <b-form-group
+                id="input-group-diet"
+                label-cols-xl="4"
+                label="Diet"
+                label-for="diet"
+                label-align-lg="center"
+              >
+                <b-form-select
+                  id="diet"
+                  v-model="$v.form.diet.$model"
+                  :options="diets"
+                >
+                </b-form-select>
+              </b-form-group>
+            </th>
+
+            <th style="width:30%;">
+              <b-form-group
+                id="input-group-intolerance"
+                label-cols-xl="5"
+                label="Intolerance"
+                label-for="intolerance"
+                label-align-lg="center"
+              >
+                <b-form-select
+                  id="intolerance"
+                  v-model="$v.form.intolerance.$model"
+                  :options="intolerances"
+                  label-align-lg="left"
+                >
+                </b-form-select>
+              </b-form-group>
+            </th>
+          </tr>
+        </table>
+
+        <!-- <b-form-group
           id="input-group-cuisine"
           label-cols-lg="3"
           label="Cuisine:"
@@ -72,24 +137,39 @@
           >
           </b-form-select>
         </b-form-group>
-        <!-- </b-button-group> -->
-        <br />
 
-        <b-button
-          type="reset"
-          class="submitbtn"
-          variant="danger"
-          style=" margin: 13px;"
-          >Reset</b-button
+        <b-form-group
+          id="input-group-intolerance"
+          label-cols-lg="3"
+          label="Intolerance:"
+          label-for="intolerance"
         >
-        &nbsp;&nbsp;
-        <b-button
-          class="submitbtn"
-          type="submit"
-          style=" margin: 13px;"
-          variant="primary"
-          >Search <b-icon-search></b-icon-search
-        ></b-button>
+          <b-form-select
+            id="intolerance"
+            v-model="$v.form.intolerance.$model"
+            :options="intolerances"
+          >
+          </b-form-select>
+        </b-form-group> -->
+
+        <br />
+        <div class="btngroup">
+          <b-button
+            type="reset"
+            class="submitbtn"
+            variant="danger"
+            style=" margin: 13px;"
+            >Reset</b-button
+          >
+          &nbsp;&nbsp;
+          <b-button
+            class="submitbtn"
+            type="submit"
+            style=" margin: 13px;"
+            variant="primary"
+            >Search <b-icon-search></b-icon-search
+          ></b-button>
+        </div>
       </b-form>
       <!-- </b-form-group> -->
     </b-card>
@@ -146,7 +226,7 @@ export default {
     form: {
       query: {
         required,
-        alpha,
+        // alpha,
       },
       amount: {
         // required,
@@ -167,67 +247,17 @@ export default {
     // console.log($root.store.username);
     // console.log($v);
   },
+  computed: {
+    queryState() {
+      return this.form.query.length > 1 ? true : false;
+    },
+    queryparams() {
+      if (!/^[a-zA-Z\s]*$/.test(this.form.query)) {
+        return false;
+      } else return true;
+    },
+  },
   methods: {
-    // showLastForm() {
-    //   try {
-    //     if (this.$root.store.username) {
-    //       if (localStorage.search) {
-    //         // this.recipes = JSdocument.getElementById("query").value = this.query;
-    //       } else {
-    //         if (localStorage.loadRecipes) {
-    //           localStorage.removeItem("query");
-    //         }
-    //       }
-    //       // if (localStorage.search) {
-    //       //   this.query = localStorage.query;
-    //       //   console.log(this.query);
-    //       //   // this.$v.form.query = JSON.parse(localStorage.query);
-    //       //   document.getElementById("query").value = this.query;
-    //       // } else {
-    //       //   if (localStorage.loadRecipes) {
-    //       //     localStorage.removeItem("query");
-    //       //   }
-    //       // }
-
-    //       // if (localStorage.amount) {
-    //       //   this.amount = localStorage.amount;
-    //       //   document.getElementById("amount").value = this.amount;
-    //       // } else {
-    //       //   if (localStorage.amount) {
-    //       //     localStorage.removeItem("amount");
-    //       //   }
-    //       // }
-
-    //       // if (localStorage.cuisine) {
-    //       //   this.cuisine = localStorage.cuisine;
-    //       //   console.log(this.cuisine);
-    //       //   document.getElementById("cuisine").value = this.cuisine;
-    //       // } else {
-    //       //   if (localStorage.cuisine) {
-    //       //     localStorage.removeItem("cuisine");
-    //       //   }
-    //       // }
-
-    //       // if (localStorage.diet) {
-    //       //   this.diet = localStorage.diet;
-    //       //   document.getElementById("diet").type_of_diet = this.diet;
-    //       // } else {
-    //       //   if (localStorage.diet) {
-    //       //     localStorage.removeItem("diet");
-    //       //   }
-    //       // }
-
-    //       // if (localStorage.intolerance) {
-    //       //   this.intolerance = localStorage.intolerance;
-    //       //   document.getElementById("intolerance").value = this.intolerance;
-    //       // } else {
-    //       //   if (localStorage.intolerance) {
-    //       //     localStorage.removeItem("intolerance");
-    //       //   }
-    //       // }
-    //     }
-    //   } catch (error) {}
-    // },
     validateState(param) {
       const { $dirty, $error } = this.$v.form[param];
       return $dirty ? !$error : null;
@@ -275,14 +305,28 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  max-width: 800px;
+  max-width: 1000px;
+}
+
+.btngroup {
+  text-align: center;
+}
+
+.middle {
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 8px;
+  // border-spacing: 0px;
+  // border-collapse: separate;
+  // border-spacing: 0;
+  // border-collapse: collapse;
 }
 
 .submitbtn {
   min-width: 140px;
   min-height: 50px;
   // font-family: "Nunito", sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   // text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 700;

@@ -90,7 +90,7 @@
                   <b-icon-heart-fill style="color:red;"></b-icon-heart-fill>
                 </button>
               </div>
-              <br />
+              
             </div>
             <div v-else>
               <br />
@@ -545,7 +545,7 @@ li {
   margin-right: auto;
   margin-bottom: 0;
   background-color: rgba(28, 28, 28, 0.5);
-  height: 50px;
+  height: 80px;
 }
 h1 {
   /* font-family: "Roboto", sans-serif; */
@@ -576,7 +576,7 @@ hr {
 
 h5 {
   /* background-color: rgba(35, 30, 28, 0.5); */
-  background-color: rgba(0, 0, 0, 0.69);
+  background-color: rgba(0, 0, 0, 0.49);
   /* font-family: "Roboto", sans-serif; */
   font-family: "Raleway", cursive;
   /* font-weight: 900; */

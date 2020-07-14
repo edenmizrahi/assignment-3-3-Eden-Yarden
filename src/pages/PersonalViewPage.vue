@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    
     <div v-if="familyRecipe">
       <!-- <div class="recipe-header mt-3 mb-4">
         <h1>{{ familyRecipe.title }}</h1>
@@ -10,7 +11,7 @@
         <br />
         <div id="recipe__presentation" :style="bg">
           <div class="description">
-            <h1>{{ familyRecipe.title }}</h1>
+            <h1 class="FamilyTitle">{{ familyRecipe.title }}</h1>
           </div>
           <br />
           <div class="circle__recipe">
@@ -269,6 +270,7 @@ li {
   margin-right: auto;
   margin-bottom: 0;
   background-color: rgba(30, 28, 28, 0.5);
+  height: 55px;
 }
 h1 {
   /* font-family: "Roboto", sans-serif; */
@@ -309,4 +311,6 @@ h5 {
   color: white;
   text-align: center;
 }
+
+
 </style>

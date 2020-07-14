@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>
+    <p class="title_">
       {{ this.title_ }}
     </p>
     <ul :style="gridStyle" class="card-list">
@@ -134,5 +134,14 @@ export default {
 
 ul {
   list-style-type: none;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
+.title_{
+  text-align: left;
+  font-family: "Cookie", cursive;
+  font-size: 80px;
+  font-weight: bolder;
+  color: black;
 }
 </style>
