@@ -3,7 +3,7 @@
     <br />
     <!-- <h1 class="title">{{ header }}</h1> -->
     <b-card bg-variant="light">
-      <b-form @submit.prevent="onSearch" @reset.prevent="onReset">
+      <b-form @submit.prevent="onSearch" @reset.prevent="onReset" style="font-size:18px;">
         <!-- <b-form @reset.prevent="onReset"> -->
         <b-form-group
           id="input-group-query"
@@ -11,26 +11,27 @@
           label-cols-lg="3"
           label="Query for search:"
           label-for="query"
-          style="font-weight:bold;"
+          style="width:80%;"
+          
         >
           <b-form-input
             id="query"
             v-model="$v.form.query.$model"
             type="text"
-            :state="queryState && queryparams"
-            aria-describedby="query-feedback query-params"
+            :state="validateState('query')"
+            
           ></b-form-input>
 
-          <b-form-invalid-feedback v-if="!$v.form.query.required">
-            query search is required
+          <b-form-invalid-feedback style="font-weight:normal;" v-if="!$v.form.query.required">
+            Search query is required
           </b-form-invalid-feedback>
 
-          <b-form-invalid-feedback id="query-feedback">
+          <b-form-invalid-feedback style="font-weight:normal;" v-if="!$v.form.query.isMoreThanOne">
             Enter at least 2 letters
           </b-form-invalid-feedback>
-          
-           <b-form-invalid-feedback id="query-params">
-            Enter just engilsh letters and space
+
+           <b-form-invalid-feedback style="font-weight:normal;"  v-if="!$v.form.query.qvalid">
+            Enter just engilsh letters
           </b-form-invalid-feedback>
           <!-- <b-form-invalid-feedback v-if="!$v.form.query.alpha">
             query search must contain only letters.
@@ -41,7 +42,7 @@
           label="Amount of result back:"
           label-for="amount"
           label-cols-lg="4"
-          style="font-weight:bold;"
+          
         >
           <b-form-radio-group
             id="amount"
@@ -57,7 +58,7 @@
 
         <table class="middle" style="width:90%;">
           <tr>
-            <th style="width:28%;">
+            <th style="width:28%;font-weight:normal;">
               <b-form-group
                 id="input-group-cuisine"
                 label-cols-xl="4"
@@ -74,7 +75,7 @@
               </b-form-group>
             </th>
 
-            <th style="width:28%;">
+            <th style="width:28%;font-weight:normal;">
               <b-form-group
                 id="input-group-diet"
                 label-cols-xl="4"
@@ -91,7 +92,7 @@
               </b-form-group>
             </th>
 
-            <th style="width:30%;">
+            <th style="width:30%;font-weight:normal;">
               <b-form-group
                 id="input-group-intolerance"
                 label-cols-xl="5"
@@ -186,6 +187,8 @@
 </template>
 
 <script>
+
+import { isMoreThanOneChar, queryparams } from "../assets/validators";
 import cuisines from "../assets/cuisines";
 import diets from "../assets/diets";
 import intolerances from "../assets/intolerances";
@@ -226,6 +229,8 @@ export default {
     form: {
       query: {
         required,
+        isMoreThanOne: isMoreThanOneChar,
+        qvalid: queryparams,
         // alpha,
       },
       amount: {

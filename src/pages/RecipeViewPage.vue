@@ -22,18 +22,53 @@
               ><h2>{{ recipe.readyInMinutes }} min</h2></i
             >
           </div>
+           <div class="circle__recipe" style="float:right;  background-color: rgba(0, 0, 0, 0.99); ">
+            <!-- <b-icon-alarm></b-icon-alarm> {{ recipe.readyInMinutes }} Min -->
+            <a v-if="recipe.vegan" href="https://imgbb.com/"
+                    ><img
+                      src="https://i.ibb.co/PgHSV4t/leaf.png"
+                      alt="leaf"
+                      border="0"
+                      style=" width:32px;height:32px;"
+                  /></a>
+
+                  <a v-if="recipe.vegetarian" href="https://imgbb.com/"
+                    ><img
+                      src="https://i.ibb.co/PgHSV4t/leaf.png"
+                      alt="leaf"
+                      border="0"
+                      style=" width:32px;height:32px;"
+                  /></a>
+          </div>
+        
           <div class="circle__recipe">
             <i class="fa fa-users"
               ><h2>{{ recipe.servings }} Serves</h2></i
             >
             <!-- <p>Serves</p> -->
           </div>
+
+             <div class="circle__recipe" style="float:right;   background-color: rgba(0, 0, 0, 0.99); ">
+            <img
+                    class="icons"
+                    v-if="recipe.glutenFree"
+                    src="https://img.icons8.com/office/40/000000/no-gluten.png"
+                  />
+                  <img
+                    class="icons"
+                    v-else
+                    src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
+                    style="height: 70px; width:66px"
+                  />
+          </div>
+
           <div class="circle__recipe">
             <!-- <h2> {{ recipe.aggregateLikes }}</h2> -->
             <i class="fa fa-thumbs-up">
               <h2>{{ recipe.aggregateLikes }}</h2></i
             >
           </div>
+          
 
           <!-- <div>
                 <div v-if="$root.store.username">
@@ -162,7 +197,7 @@
             </div>
           </h5> -->
           
-          <h5>
+          <!-- <h5>
             <table
               class="middle" style="border-radius: 50px 20px; width:200px;height:50px; background-color: transparent;"
             >
@@ -199,9 +234,11 @@
                 </th>
               </tr>
             </table>
-          </h5>
+          </h5> -->
 
           <div class="content">
+            <br/>
+            <br/>
             <b-tabs class="content" content-class="mt-4" align="center">
               <b-tab
                 v-if="recipe.ingredients.length > 0"
@@ -480,7 +517,7 @@ export default {
   /* border: 1px solid #ddd; */
   /* border-radius: 8px 2px; */
   /* padding-top: -1px; */
-  width: 40px;
+  width: 46px;
   /* border: 1.5px solid black; */
 }
 #recipe__presentation {
