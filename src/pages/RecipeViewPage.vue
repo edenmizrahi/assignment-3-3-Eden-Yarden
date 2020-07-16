@@ -22,7 +22,7 @@
               ><h2>{{ recipe.readyInMinutes }} min</h2></i
             >
           </div>
-           <div class="circle__recipe" style="float:right;  background-color: rgba(0, 0, 0, 0.99); ">
+           <div v-if="recipe.vegan || recipe.vegetarian " class="circle__recipe" style="float:right;  background-color: rgba(0, 0, 0, 0.99); ">
             <!-- <b-icon-alarm></b-icon-alarm> {{ recipe.readyInMinutes }} Min -->
             <a v-if="recipe.vegan" href="https://imgbb.com/"
                     ><img

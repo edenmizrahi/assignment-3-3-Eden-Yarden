@@ -32,10 +32,10 @@ import {
 import VueAxios from "vue-axios";
 import axios from "axios";
 import VueCookies from "vue-cookies";
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
 import { BFormSelect } from 'bootstrap-vue'
 Vue.component('b-form-select', BFormSelect)
-
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
@@ -65,6 +65,11 @@ const shared_data = {
     localStorage.setItem("watchedList", watchedList);
     this.lastWatch = watchedList;
   },
+
+  addFamilyList(familyList) {
+    localStorage.setItem("familyList", familyList);
+    // this.lastWatch = familyList;
+  },
   
   login(username) {
     localStorage.setItem("username", username);
@@ -84,6 +89,8 @@ const shared_data = {
     this.username = undefined;
     localStorage.removeItem("watchedList");
     this.lastWatch = undefined;
+    
+    localStorage.removeItem("familyList");
 
     if(localStorage.search){
       localStorage.removeItem("search")

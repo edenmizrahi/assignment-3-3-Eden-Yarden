@@ -2,8 +2,12 @@
   <div class="container" style="width:2500px;">
     <br />
     <!-- <h1 class="title">{{ header }}</h1> -->
-    <b-card bg-variant="light">
-      <b-form @submit.prevent="onSearch" @reset.prevent="onReset" style="font-size:18px;">
+    <b-card class="searchform">
+      <b-form
+        @submit.prevent="onSearch"
+        @reset.prevent="onReset"
+        style="font-size:18px;font-weight:bold; "
+      >
         <!-- <b-form @reset.prevent="onReset"> -->
         <b-form-group
           id="input-group-query"
@@ -12,25 +16,32 @@
           label="Query for search:"
           label-for="query"
           style="width:80%;"
-          
         >
           <b-form-input
             id="query"
             v-model="$v.form.query.$model"
             type="text"
             :state="validateState('query')"
-            
           ></b-form-input>
 
-          <b-form-invalid-feedback style="font-weight:normal;" v-if="!$v.form.query.required">
+          <b-form-invalid-feedback
+            style="font-weight:normal;"
+            v-if="!$v.form.query.required"
+          >
             Search query is required
           </b-form-invalid-feedback>
 
-          <b-form-invalid-feedback style="font-weight:normal;" v-if="!$v.form.query.isMoreThanOne">
-            Enter at least 2 letters
+          <b-form-invalid-feedback
+            style="font-weight:normal;"
+            v-if="!$v.form.query.isMoreThanOne"
+          >
+            Enter at least 2 characters
           </b-form-invalid-feedback>
 
-           <b-form-invalid-feedback style="font-weight:normal;"  v-if="!$v.form.query.qvalid">
+          <b-form-invalid-feedback
+            style="font-weight:normal;"
+            v-if="!$v.form.query.qvalid"
+          >
             Enter just engilsh letters
           </b-form-invalid-feedback>
           <!-- <b-form-invalid-feedback v-if="!$v.form.query.alpha">
@@ -42,7 +53,6 @@
           label="Amount of result back:"
           label-for="amount"
           label-cols-lg="4"
-          
         >
           <b-form-radio-group
             id="amount"
@@ -58,7 +68,7 @@
 
         <table class="middle" style="width:90%;">
           <tr>
-            <th style="width:28%;font-weight:normal;">
+            <th style="width:28%;font-weight:bold;">
               <b-form-group
                 id="input-group-cuisine"
                 label-cols-xl="4"
@@ -75,7 +85,7 @@
               </b-form-group>
             </th>
 
-            <th style="width:28%;font-weight:normal;">
+            <th style="width:28%;font-weight:bold;">
               <b-form-group
                 id="input-group-diet"
                 label-cols-xl="4"
@@ -92,7 +102,7 @@
               </b-form-group>
             </th>
 
-            <th style="width:30%;font-weight:normal;">
+            <th style="width:30%;font-weight:bold;">
               <b-form-group
                 id="input-group-intolerance"
                 label-cols-xl="5"
@@ -187,7 +197,6 @@
 </template>
 
 <script>
-
 import { isMoreThanOneChar, queryparams } from "../assets/validators";
 import cuisines from "../assets/cuisines";
 import diets from "../assets/diets";
@@ -310,7 +319,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  max-width: 1000px;
+  // max-width: 1000px;
 }
 
 .btngroup {
@@ -409,5 +418,26 @@ export default {
     height: 300px;
     opacity: 0;
   }
+}
+
+.searchform {
+  // opacity: 0.3;
+  background-size: contain;
+  z-index: 1;
+  box-shadow: 14px 14px 23px white;
+  // background-repeat: no-repeat;
+}
+
+.searchform::before {
+  content: "";
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.5;
+  z-index: -1;
+  position: absolute;
+  background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594743557/background/qust_eeetba.jpg");
+  background-size: contain;
 }
 </style>

@@ -6,8 +6,19 @@
         style=" position: absolute; top: 270px; left: 20;"
       ></b-icon-eye-fill>
     </p>
+    <!-- <button
+      class="circle"
+      v-if="$root.store.username && recipe.favorite == false"
+      type="button"
+      style=" position: absolute; top: 50px; left: -10px;  font-size:40px;  "
+      @click="addTofavorite()"
+    >
+      <b-icon-heart-fill
+        style="color:white; position: absolute; top: 12px; left: 8;"
+      ></b-icon-heart-fill>
+    </button> -->
     <div
-      @click="addTofavorite"
+      @click="addTofavorite()"
       v-if="$root.store.username && recipe.favorite == false"
       class="circle"
       style=" position: absolute; top: 50px; left: -10px;  "
@@ -41,14 +52,16 @@ export default {
   methods: {
     async addTofavorite() {
       let responseAfterAddFavorite;
-      this.cur_recipe.favorite = true;
+      //   console.log(this.recipe);
+      this.recipe.favorite = true;
+      let id = this.recipe.recipe_id;
       //favorite / watched
       try {
         responseAfterAddFavorite = await this.axios.put(
-          "http://localhost:4000/profile/favorite/add/" +
-            this.cur_recipe.recipe_id
+          "http://localhost:4000/profile/favorite/add/" + this.recipe.recipe_id
         );
-
+        console.log(responseAfterAddFavorite);
+        console.log(this.recipe.recipe_id);
         if (responseAfterAddFavorite.status !== 200)
           this.$router.replace("/NotFound");
       } catch (error) {
@@ -56,21 +69,49 @@ export default {
         return;
       }
       let _recipe = {
-        instructions: this.cur_recipe.instructions,
-        _instructions: this.cur_recipe._instructions,
+        // id: this.recipe.recipe_id,
+        instructions: this.recipe.instructions,
+        _instructions: this.recipe._instructions,
         // analyzedInstructions,
-        ingredients: this.cur_recipe.ingredients,
-        vegetarian: this.cur_recipe.vegetarian,
-        vegan: this.cur_recipe.vegan,
-        glutenFree: this.cur_recipe.glutenFree,
-        aggregateLikes: this.cur_recipe.aggregateLikes,
-        readyInMinutes: this.cur_recipe.readyInMinutes,
-        image: this.cur_recipe.image,
-        title: this.cur_recipe.title,
-        servings: this.cur_recipe.servings,
+        ingredients: this.recipe.ingredients,
+        vegetarian: this.recipe.vegetarian,
+        vegan: this.recipe.vegan,
+        glutenFree: this.recipe.glutenFree,
+        aggregateLikes: this.recipe.aggregateLikes,
+        readyInMinutes: this.recipe.readyInMinutes,
+        image: this.recipe.image,
+        title: this.recipe.title,
+        servings: this.recipe.servings,
         favorite: true,
       };
-      this.cur_recipe = _recipe;
+      console.log("a");
+      this.recipe = _recipe;
+      console.log("aa");
+      //update recipes array in local storage
+      if (localStorage.search) {
+        let recipesFromLocalStorage = JSON.parse(localStorage.search);
+        let find = "false";
+        for (
+          let k = 0;
+          k < recipesFromLocalStorage.length && find == "false";
+          k++
+        ) {
+          if (recipesFromLocalStorage[k].recipe_id == id) {
+            recipesFromLocalStorage[k].favorite = true;
+            find = "true";
+          }
+        }
+
+        if (find == "true") {
+          console.log("b");
+          localStorage.removeItem("search");
+          localStorage.setItem(
+            "search",
+            JSON.stringify(recipesFromLocalStorage)
+          );
+          console.log("c");
+        }
+      }
     },
   },
 };

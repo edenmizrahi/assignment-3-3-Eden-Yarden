@@ -1,24 +1,32 @@
 <template>
   <div class="container">
-    <h1 class="title">Register</h1>
+    <h1 class="title" style="text-align:center;">Register</h1>
+    <br/>
     <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
       <b-form-group
         id="input-group-firstname"
         label-cols-sm="3"
         label="First name:"
         label-for="firstname"
+        style="font-size:20px;"
       >
         <b-form-input
           id="firstname"
           v-model="$v.form.firstname.$model"
           type="text"
           :state="validateState('firstname')"
+
         ></b-form-input>
         <b-form-invalid-feedback v-if="!$v.form.firstname.required">
           First name is required
         </b-form-invalid-feedback>
-        <b-form-invalid-feedback v-if="!$v.form.firstname.alpha">
-          First name must contain only letters.
+
+        <b-form-invalid-feedback v-if="!$v.form.firstname.fn_isMoreThanOne">
+          First Name must contains at least 2 characters
+        </b-form-invalid-feedback>
+
+        <b-form-invalid-feedback v-if="!$v.form.firstname.fn_valid">
+          First Name must contains just engilsh characters
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -27,6 +35,7 @@
         label-cols-sm="3"
         label="Last name:"
         label-for="lastname"
+        style="font-size:20px;"
       >
         <b-form-input
           id="lastname"
@@ -37,8 +46,12 @@
         <b-form-invalid-feedback v-if="!$v.form.lastname.required">
           Last name is required
         </b-form-invalid-feedback>
-        <b-form-invalid-feedback v-if="!$v.form.lastname.alpha">
-          Last name must contain only letters.
+        <b-form-invalid-feedback v-if="!$v.form.firstname.ln_isMoreThanOne">
+          Last Name must contains at least 2 characters
+        </b-form-invalid-feedback>
+
+        <b-form-invalid-feedback v-if="!$v.form.firstname.ln_valid">
+          Last Name must contains just engilsh characters
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -47,6 +60,7 @@
         label-cols-sm="3"
         label="Username:"
         label-for="username"
+        style="font-size:20px;"
       >
         <b-form-input
           id="username"
@@ -70,6 +84,7 @@
         label-cols-sm="3"
         label="Country:"
         label-for="country"
+        style="font-size:20px;"
       >
         <b-form-select
           id="country"
@@ -87,6 +102,7 @@
         label-cols-sm="3"
         label="Email:"
         label-for="email"
+        style="font-size:20px;"
       >
         <b-form-input
           id="email"
@@ -133,6 +149,7 @@
         label-cols-sm="3"
         label="Confirm Password:"
         label-for="confirmedPassword"
+        style="font-size:20px;"
       >
         <b-form-input
           id="confirmedPassword"
@@ -155,6 +172,7 @@
         label-cols-sm="3"
         label="Image(URL):"
         label-for="image"
+        style="font-size:20px;"
       >
         <b-form-input
           id="image"
@@ -163,7 +181,8 @@
           :state="validateState('image')"
         ></b-form-input>
       </b-form-group>
-
+<br/>
+<br/>
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
@@ -194,6 +213,7 @@
 </template>
 
 <script>
+import { isMoreThanOneChar, queryparams } from "../assets/validators";
 import countries from "../assets/countries";
 import {
   required,
@@ -214,7 +234,6 @@ export default {
         lastname: "",
         firstname: "",
         username: "",
-        lastName: "",
         country: null,
         password: "",
         confirmedPassword: "",
@@ -228,21 +247,21 @@ export default {
   },
   validations: {
     form: {
-      lastname: {
-        required,
-        alpha,
-      },
       email: {
         required,
         email,
       },
       firstname: {
         required,
-        alpha,
+        fn_isMoreThanOne: isMoreThanOneChar,
+        fn_valid: queryparams,
+        // alpha,
       },
       lastname: {
         required,
-        alpha,
+        ln_isMoreThanOne: isMoreThanOneChar,
+        ln_valid: queryparams,
+        // alpha,
       },
       image: {},
       username: {
@@ -321,7 +340,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css?family=Pangolin:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
+
 .container {
-  max-width: 500px;
+  max-width: 630px;
+  color: wheat;
+  background-color: rgba(1, 1, 1, 0.6);
+  border-radius: 20px;
+  height: 740px;
+  padding-top: 20px;
+  font-family: Pangolin;
+  margin-top: 7%;
+ 
 }
 </style>

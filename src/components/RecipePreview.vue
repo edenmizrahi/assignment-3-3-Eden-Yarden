@@ -10,20 +10,25 @@
         </td>
       </tr>
       <tr>
-        <td v-if="type != 'Family Recipes' && type != 'My Recipes'"
+        <td
+          v-if="type != 'Family Recipes' && type != 'My Recipes'"
           colspan="5"
           v-bind:style="{
             'background-image': 'url(' + recipe.image + ')',
           }"
           style="width:300px;height:200px;background-size: 300px 200px;"
         ></td>
-        <td v-else
+        <td
+          v-else
           colspan="5"
           v-bind:style="{
-            'background-image': 'url(https://res.cloudinary.com/dc9fdssoo/image/upload/' + recipe.image + ')',
+            'background-image':
+              'url(https://res.cloudinary.com/dc9fdssoo/image/upload/' +
+              recipe.image +
+              ')',
           }"
-          style="width:300px;height:200px;background-size: 300px 200px;">
-          </td>
+          style="width:300px;height:200px;background-size: 300px 200px;"
+        ></td>
       </tr>
       <tr style="height:100px">
         <th>

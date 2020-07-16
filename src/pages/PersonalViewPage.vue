@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    
     <div v-if="familyRecipe">
       <!-- <div class="recipe-header mt-3 mb-4">
         <h1>{{ familyRecipe.title }}</h1>
@@ -19,14 +18,55 @@
               ><h2>{{ familyRecipe.readyInMinutes }} min</h2></i
             >
           </div>
-          <div class="circle__recipe">
+          <div
+            v-if="familyRecipe.vegan || familyRecipe.vegetarian"
+            class="circle__recipe"
+            style="float:right;  background-color: rgba(0, 0, 0, 0.99); "
+          >
+            <!-- <b-icon-alarm></b-icon-alarm> {{ recipe.readyInMinutes }} Min -->
+            <a v-if="familyRecipe.vegan" href="https://imgbb.com/"
+              ><img
+                src="https://i.ibb.co/PgHSV4t/leaf.png"
+                alt="leaf"
+                border="0"
+                style=" width:32px;height:32px;"
+            /></a>
+
+            <a v-if="familyRecipe.vegetarian" href="https://imgbb.com/"
+              ><img
+                src="https://i.ibb.co/PgHSV4t/leaf.png"
+                alt="leaf"
+                border="0"
+                style=" width:32px;height:32px;"
+            /></a>
+          </div>
+          <div v-if="familyRecipe.where" class="circle__recipe">
             <h2>Where: {{ familyRecipe.where }}</h2>
           </div>
-          <div class="circle__recipe">
+          <div v-else><br/><br/><br/><br/></div>
+          <div
+            class="circle__recipe"
+            style="float:right;   background-color: rgba(0, 0, 0, 0.99); "
+          >
+            <img
+              class="icons"
+              v-if="familyRecipe.glutenFree"
+              src="https://img.icons8.com/office/40/000000/no-gluten.png"
+            />
+            <img
+              class="icons"
+              v-else
+              src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
+              style="height: 70px; width:66px"
+            />
+          </div>
+          <div v-if="familyRecipe.where" class="circle__recipe">
             <h2>Made by: {{ familyRecipe.owner }}</h2>
           </div>
+          <div v-else><br/><br/><br/><br/></div>
           <br />
-
+          <br />
+          <!-- <br /> -->
           <!-- <h5>
             <b>Vegan:</b> {{ familyRecipe.vegan }} |
             <b>Vegetarian:</b>
@@ -34,7 +74,7 @@
             <b>Gluten Free:</b>
             {{ familyRecipe.glutenFree }}
           </h5> -->
-          <h5>
+          <!-- <h5>
             <a v-if="familyRecipe.vegan" href="https://imgbb.com/"
               ><img
                 src="https://i.ibb.co/PgHSV4t/leaf.png"
@@ -61,9 +101,10 @@
               src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594580970/gluten-removebg-preview_r21yif.png"
               style=" margin: 1px; width:55px;height:44px;"
             />
-          </h5>
+          </h5> -->
 
-          <div class="content">
+         
+        <div class="content" style="padding-top:4%;">
             <b-tabs class="content" content-class="mt-4" align="center">
               <b-tab
                 v-if="familyRecipe.ingredients.length > 0"
@@ -102,6 +143,7 @@
             </b-tabs>
           </div>
         </div>
+         
       </div>
     </div>
   </div>
@@ -134,13 +176,15 @@ export default {
       try {
         console.log(this.$route.params.recipeId);
         if (this.$route.params.type == "family") {
-          response = await this.axios.get(
-            this.$root.store.BASE_URL +
-              "/profile/familyRecipes/" +
-              "[" +
-              this.$route.params.recipeId +
-              "]"
-          );
+          if (!localStorage.familyList) {
+            response = await this.axios.get(
+              this.$root.store.BASE_URL +
+                "/profile/familyRecipes/" +
+                "[" +
+                this.$route.params.recipeId +
+                "]"
+            );
+          }
         } else {
           if (this.$route.params.type == "my") {
             response = await this.axios.get(
@@ -154,23 +198,26 @@ export default {
         }
         console.log("after");
         console.log(response);
+        if (localStorage.familyList) {
+          this.familyRecipe = JSON.parse(localStorage.familyList);
+        } else {
+          let _familyRecipe = {
+            instructions: response.data[0].instructions,
+            ingredients: response.data[0].ingredients,
+            vegetarian: response.data[0].vegetarian,
+            vegan: response.data[0].vegan,
+            glutenFree: response.data[0].glutenFree,
+            readyInMinutes: response.data[0].readyInMinutes,
+            image:
+              "https://res.cloudinary.com/dc9fdssoo/image/upload/" +
+              response.data[0].image,
+            title: response.data[0].title,
+            owner: response.data[0].owner,
+            where: response.data[0].where,
+          };
 
-        let _familyRecipe = {
-          instructions: response.data[0].instructions,
-          ingredients: response.data[0].ingredients,
-          vegetarian: response.data[0].vegetarian,
-          vegan: response.data[0].vegan,
-          glutenFree: response.data[0].glutenFree,
-          readyInMinutes: response.data[0].readyInMinutes,
-          image:
-            "https://res.cloudinary.com/dc9fdssoo/image/upload/" +
-            response.data[0].image,
-          title: response.data[0].title,
-          owner: response.data[0].owner,
-          where: response.data[0].where,
-        };
-
-        this.familyRecipe = _familyRecipe;
+          this.familyRecipe = _familyRecipe;
+        }
 
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
@@ -205,6 +252,7 @@ export default {
 .content {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: fff;
+  
   /* width: 550px; */
 }
 #recipe__presentation {
@@ -222,6 +270,7 @@ export default {
   opacity: 0.8;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   height: 410px;
+  /* display:unset; */
 }
 
 ul.checkmark li::before {
@@ -311,6 +360,4 @@ h5 {
   color: white;
   text-align: center;
 }
-
-
 </style>

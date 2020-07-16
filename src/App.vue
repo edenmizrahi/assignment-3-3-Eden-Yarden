@@ -5,7 +5,8 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       />
-      <b-navbar toggleable="lg" type="dark" variant="info">
+       <!-- toggleable="lg" type="dark" variant="info" style="top:0px" -->
+      <b-navbar class="nav" toggleable="lg" type="dark" variant="info" style="top:0px">
         <b-navbar-brand href="#">Recipes </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -112,34 +113,48 @@ export default {
 <style lang="scss">
 @import "@/scss/form-style.scss";
 
+// .nav{
+//   background: transparent;
+//   font-weight: bold;
+// }
+
+// .router-view{
+//    background: transparent;
+// }
+
 #app {
-  // font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // color: #2c3e50;
-  min-height: 100vh;
-
+  // color: transparent;
+  // min-height: 100vh;
+  // background-image: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594563633/background/various-fresh-vegetables-organic-food-healthy-rustic-background_44537-627_bup06t.jpg");;
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
 }
 
-#app::before {
-  content: '';
-  display: block;
-  position: absolute;
-  min-height: 100%;
-  min-width: 1024px;
-  // position: fixed;
-  background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594563633/background/various-fresh-vegetables-organic-food-healthy-rustic-background_44537-627_bup06t.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  z-index: -1;
-  // color: #2c3e50;
-  width: 100%;
-  height: auto;
-  top: 0;
-  left: -100;
-}
+// #app::before {
+//   //  background-color: wheat;
+//   // background-size: cover;
+//   // background-repeat: no-repeat;
+//   content: '';
+//   // display: block;
+//   position: absolute;
+//   min-height: 100%;
+//   min-width: 1024px;
+//   // position: fixed;
+//   background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594563633/background/various-fresh-vegetables-organic-food-healthy-rustic-background_44537-627_bup06t.jpg");
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   // background-position: center;
+//   // background-attachment: fixed;
+//   z-index: -1;
+//   // color: #2c3e50;
+//   width: 100%;
+//   height: auto;
+//   top: 0;
+//   // left: -100;
+// }
 
 // .jumbotron {
 //   background-image: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg");
@@ -147,9 +162,9 @@ export default {
 //   background-repeat: no-repeat;
 // }
 
-// #nav {
-//   padding: 30px;
-// }
+.nav {
+  padding: 30px;
+}
 
 // #nav a {
 //   font-weight: bold;

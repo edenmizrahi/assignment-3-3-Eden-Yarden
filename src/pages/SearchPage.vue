@@ -121,6 +121,59 @@ export default {
         }
       } catch (error) {}
     },
+    async checkIfLogin(_instructions, response) {
+      try {
+        let responewatchedorfav;
+
+        //favorite / watched
+        try {
+          // console.log(this.$route.params.recipeId);
+          console.log("enter to watch/fav");
+          responewatchedorfav = await this.axios.get(
+            this.$root.store.BASE_URL +
+              "/profile/recipeInfo/" +
+              "[" +
+              this.$route.params.recipeId +
+              "]"
+          );
+          console.log("after");
+          console.log(responewatchedorfav);
+          // console.log("response.status", response.status);
+          if (responewatchedorfav.status !== 200)
+            this.$router.replace("/NotFound");
+        } catch (error) {
+          console.log(
+            "error.respone_watchedOrFav.status",
+            error.responewatchedorfav.status
+          );
+          this.$router.replace("/NotFound");
+          return;
+        }
+
+        let _recipe = {
+          instructions: response.data.instructions,
+          _instructions,
+          // analyzedInstructions,
+          ingredients: response.data.ingredients,
+          vegetarian: response.data.vegetarian,
+          vegan: response.data.vegan,
+          glutenFree: response.data.glutenFree,
+          aggregateLikes: response.data.aggregateLikes,
+          readyInMinutes: response.data.readyInMinutes,
+          image: response.data.image,
+          title: response.data.title,
+          servings: response.data.servings,
+          favorite:
+            responewatchedorfav.data[this.$route.params.recipeId].favorite,
+          watched:
+            responewatchedorfav.data[this.$route.params.recipeId].watched,
+        };
+
+        this.recipe = _recipe;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async Search(query, amount, cuisine, diet, intolerance) {
       this.resAns = "none";
       // this.ShowLastSearch();
@@ -147,9 +200,46 @@ export default {
           this.$router.replace("/NotFound");
         } else {
           console.log("after endpoint search");
+          let recipesArray = response.data;
+          let recipes_;
           console.log(response);
+          if (this.$root.store.username) {
+            let recipesIds = [];
+            let size = recipesArray.length;
+            for (let i = 0; i < size; i++) {
+              recipesIds[i] = recipesArray[i].recipe_id;
+            }
 
-          const recipes_ = response.data;
+            let responewatchedorfav = await this.axios.get(
+              this.$root.store.BASE_URL +
+                "/profile/recipeInfo/" +
+                "[" +
+                recipesIds +
+                "]"
+            );
+            console.log(responewatchedorfav);
+
+            for (let j = 0; j < size; j++) {
+              console.log(response.data[j]);
+              console.log(recipesArray[j].favorite);
+              let id = recipesArray[j].recipe_id;
+              console.log(recipesArray[j].recipe_id);
+              console.log(responewatchedorfav.data[id].favorite);
+              recipesArray[j].favorite =
+                responewatchedorfav.data[recipesArray[j].recipe_id].favorite;
+              recipesArray[j].watched =
+                responewatchedorfav.data[recipesArray[j].recipe_id].watched;
+            }
+            console.log(recipesArray);
+            recipes_ = recipesArray;
+            //  favorite:
+            //             responewatchedorfav.data[this.$route.params.recipeId].favorite,
+            //           watched:
+            //             responewatchedorfav.data[this.$route.params.recipeId].watched,
+          } else {
+            recipes_ = response.data;
+          }
+
           console.log(recipes_);
 
           this.recipes.push;

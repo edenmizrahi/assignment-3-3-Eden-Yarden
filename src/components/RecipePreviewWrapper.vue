@@ -23,6 +23,19 @@
       >
       <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
        </router-link>
+
+        <!-- <router-link
+        v-if="type == 'search'"
+        :to="{
+          name: 'recipe',
+           params: {recipeId: cur_recipe.recipe_id },
+        }"
+        class="recipe-preview"
+      >
+      <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
+       </router-link> -->
+
+
       <router-link v-else :to="{
           name: 'PersonalViewPage',
           params: { type: 'family', recipeId: cur_recipe.recipe_id },

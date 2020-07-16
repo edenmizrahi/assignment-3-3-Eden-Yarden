@@ -1,12 +1,14 @@
 <template>
   <div class="container">
-    <h1 class="title">Login</h1>
+    <h1 class="title" style="text-align:center;">Login</h1>
+    <br />
     <b-form @submit.prevent="onLogin">
       <b-form-group
         id="input-group-Username"
         label-cols-sm="3"
         label="Username:"
         label-for="Username"
+        style="font-size:20px;"
       >
         <b-form-input
           id="Username"
@@ -24,6 +26,7 @@
         label-cols-sm="3"
         label="Password:"
         label-for="Password"
+        style="font-size:20px;"
       >
         <b-form-input
           id="Password"
@@ -35,7 +38,7 @@
           Password is required
         </b-form-invalid-feedback>
       </b-form-group>
-
+      <br />
       <b-button
         type="submit"
         variant="primary"
@@ -130,12 +133,12 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Pangolin:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
 
 .container {
-  max-width: 400px;
+  max-width: 450px;
   color: wheat;
   background-color: rgba(1, 1, 1, 0.6);
   border-radius: 20px;
-  height: 300px;
-  padding-top: 10px;
+  height: 340px;
+  padding-top: 12px;
   font-family: Pangolin;
   margin-top: 7%;
 }
