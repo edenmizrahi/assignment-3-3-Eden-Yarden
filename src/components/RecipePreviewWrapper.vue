@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="type != 'My Recipes'&&type != 'Family Recipes'">
+    <div v-if="type != 'My Recipes' && type != 'Family Recipes'">
       <RecipePreviewExtension :recipe="cur_recipe"></RecipePreviewExtension>
       <router-link
         :to="{
@@ -9,7 +9,7 @@
         }"
         class="recipe-preview"
       >
-      <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
+        <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
       </router-link>
     </div>
     <div v-else>
@@ -21,29 +21,20 @@
         }"
         class="recipe-preview"
       >
-      <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
-       </router-link>
+        <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
+      </router-link>
 
-        <!-- <router-link
-        v-if="type == 'search'"
+      <router-link
+        v-else
         :to="{
-          name: 'recipe',
-           params: {recipeId: cur_recipe.recipe_id },
-        }"
-        class="recipe-preview"
-      >
-      <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
-       </router-link> -->
-
-
-      <router-link v-else :to="{
           name: 'PersonalViewPage',
           params: { type: 'family', recipeId: cur_recipe.recipe_id },
         }"
-        class="recipe-preview">
-      <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
+        class="recipe-preview"
+      >
+        <RecipePreview :recipe="cur_recipe" :type="type"></RecipePreview>
       </router-link>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -53,9 +44,9 @@ import RecipePreview from "./RecipePreview.vue";
 import RecipePreviewExtension from "./RecipePreviewExtension.vue";
 
 export default {
-  components:{
+  components: {
     RecipePreview,
-    RecipePreviewExtension
+    RecipePreviewExtension,
   },
   watch: {
     recipe: async function(newVal, lastVal) {
@@ -66,7 +57,12 @@ export default {
   },
   name: "RecipePreviewWrapper",
   async mounted() {
+    console.log("enter to RecipePreviewWrapper mounted func:", this.cur_recipe);
     this.cur_recipe = this.recipe;
+    console.log(
+      "exit from RecipePreviewWrapper mounted func:",
+      this.cur_recipe
+    );
   },
   data() {
     return {
@@ -84,8 +80,6 @@ export default {
       required: true,
     },
   },
-
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

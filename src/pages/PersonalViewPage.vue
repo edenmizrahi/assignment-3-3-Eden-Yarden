@@ -43,7 +43,7 @@
           <div v-if="familyRecipe.where" class="circle__recipe">
             <h2>Where: {{ familyRecipe.where }}</h2>
           </div>
-          <div v-else><br/><br/><br/><br/></div>
+          <div v-else><br /><br /><br /><br /></div>
           <div
             class="circle__recipe"
             style="float:right;   background-color: rgba(0, 0, 0, 0.99); "
@@ -63,7 +63,7 @@
           <div v-if="familyRecipe.where" class="circle__recipe">
             <h2>Made by: {{ familyRecipe.owner }}</h2>
           </div>
-          <div v-else><br/><br/><br/><br/></div>
+          <div v-else><br /><br /><br /><br /></div>
           <br />
           <br />
           <!-- <br /> -->
@@ -103,8 +103,7 @@
             />
           </h5> -->
 
-         
-        <div class="content" style="padding-top:4%;">
+          <div class="content" style="padding-top:4%;">
             <b-tabs class="content" content-class="mt-4" align="center">
               <b-tab
                 v-if="familyRecipe.ingredients.length > 0"
@@ -143,7 +142,6 @@
             </b-tabs>
           </div>
         </div>
-         
       </div>
     </div>
   </div>
@@ -176,52 +174,80 @@ export default {
       try {
         console.log(this.$route.params.recipeId);
         if (this.$route.params.type == "family") {
-          if (!localStorage.familyList) {
-            response = await this.axios.get(
-              this.$root.store.BASE_URL +
-                "/profile/familyRecipes/" +
-                "[" +
-                this.$route.params.recipeId +
-                "]"
-            );
+          // if (this.$root.store.familyList.length == 0) {
+          let familyArray = this.$root.store.familyList;
+          console.log("familyArray", familyArray);
+          for (let i = 0; i < 3; i++) {
+            if (familyArray[i].recipe_id == this.$route.params.recipeId) {
+              this.familyRecipe = familyArray[i];
+            }
           }
+          console.log("familyRecipe", this.familyRecipe);
+          // }
+
+          // if (this.$root.store.familyList.length == 0) {
+          //   response = await this.axios.get(
+          //     this.$root.store.BASE_URL +
+          //       "/profile/familyRecipes/" +
+          //       "[" +
+          //       this.$route.params.recipeId +
+          //       "]"
+          //   );
+          // }
         } else {
           if (this.$route.params.type == "my") {
-            response = await this.axios.get(
-              this.$root.store.BASE_URL +
-                "/profile/myRecipes/" +
-                "[" +
-                this.$route.params.recipeId +
-                "]"
-            );
+            let myArray = this.$root.store.myRecipesList;
+            console.log("myArray", myArray);
+            for (let i = 0; i < 3; i++) {
+              if (myArray[i].recipe_id == this.$route.params.recipeId) {
+                this.familyRecipe = myArray[i];
+              }
+            }
+            console.log("familyRecipe", this.familyRecipe);
+            // if (this.$root.store.myList.length == 0) {
+            //   response = await this.axios.get(
+            //     this.$root.store.BASE_URL +
+            //       "/profile/myRecipes/" +
+            //       "[" +
+            //       this.$route.params.recipeId +
+            //       "]"
+            //   );
+            // }
           }
         }
         console.log("after");
-        console.log(response);
-        if (localStorage.familyList) {
-          this.familyRecipe = JSON.parse(localStorage.familyList);
-        } else {
-          let _familyRecipe = {
-            instructions: response.data[0].instructions,
-            ingredients: response.data[0].ingredients,
-            vegetarian: response.data[0].vegetarian,
-            vegan: response.data[0].vegan,
-            glutenFree: response.data[0].glutenFree,
-            readyInMinutes: response.data[0].readyInMinutes,
-            image:
-              "https://res.cloudinary.com/dc9fdssoo/image/upload/" +
-              response.data[0].image,
-            title: response.data[0].title,
-            owner: response.data[0].owner,
-            where: response.data[0].where,
-          };
+        // console.log(response);
+        // if (this.$root.store.familyList.length > 0) {
+        //   let familyArray = JSON.parse(localStorage.familyList);
+        //   for (let i = 0; i < 3; i++) {
+        //     if (familyArray[i].title == response.data[0].title) {
+        //       this.familyRecipe = familyArray[i];
+        //     }
+        //   }
+        // } else {
+        let _familyRecipe = {
+          instructions: this.familyRecipe.instructions,
+          ingredients: this.familyRecipe.ingredients,
+          vegetarian: this.familyRecipe.vegetarian,
+          vegan: this.familyRecipe.vegan,
+          glutenFree: this.familyRecipe.glutenFree,
+          readyInMinutes: this.familyRecipe.readyInMinutes,
+          image:
+            "https://res.cloudinary.com/dc9fdssoo/image/upload/" +
+            this.familyRecipe.image,
+          title: this.familyRecipe.title,
+          owner: this.familyRecipe.owner,
+          where: this.familyRecipe.where,
+        };
 
-          this.familyRecipe = _familyRecipe;
-        }
+        this.familyRecipe = _familyRecipe;
+        console.log("familyRecipe", this.familyRecipe);
+        // localStorage.setItem("familyList", JSON.stringify(this.familyRecipe));
+        // }
 
-        if (response.status !== 200) this.$router.replace("/NotFound");
+        // if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
-        console.log("error.response.status", error.response.status);
+        // console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
         return;
       }
@@ -252,7 +278,7 @@ export default {
 .content {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: fff;
-  
+
   /* width: 550px; */
 }
 #recipe__presentation {

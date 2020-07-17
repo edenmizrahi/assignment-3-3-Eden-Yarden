@@ -33,14 +33,14 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 import VueCookies from "vue-cookies";
 
-import { BFormSelect } from 'bootstrap-vue'
-Vue.component('b-form-select', BFormSelect)
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+import { BFormSelect } from "bootstrap-vue";
+Vue.component("b-form-select", BFormSelect);
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
-import { BButtonGroup } from 'bootstrap-vue'
-Vue.component('b-button-group', BButtonGroup)
+import { BButtonGroup } from "bootstrap-vue";
+Vue.component("b-button-group", BButtonGroup);
 
 import routes from "./routes";
 import VueRouter from "vue-router";
@@ -55,11 +55,16 @@ const router = new VueRouter({
   routes,
 });
 
+console.log("enter shared_data");
 const shared_data = {
   BASE_URL: "http://localhost:4000",
   username: localStorage.username,
   recipePage: "",
-  lastWatch: localStorage.watchedList,
+  // lastWatch: localStorage.watchedList,
+  familyList: [],
+  myRecipesList: [],
+  // lastWatchList: [],
+  // favoriteList: [],
 
   addWatchedList(watchedList) {
     localStorage.setItem("watchedList", watchedList);
@@ -70,7 +75,7 @@ const shared_data = {
     localStorage.setItem("familyList", familyList);
     // this.lastWatch = familyList;
   },
-  
+
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -88,12 +93,20 @@ const shared_data = {
     // localStorage.removeItem("intolerance");
     this.username = undefined;
     localStorage.removeItem("watchedList");
-    this.lastWatch = undefined;
-    
-    localStorage.removeItem("familyList");
+    // this.lastWatch = undefined;
+    this.familyList = [];
+    this.myRecipesList = [];
+    this.lastWatchList = [];
+    // this.favoriteList = [];
 
-    if(localStorage.search){
-      localStorage.removeItem("search")
+    if (localStorage.watchedList) {
+      localStorage.removeItem("watchedList");
+    }
+    if (localStorage.favoriteList) {
+      localStorage.removeItem("favoriteList");
+    }
+    if (localStorage.search) {
+      localStorage.removeItem("search");
     }
   },
   // search(recipes){
@@ -118,6 +131,8 @@ const shared_data = {
   //   // console.log("search", this.intolerance);
   // }
 };
+
+console.log(shared_data.familyList);
 
 router.beforeEach((to, from, next) => {
   // if there was a transition from logged in to session expired or localStorage was deleted

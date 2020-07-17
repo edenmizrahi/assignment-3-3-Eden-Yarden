@@ -19,7 +19,7 @@
     </button> -->
     <div
       @click="addTofavorite()"
-      v-if="$root.store.username && recipe.favorite == false"
+      v-if="$root.store.username && cur_recipe.favorite == false"
       class="circle"
       style=" position: absolute; top: 50px; left: -10px;  "
     >
@@ -33,7 +33,7 @@
       <b-icon-heart-fill
         class="favorite"
         variant="danger"
-        v-if="$root.store.username && recipe.favorite == true"
+        v-if="$root.store.username && cur_recipe.favorite == true"
         style=" position: absolute; top: 60px; left: 0px;  "
       ></b-icon-heart-fill>
     </p>
@@ -43,50 +43,66 @@
 <script>
 export default {
   name: "RecipePreviewExtension",
+  data() {
+    return {
+      cur_recipe: this.recipe,
+    };
+  },
   props: {
     recipe: {
       type: Object,
       required: true,
     },
   },
+
   methods: {
     async addTofavorite() {
+      console.log("enter");
       let responseAfterAddFavorite;
-      //   console.log(this.recipe);
-      this.recipe.favorite = true;
-      let id = this.recipe.recipe_id;
+      this.cur_recipe.favorite = true;
+      let id = this.cur_recipe.recipe_id;
       //favorite / watched
       try {
+        console.log("1");
         responseAfterAddFavorite = await this.axios.put(
-          "http://localhost:4000/profile/favorite/add/" + this.recipe.recipe_id
+          "http://localhost:4000/profile/favorite/add/" +
+            this.cur_recipe.recipe_id
         );
-        console.log(responseAfterAddFavorite);
-        console.log(this.recipe.recipe_id);
+        console.log("2");
         if (responseAfterAddFavorite.status !== 200)
           this.$router.replace("/NotFound");
       } catch (error) {
         this.$router.replace("/NotFound");
         return;
       }
+
+      // this.$root.store.favoriteList.push(cur_recipe);
+      // console.log(this.$root.store.favoriteList);
+
+      //  this.$root.store.favoriteList = [];
+      if (localStorage.favoriteList) {
+        localStorage.removeItem("favoriteList");
+      }
+      console.log("3");
       let _recipe = {
-        // id: this.recipe.recipe_id,
-        instructions: this.recipe.instructions,
-        _instructions: this.recipe._instructions,
+        instructions: this.cur_recipe.instructions,
+        _instructions: this.cur_recipe._instructions,
         // analyzedInstructions,
-        ingredients: this.recipe.ingredients,
-        vegetarian: this.recipe.vegetarian,
-        vegan: this.recipe.vegan,
-        glutenFree: this.recipe.glutenFree,
-        aggregateLikes: this.recipe.aggregateLikes,
-        readyInMinutes: this.recipe.readyInMinutes,
-        image: this.recipe.image,
-        title: this.recipe.title,
-        servings: this.recipe.servings,
+        ingredients: this.cur_recipe.ingredients,
+        vegetarian: this.cur_recipe.vegetarian,
+        vegan: this.cur_recipe.vegan,
+        glutenFree: this.cur_recipe.glutenFree,
+        aggregateLikes: this.cur_recipe.aggregateLikes,
+        readyInMinutes: this.cur_recipe.readyInMinutes,
+        image: this.cur_recipe.image,
+        title: this.cur_recipe.title,
+        servings: this.cur_recipe.servings,
         favorite: true,
       };
-      console.log("a");
-      this.recipe = _recipe;
-      console.log("aa");
+      console.log("4");
+      this.cur_recipe = _recipe;
+      console.log("5");
+
       //update recipes array in local storage
       if (localStorage.search) {
         let recipesFromLocalStorage = JSON.parse(localStorage.search);

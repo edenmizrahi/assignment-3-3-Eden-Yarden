@@ -166,7 +166,8 @@ export default {
   font-family: "Roboto", sans-serif;
   /* -webkit-background-clip: text; */
   /* -webkit-text-fill-color: transparent;	 */
-  background-image: url("https://res.cloudinary.com/dc9fdssoo/image/upload/o_51/v1594814682/icons/emoji_de0tto.jpg");
+  background-image: url("https://res.cloudinary.com/dc9fdssoo/image/upload/o_54/v1595019125/background/foodAbout_laqdwz.jpg");
+  /* background-image: url("https://res.cloudinary.com/dc9fdssoo/image/upload/o_51/v1594814682/icons/emoji_de0tto.jpg"); */
   background-size: contain;
   /* background-attachment: unset; */
   /* background-position: 0%; */

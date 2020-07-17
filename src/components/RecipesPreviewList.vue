@@ -9,7 +9,7 @@
 
         <b-row>
           <b-col v-for="r in this.recipes" :key="r.recipe_id">
-            <RecipePreviewWrapper class="recipePreview" v-bind:recipe="r" />
+            <RecipePreviewWrapper class="recipePreview" :recipe="r" />
           </b-col>
         </b-row>
       </b-container>
@@ -31,17 +31,6 @@
         </b-col>
       </b-container>
     </div>
-    <!-- <div v-if="type == 'search'">
-      <b-container>
-        <h3>
-          Search results:
-          <slot></slot>
-        </h3>
-        <b-col v-for="r in recipes" :key="r.id">
-          <RecipePreviewWrapper class="recipePreview" :recipe="r" />
-        </b-col>
-      </b-container>
-    </div> -->
   </div>
 </template>
 
@@ -106,6 +95,7 @@ export default {
           //favorite / watched
           try {
             // console.log(this.$route.params.recipeId);
+
             console.log(111111111111, rec.recipe_id);
             responewatchedorfav = await this.axios.get(
               this.$root.store.BASE_URL +
@@ -114,7 +104,7 @@ export default {
                 rec.recipe_id +
                 "]"
             );
-            // console.log("response.status", response.status);
+            console.log("responewatchedorfav", responewatchedorfav);
             if (responewatchedorfav.status !== 200)
               this.$router.replace("/NotFound");
           } catch (error) {
@@ -126,7 +116,7 @@ export default {
             rec.watched = responewatchedorfav.data[rec.recipe_id].watched;
           }
           console.log("****************************************");
-          console.log(222222222, this.rec.watched);
+          console.log(222222222, rec.watched);
         } catch (error) {
           console.log(error);
         }
@@ -136,46 +126,35 @@ export default {
     async updateRecipes() {
       try {
         let response = [];
+        let isExistInGlobal = "false";
         if (this.type == "random") {
           response = await this.axios.get(
             this.$root.store.BASE_URL + "/recipes/random"
           );
         } else {
           if (this.type == "lastWatch") {
-            response = await this.axios.get(
-              this.$root.store.BASE_URL + "/profile/watchedList/top"
-            );
-          } else {
-            if (this.type == "search") {
-              response1 = await this.axios.get(
-                this.$root.store.BASE_URL +
-                  "/profile/recipeInfo/" +
-                  this.cur_recipe.recipe_id
+            if (localStorage.watchedList) {
+              console.log("take from local storage");
+              this.recipes_ = JSON.parse(localStorage.watchedList);
+              isExistInGlobal = "true";
+            } else {
+              console.log("call API top watched list");
+              response = await this.axios.get(
+                this.$root.store.BASE_URL + "/profile/watchedList/top"
               );
-              console.log(response1);
-              response2 = await this.axios.get(
-                this.$root.store.BASE_URL +
-                  "/recipes/displayPreviewRecipe/recipeId/" +
-                  this.cur_recipe.recipe_id
+
+              localStorage.setItem(
+                "watchedList",
+                JSON.stringify(response.data)
               );
-              console.log(response2);
             }
           }
-          // if(this.type=='lastWatch'&& !this.$root.store.lastWatch){
-          //     response = await this.axios.get(
-          // this.$root.store.BASE_URL + "/profile/watchedList/top"
-
-          // );
-
-          // }
-          // if(this.type=='lastWatch'&& !!this.$root.store.lastWatch){
-          //     response = {};
-          //     response.data=this.$root.store.lastWatch;
-
-          // }
         }
 
-        this.recipes_ = response.data;
+        if (isExistInGlobal == "false") {
+          this.recipes_ = response.data;
+        }
+
         console.log(response);
         console.log(this.recipes_);
         this.recipes.push;
