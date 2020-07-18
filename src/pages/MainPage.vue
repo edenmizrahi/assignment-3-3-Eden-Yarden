@@ -1,5 +1,5 @@
 <template>
-  <b-container
+  <b-container class="main-page-container"
     fluid
     style="background-image: url(https://i.ibb.co/0cP75KS/bg10.jpg);
   -webkit-background-size: cover;
@@ -16,7 +16,7 @@
   -o-background-size: cover;
   background-size: cover;"
         >>
-        <h1 class="title" style="font-size:80px">
+        <h1 class="title" style="font-size:100px ;text-align: center">
           Welcome To Our Recipes Website!
         </h1>
         <RecipesPreviewList
@@ -351,5 +351,11 @@ p {
 .separator {
   margin-top: 100px;
   border-bottom: 5px solid #6182ae;
+}
+
+
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon");
+.main-page-container {
+   text-align: center;
 }
 </style>

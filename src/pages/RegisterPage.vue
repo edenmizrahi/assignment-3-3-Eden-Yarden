@@ -133,6 +133,7 @@
         <b-form-invalid-feedback v-if="!$v.form.password.required">
           Password is required
         </b-form-invalid-feedback>
+     
         <b-form-text v-else-if="$v.form.password.$error" text-variant="info">
           Your password should be <strong>strong</strong>. <br />
           For that, your password should be also:
@@ -141,6 +142,14 @@
           v-if="$v.form.password.required && !$v.form.password.length"
         >
           Have length between 5-10 characters long
+        </b-form-invalid-feedback>
+           <b-form-invalid-feedback
+          v-if="!$v.form.password.onlyDigit" >
+          Password should have at least one digit.
+        </b-form-invalid-feedback>
+          <b-form-invalid-feedback
+          v-if="!$v.form.password.oneSpecialChar" >
+          Password should have at least one special character.
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -222,8 +231,11 @@ import {
   alpha,
   sameAs,
   email,
+  profileurl,
+  helpers,
 } from "vuelidate/lib/validators";
-
+const onlyDigit = helpers.regex('dig', /[0-9]/)
+const oneSpecialChar = helpers.regex('dig', /[!@#$%^&*(),.?":{}|<>]/)
 export default {
   name: "Register",
   data() {
@@ -275,6 +287,8 @@ export default {
       password: {
         required,
         length: (p) => minLength(5)(p) && maxLength(10)(p),
+        onlyDigit,
+        oneSpecialChar
       },
       confirmedPassword: {
         required,
@@ -347,7 +361,7 @@ export default {
   color: wheat;
   background-color: rgba(1, 1, 1, 0.6);
   border-radius: 20px;
-  height: 740px;
+  height: 100%;
   padding-top: 20px;
   font-family: Pangolin;
   margin-top: 7%;

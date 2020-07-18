@@ -1,5 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" style="  background-image: url('https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561161/background/93324_zmluhi.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;">
     <div>
       <link
         rel="stylesheet"
@@ -132,6 +134,12 @@ export default {
   // background-size: 100% 100%;
   // background-repeat: no-repeat;
 }
+// body{
+//   background-image: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594726750/background/240_F_106886093_1UPuCfSMX6YI6GlY79ChZ4TasLWkEE36_afsbge.jpg");
+//   background-size: 100% 100%;
+//   background-repeat: no-repeat;
+
+// }
 
 // #app::before {
 //   //  background-color: wheat;

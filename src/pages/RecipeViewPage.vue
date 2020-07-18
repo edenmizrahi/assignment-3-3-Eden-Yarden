@@ -240,7 +240,7 @@
               </tr>
             </table>
           </h5> -->
-
+</div>
           <div class="content">
             <br />
             <br />
@@ -282,7 +282,7 @@
         </div>
       </div>
     </div>
-  </div>
+ 
 </template>
 
 <script>
@@ -292,6 +292,11 @@ export default {
   // components: {
   //   AddRecipeToFavorite,
   // },
+  watch: {
+    $route(to, from) {
+          this.id = to.params.id;
+      }
+  },
   name: "RecipeViewPage",
   data() {
     return {
@@ -487,8 +492,9 @@ export default {
   /* background: url("https://res.cloudinary.com/dc9fdssoo/image/upload/v1594561154/background/60214490-menu-food-culinary-frame-concept-on-black-background_whofgy.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
-  /* width: 400%; */
+
   height: 200%;
+    /* width: 400%; */
 }
 
 .wrapper {
@@ -516,10 +522,22 @@ export default {
 /* .recipe-body{
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 } */
-.content {
+tabs .content {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: fff;
-  /* width: 550px; */
+  background-color: white;
+  width: 90%;
+  position:relative;
+  margin-left: 5%;
+  padding: 0 0 0 0;
+
+}
+.content{
+    background-color: white;
+     width: 50%;
+     margin-left:25%;
+       padding: 0 0 0 0;
+
+
 }
 
 .icons {
@@ -536,14 +554,14 @@ export default {
   -moz-background-size: contain;
   -o-background-size: contain;
   background-size: cover;
-  width: 55%;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
   background-position: relative;
   background-size: 100vw 100vh;
-  opacity: 0.8;
+  /* opacity: 0.8; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  height: 450px;
+  height: 450px; 
 }
 
 ul.checkmark li::before {

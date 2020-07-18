@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="prev-list-container">
     <div v-if="type == 'random'">
       <b-container>
         <h3 class="title_left">
@@ -22,7 +22,7 @@
     </div>
     <div v-if="type == 'lastWatch'">
       <b-container>
-        <h3>
+        <h3 style="text-align:left ; margin-left:50px; font-size:40px ; margin-bottom:20px;">
           Last Watched:
           <slot></slot>
         </h3>
@@ -196,11 +196,12 @@ ul {
 }
 
 @import url("https://fonts.googleapis.com/css?family=Do+Hyeon");
-/* div {
+.prev-list-container {
   font-family: 'Do Hyeon', sans-serif;
    text-align: center;
-} */
+}
 .title_left {
-  color: thistle;
+  color: rgba(216, 191, 216, 0.993);
+  
 }
 </style>

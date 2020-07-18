@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="recipes-page-cont">
     <p class="title_">
       {{ this.title_ }}
     </p>
@@ -249,5 +249,9 @@ ul {
   font-size: 80px;
   font-weight: bolder;
   color: black;
+  text-align: center;
+}
+.recipes-page-cont{
+  background-color: rgba(255, 255, 255, 0.85);
 }
 </style>

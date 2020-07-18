@@ -42,7 +42,6 @@
 var selected = "js-is-selected";
 import RecipePreview from "./RecipePreview.vue";
 import RecipePreviewExtension from "./RecipePreviewExtension.vue";
-
 export default {
   components: {
     RecipePreview,

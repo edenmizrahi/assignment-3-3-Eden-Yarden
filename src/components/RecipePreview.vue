@@ -1,8 +1,8 @@
 <template>
   <div>
-    <table
+    <table id="prev_table"
       class="center"
-      style="border: 2px solid red;border-radius: 50px 20px; width:300px;height:300px;"
+      style="border: 2px solid black ;border-radius: 50px 20px; width:300px;height:300px;"
     >
       <tr>
         <td colspan="5" style="height:80px">
@@ -92,31 +92,34 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700|Work+Sans:100,200,300,400,500,600");
-.center {
+#prev_table {
   border-collapse: collapse;
   border-radius: 1em;
   overflow: hidden;
   color: black;
   background-color: #faf7d7;
+/* border: 10px solid black; */
 }
 
-.center th,
-.center td {
+#prev_table th,
+#prev_table td {
   padding: 1em;
   background: #ddd;
   border-bottom: 2px solid white;
   background-color: #faf7d7b2;
+
 }
 
 .css-mine {
   margin-top: 2em;
   clear: both;
+  
 }
 
-body {
+/* body {
   margin: 1.5em;
-}
-.center :hover {
+} */
+#prev_table:hover {
   color: #000000;
   border: 10px solid #ffffff;
   text-shadow: 0px 0px 20px #ffffff;
@@ -125,5 +128,6 @@ body {
   -webkit-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
   font-size: 17px;
+
 }
 </style>

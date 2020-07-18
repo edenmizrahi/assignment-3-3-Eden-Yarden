@@ -8,7 +8,8 @@ export function isMoreThanOneChar(value) {
     if (!/^[a-zA-Z\s]*$/.test(value)) {
       return false;
     } else return true;
-  }
+}
+  
 
 //   export function firstNameparams() {
 //     if (!/^[a-zA-Z\s]*$/.test(this.form.firs)) {
