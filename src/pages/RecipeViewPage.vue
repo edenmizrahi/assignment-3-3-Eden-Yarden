@@ -240,49 +240,46 @@
               </tr>
             </table>
           </h5> -->
-</div>
-          <div class="content">
-            <br />
-            <br />
-            <b-tabs class="content" content-class="mt-4" align="center">
-              <b-tab
-                v-if="recipe.ingredients.length > 0"
-                title="Ingredients"
-                active
-              >
-                <div>
-                  <!-- <div class="mb-3"></div> -->
-                  <h3 style="margin-left: 30px;">Ingredients:</h3>
-                  <hr />
-                  <ul class="checkmark">
-                    <li
-                      v-for="r in recipe.ingredients"
-                      :key="'_' + r.amount + r.name"
-                    >
-                      {{ r.amount + " " + r.name }}
-                    </li>
-                  </ul>
-                  <br />
-                </div>
-              </b-tab>
-              <b-tab v-if="recipe.ingredients.length > 0" title="Instructions">
-                <div>
-                  <h3 style="margin-left: 30px;">Instructions:</h3>
-                  <hr />
-                  <ol>
-                    <li v-for="s in recipe._instructions" :key="s.number">
-                      {{ s.step }}
-                    </li>
-                  </ol>
-                  <br />
-                </div>
-              </b-tab>
-            </b-tabs>
-          </div>
+        </div>
+        <div class="content">
+          <b-tabs class="content" content-class="mt-4" align="center">
+            <b-tab
+              v-if="recipe.ingredients.length > 0"
+              title="Ingredients"
+              active
+            >
+              <div>
+                <!-- <div class="mb-3"></div> -->
+                <h3 style="margin-left: -60px;">Ingredients:</h3>
+                <hr />
+                <ul class="checkmark" style="margin-left: -100px;">
+                  <li
+                    v-for="r in recipe.ingredients"
+                    :key="'_' + r.amount + r.name"
+                  >
+                    {{ r.amount + " " + r.name }}
+                  </li>
+                </ul>
+                <br />
+              </div>
+            </b-tab>
+            <b-tab v-if="recipe.ingredients.length > 0" title="Instructions">
+              <div>
+                <h3 style="margin-left: -60px;">Instructions:</h3>
+                <hr />
+                <ol style="margin-left: -100px;">
+                  <li v-for="s in recipe._instructions" :key="s.number">
+                    {{ s.step }}
+                  </li>
+                </ol>
+                <br />
+              </div>
+            </b-tab>
+          </b-tabs>
         </div>
       </div>
     </div>
- 
+  </div>
 </template>
 
 <script>
@@ -294,8 +291,8 @@ export default {
   // },
   watch: {
     $route(to, from) {
-          this.id = to.params.id;
-      }
+      this.id = to.params.id;
+    },
   },
   name: "RecipeViewPage",
   data() {
@@ -494,7 +491,7 @@ export default {
   background-repeat: no-repeat;
 
   height: 200%;
-    /* width: 400%; */
+  /* width: 400%; */
 }
 
 .wrapper {
@@ -526,18 +523,15 @@ tabs .content {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
   width: 90%;
-  position:relative;
-  margin-left: 5%;
+  position: relative;
+  /* margin-left: 5%; */
   padding: 0 0 0 0;
-
 }
-.content{
-    background-color: white;
-     width: 50%;
-     margin-left:25%;
-       padding: 0 0 0 0;
-
-
+.content {
+  background-color: white;
+  width: 50%;
+  margin-left: 25%;
+  padding: 0 0 0 0;
 }
 
 .icons {
@@ -561,7 +555,7 @@ tabs .content {
   background-size: 100vw 100vh;
   /* opacity: 0.8; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  height: 450px; 
+  height: 450px;
 }
 
 ul.checkmark li::before {
@@ -631,7 +625,7 @@ h3 {
 
 hr {
   color: dimgrey;
-  margin-left: 4%;
+  margin-left: -24%;
   width: 200px;
   height: 2px;
   border-width: 0;
