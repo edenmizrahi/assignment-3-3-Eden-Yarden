@@ -13,8 +13,10 @@
         <b>Hello!</b> <br />
         Our names are Eden Mizrahi & Yarden Schwartz.<br />
         We are both third year students in Information Systems and Software
-        Engineering at Ben Gurion University. <br />We have been working
-        together for 3 years in all the universities projects. <br />We hope you
+        Engineering at Ben Gurion University. <br />We are good friends and work great together.
+        <!-- We are a good team, we have been working
+        together for 3 years in all the universities projects.  -->
+        <br />We hope you
         enjoyed our recipes website at least as much we enjoyed doing it 😊
       </p>
       <p style="text-align:center; font-weight:bold;">
