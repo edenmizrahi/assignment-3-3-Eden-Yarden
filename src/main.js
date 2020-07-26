@@ -92,12 +92,13 @@ const shared_data = {
     // localStorage.removeItem("cuisine");
     // localStorage.removeItem("intolerance");
     this.username = undefined;
-    localStorage.removeItem("watchedList");
+    // localStorage.removeItem("watchedList");
+    // localStorage.removeItem("favoriteList");
     // this.lastWatch = undefined;
     this.familyList = [];
     this.myRecipesList = [];
     this.lastWatchList = [];
-    // this.favoriteList = [];
+    this.favoriteList = [];
 
     if (localStorage.watchedList) {
       localStorage.removeItem("watchedList");

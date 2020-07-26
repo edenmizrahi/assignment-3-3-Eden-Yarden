@@ -56,10 +56,10 @@ export default {
   },
   methods: {
     async inStart() {
-      console.log(1234567890000, this.title);
-      console.log(1234567890000, this.numberOfColumns);
-      let isExistInGlobal = "false";
       try {
+        console.log(1234567890000, this.title);
+        console.log(1234567890000, this.numberOfColumns);
+        let isExistInGlobal = "false";
         let response = [];
         let FullResponse = [];
         let recipes_ = [];
@@ -112,9 +112,11 @@ export default {
             console.log("response", response);
             console.log("family - after server");
             let idsArray = [];
+
             for (let j = 0; j < 3; j++) {
               idsArray[j] = response.data[j].recipe_id;
             }
+
             console.log("search in API");
             FullResponse = await this.axios.get(
               this.$root.store.BASE_URL +
@@ -128,6 +130,7 @@ export default {
             console.log("family - after store", this.$root.store.familyList);
 
             isExistInGlobal = "true";
+
             //  localStorage.setItem("familyList", JSON.stringify(this.familyRecipe));
           } else {
             recipes_ = this.$root.store.familyList;
@@ -148,6 +151,7 @@ export default {
             console.log("response", response);
             console.log("My - after server");
             let idsArray = [];
+
             for (let j = 0; j < 3; j++) {
               idsArray[j] = response.data[j].recipe_id;
             }
@@ -251,7 +255,7 @@ ul {
   color: black;
   text-align: center;
 }
-.recipes-page-cont{
+.recipes-page-cont {
   background-color: rgba(255, 255, 255, 0.85);
 }
 </style>

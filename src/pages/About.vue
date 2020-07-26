@@ -7,48 +7,85 @@
     />
     <br />
     <h1 class="aboutTitle">About Us!</h1>
-    <div class="abountInfo" style="font-weight:bold; font-size:18px;">
-      <!-- <p>Eden Mizrahi & Yarden Schwartz</p> -->
-      <p style="padding-left: 15px; padding-top: 15px; line-height:34px;">
-        <b>Hello!</b> <br />
-        Our names are Eden Mizrahi & Yarden Schwartz.<br />
-        We are both third year students in Information Systems and Software
-        Engineering at Ben Gurion University. <br />We are good friends and work great together.
-        <!-- We are a good team, we have been working
-        together for 3 years in all the universities projects.  -->
-        <br />We hope you
-        enjoyed our recipes website at least as much we enjoyed doing it 😊
-      </p>
-      <p style="text-align:center; font-weight:bold;">
-        You can take a look at our others projects:<br />
-      </p>
+    <table
+      style="  border-collapse: collapse;
+  width: 80%;"
+    >
+      <tr>
+        <td>
+          <div class="abountInfo" style="font-weight:bold; font-size:18px;">
+            <!-- <p>Eden Mizrahi & Yarden Schwartz</p> -->
+            <br />
+            <br />
+            <br />
+            <p style="padding-left: 15px; padding-top: 15px; line-height:34px;">
+              <b style="font-size: 30px;">Hello!</b> <br />
+              <br />
+              Our names are Eden Mizrahi & Yarden Schwartz.<br />
+              We are both third year students in Information Systems and
+              Software Engineering at Ben Gurion University. <br />We are good
+              friends and work great together. <br />We hope you enjoyed our
+              recipes website at least as much we enjoyed doing it 😊
+            </p>
+            <br />
 
-      <p style="text-align:center; line-height:30px; padding-bottom: 15px; ">
-        <img
-          style="width:22px; height:22px;"
-          id="pacman6"
-          src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594811554/icons/pacman_icon_withoutBG_ih7prw.png"
-        />
+            <p style="text-align:center; font-weight:bold;">
+              You can take a look at our others projects:<br />
+            </p>
 
-        <a
-          href="https://sise-web-development-environments.github.io/assignment2-yarden-eden/"
-        >
-          Pacman Game</a
-        >
-        <br />
-        <a
-          href="https://sise-web-development-environments.github.io/206015141/"
-        >
-          Yarden's site</a
-        >
-        <br />
-        <a
-          href="https://sise-web-development-environments.github.io/311322077/"
-        >
-          Eden's site</a
-        >
-      </p>
-    </div>
+            <p
+              style="text-align:center; line-height:30px; padding-bottom: 15px; "
+            >
+              <a
+                href="https://github.com/SISE-Web-Development-Environments/assignment-3-2-311322077-206015141"
+              >
+                Backend side
+              </a>
+              <br />
+
+              <img
+                style="width:22px; height:22px;"
+                id="pacman6"
+                src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1594811554/icons/pacman_icon_withoutBG_ih7prw.png"
+              />
+
+              <a
+                href="https://sise-web-development-environments.github.io/assignment2-yarden-eden/"
+              >
+                Pacman Game</a
+              >
+              <br />
+              <a
+                href="https://sise-web-development-environments.github.io/206015141/"
+              >
+                Yarden's site</a
+              >
+              <br />
+              <a
+                href="https://sise-web-development-environments.github.io/311322077/"
+              >
+                Eden's site</a
+              >
+            </p>
+          </div>
+        </td>
+
+        <td>
+          <div class="images">
+            <img
+              style="width:430px; max-height:400px;"
+              src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1595782853/edenandyarden.jpg"
+            /><img
+              style="width:430px; max-height:400px;"
+              src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1595782751/edenyarden1.jpg"
+            />
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <br />
+    <br />
     <footer class="footer-distributed">
       <div class="footer-right" style="padding-top: 0px; float: left;">
         <div class="footer-icons" style="margin-top: 0px;">
@@ -132,7 +169,7 @@ export default {
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  align-items: center;
+  /* align-items: center; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -153,11 +190,16 @@ export default {
 
 .aboutTitle {
   /* margin-left: 20px; */
-  text-align: left;
+  text-align: center;
   font-family: "Cookie", cursive;
   font-size: 94px;
   font-weight: bolder;
   color: black;
+}
+
+.images {
+  /* float: right; */
+  margin: 2%;
 }
 
 .abountInfo {
@@ -173,11 +215,14 @@ export default {
   background-size: contain;
   /* background-attachment: unset; */
   /* background-position: 0%; */
-  width: 55%;
+  /* width: 40%; */
+  /* text-align: ; */
+  /* float: left; */
   /* height: 60%; */
   margin: 2%;
   /* opacity: 0.3; */
   /* font-size: 100px; */
+  float: right;
   animation: clouds-moving infinite 50s;
   animation-fill-mode: forwards;
   animation-play-state: running;
@@ -302,5 +347,9 @@ export default {
 .fa-github:hover {
   color: #6cc644;
   /* background-color: #6cc644; */
+}
+
+.fa-envelope:hover {
+  color: #747577;
 }
 </style>
