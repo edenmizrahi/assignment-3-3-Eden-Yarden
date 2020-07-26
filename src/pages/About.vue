@@ -18,14 +18,18 @@
             <br />
             <br />
             <br />
-            <p style="padding-left: 15px; padding-top: 15px; line-height:34px;">
+            <br />
+            <br />
+            <p
+              style="padding-left: 16px; padding-right: 16px; padding-top: 15px; line-height:34px;"
+            >
               <b style="font-size: 30px;">Hello!</b> <br />
               <br />
               Our names are Eden Mizrahi & Yarden Schwartz.<br />
               We are both third year students in Information Systems and
               Software Engineering at Ben Gurion University. <br />We are good
-              friends and work great together. <br />We hope you enjoyed our
-              recipes website at least as much we enjoyed doing it 😊
+              friends 👯‍♂️ and work great together 💻. <br />We hope you enjoyed
+              our recipes website at least as much we enjoyed doing it 😊
             </p>
             <br />
 
@@ -70,17 +74,21 @@
           </div>
         </td>
 
-        <td>
-          <div class="images">
-            <img
-              style="width:430px; max-height:400px;"
-              src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1595782853/edenandyarden.jpg"
-            /><img
-              style="width:430px; max-height:400px;"
-              src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1595782751/edenyarden1.jpg"
-            />
-          </div>
-        </td>
+        <div>
+          <b-carousel class="carousel" :interval="4000">
+            <b-carousel-slide
+              img-src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1595782751/edenyarden1.jpg"
+              style="padding-top:60px;"
+            ></b-carousel-slide>
+            <b-carousel-slide
+              img-src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1595782853/edenandyarden.jpg"
+            ></b-carousel-slide>
+            <b-carousel-slide
+              img-src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1595782751/WhatsApp_Image_2020-07-25_at_09.23.51_cmxij4.jpg"
+              style="padding-top:60px;"
+            ></b-carousel-slide>
+          </b-carousel>
+        </div>
       </tr>
     </table>
 
@@ -154,6 +162,12 @@ export default {
 </script>
 
 <style scoped>
+.carousel {
+  top: -10px;
+  width: 640px;
+  height: 360px;
+  text-align: center;
+}
 .container {
   /* height: auto; */
   /* width: 100%;
