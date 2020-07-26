@@ -302,7 +302,7 @@ export default {
   },
   computed: {
     bg() {
-      console.log(this.recipe.image);
+      // console.log(this.recipe.image);
       return {
         background: `url("${this.recipe.image}") no-repeat`,
         "background-size": `cover`,
@@ -317,24 +317,26 @@ export default {
       let response;
 
       try {
-        console.log("recipe id: " + this.$route.params.recipeId);
+        // console.log("recipe id: " + this.$route.params.recipeId);
         response = await this.axios.get(
           this.$root.store.BASE_URL +
             "/recipes/displayRecipePage/recipeId/" +
             this.$route.params.recipeId
         );
-        console.log("recipe id: " + this.$route.params.recipeId);
+        // console.log("recipe id: " + this.$route.params.recipeId);
 
-        console.log("success addd!!!!!!!!!!!");
+        // console.log("success addd!!!!!!!!!!!");
         // console.log("after");
         // console.log("response.status", response.status);
-        if (response.status !== 200) this.$router.replace("/NotFound");
+        if (response.status !== 200) {
+          this.$router.replace("/NotFound");
+        }
       } catch (error) {
-        console.log("error.response.status", error.response.status);
+        // console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
         return;
       }
-      console.log(response);
+      // console.log(response);
       let a = {
         // analyzedInstructions,
         id: response.data.recipe_id,
@@ -375,6 +377,7 @@ export default {
       }
     } catch (error) {
       console.log(error);
+      this.$router.replace("/NotFound");
     }
   },
   methods: {

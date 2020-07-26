@@ -89,22 +89,13 @@ export default {
   },
   async mounted() {
     console.log("beforeCreated");
-    // this.aftersearch = "false";
     this.ShowLastSearch();
-    // console.log(this.$store.recipes);
-    // if (this.$store.recipes != "") {
-    //   this.recipes = this.$store.recipes;
-    // }
   },
   computed: {
     numOfLines: function() {
       console.log(Math.ceil(this.recipes.length / 3));
       return Math.ceil(this.recipes.length / 3);
     },
-    // afterSearch: function() {
-    //   console.log(this.aftersearch);
-    //   return this.aftersearch;
-    // },
   },
   methods: {
     ShowLastSearch() {
@@ -119,7 +110,9 @@ export default {
             localStorage.removeItem("search");
           }
         }
-      } catch (error) {}
+      } catch (error) {
+        this.$router.replace("/NotFound");
+      }
     },
     async checkIfLogin(_instructions, response) {
       try {
@@ -128,7 +121,7 @@ export default {
         //favorite / watched
         try {
           // console.log(this.$route.params.recipeId);
-          console.log("enter to watch/fav");
+          // console.log("enter to watch/fav");
           responewatchedorfav = await this.axios.get(
             this.$root.store.BASE_URL +
               "/profile/recipeInfo/" +
@@ -136,16 +129,17 @@ export default {
               this.$route.params.recipeId +
               "]"
           );
-          console.log("after");
-          console.log(responewatchedorfav);
+          // console.log("after");
+          // console.log(responewatchedorfav);
           // console.log("response.status", response.status);
-          if (responewatchedorfav.status !== 200)
+          if (responewatchedorfav.status !== 200) {
             this.$router.replace("/NotFound");
+          }
         } catch (error) {
-          console.log(
-            "error.respone_watchedOrFav.status",
-            error.responewatchedorfav.status
-          );
+          // console.log(
+          //   "error.respone_watchedOrFav.status",
+          //   error.responewatchedorfav.status
+          // );
           this.$router.replace("/NotFound");
           return;
         }
@@ -175,12 +169,12 @@ export default {
       }
     },
     async Search(query, amount, cuisine, diet, intolerance) {
-      this.resAns = "none";
-      // this.ShowLastSearch();
-      let response;
       try {
+        this.resAns = "none";
+        // this.ShowLastSearch();
+        let response;
         this.results = "";
-        console.log("enter to search func");
+        // console.log("enter to search func");
         let validAmount = amount;
         if (validAmount == "") {
           validAmount = 5;
@@ -199,10 +193,10 @@ export default {
         if (response.status === 404) {
           this.$router.replace("/NotFound");
         } else {
-          console.log("after endpoint search");
+          // console.log("after endpoint search");
           let recipesArray = response.data;
           let recipes_;
-          console.log(response);
+          // console.log(response);
           if (this.$root.store.username) {
             let recipesIds = [];
             let size = recipesArray.length;
@@ -217,20 +211,20 @@ export default {
                 recipesIds +
                 "]"
             );
-            console.log(responewatchedorfav);
+            // console.log(responewatchedorfav);
 
             for (let j = 0; j < size; j++) {
-              console.log(response.data[j]);
-              console.log(recipesArray[j].favorite);
+              // console.log(response.data[j]);
+              // console.log(recipesArray[j].favorite);
               let id = recipesArray[j].recipe_id;
-              console.log(recipesArray[j].recipe_id);
-              console.log(responewatchedorfav.data[id].favorite);
+              // console.log(recipesArray[j].recipe_id);
+              // console.log(responewatchedorfav.data[id].favorite);
               recipesArray[j].favorite =
                 responewatchedorfav.data[recipesArray[j].recipe_id].favorite;
               recipesArray[j].watched =
                 responewatchedorfav.data[recipesArray[j].recipe_id].watched;
             }
-            console.log(recipesArray);
+            // console.log(recipesArray);
             recipes_ = recipesArray;
             //  favorite:
             //             responewatchedorfav.data[this.$route.params.recipeId].favorite,
@@ -240,7 +234,7 @@ export default {
             recipes_ = response.data;
           }
 
-          console.log(recipes_);
+          // console.log(recipes_);
 
           this.recipes.push;
           this.recipes = [];
@@ -263,9 +257,6 @@ export default {
           this.aftersearch = "false";
           this.results = "No recipes found for search results";
         }
-        //   // this.$router.replace("/NotFound");
-        //   alert("No found search results");
-        // this.form.submitError = err.response.data.message;
       }
     },
     orderByTime() {
@@ -334,6 +325,7 @@ export default {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
+  color: white;
 }
 // .container::before {
 //   content: '';

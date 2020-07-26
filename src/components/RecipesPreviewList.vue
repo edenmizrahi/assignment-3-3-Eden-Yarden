@@ -22,7 +22,9 @@
     </div>
     <div v-if="type == 'lastWatch'">
       <b-container>
-        <h3 style="text-align:left ; margin-left:50px; font-size:40px ; margin-bottom:20px;">
+        <h3
+          style="text-align:left ; margin-left:50px; font-size:40px ; margin-bottom:20px;"
+        >
           Last Watched:
           <slot></slot>
         </h3>
@@ -96,7 +98,7 @@ export default {
           try {
             // console.log(this.$route.params.recipeId);
 
-            console.log(111111111111, rec.recipe_id);
+            // console.log(111111111111, rec.recipe_id);
             responewatchedorfav = await this.axios.get(
               this.$root.store.BASE_URL +
                 "/profile/recipeInfo/" +
@@ -104,7 +106,7 @@ export default {
                 rec.recipe_id +
                 "]"
             );
-            console.log("responewatchedorfav", responewatchedorfav);
+            // console.log("responewatchedorfav", responewatchedorfav);
             if (responewatchedorfav.status !== 200)
               this.$router.replace("/NotFound");
           } catch (error) {
@@ -115,8 +117,8 @@ export default {
           if (this.type != "lastWatch") {
             rec.watched = responewatchedorfav.data[rec.recipe_id].watched;
           }
-          console.log("****************************************");
-          console.log(222222222, rec.watched);
+          // console.log("****************************************");
+          // console.log(222222222, rec.watched);
         } catch (error) {
           console.log(error);
         }
@@ -131,14 +133,18 @@ export default {
           response = await this.axios.get(
             this.$root.store.BASE_URL + "/recipes/random"
           );
+
+          if (response.status !== 200) {
+            this.$router.replace("/NotFound");
+          }
         } else {
           if (this.type == "lastWatch") {
             if (localStorage.watchedList) {
-              console.log("take from local storage");
+              // console.log("take from local storage");
               this.recipes_ = JSON.parse(localStorage.watchedList);
               isExistInGlobal = "true";
             } else {
-              console.log("call API top watched list");
+              // console.log("call API top watched list");
               response = await this.axios.get(
                 this.$root.store.BASE_URL + "/profile/watchedList/top"
               );
@@ -155,12 +161,12 @@ export default {
           this.recipes_ = response.data;
         }
 
-        console.log(response);
-        console.log(this.recipes_);
+        // console.log(response);
+        // console.log(this.recipes_);
         this.recipes.push;
         this.recipes = [];
 
-        console.log("start check33333333***********************");
+        // console.log("start check33333333***********************");
 
         this.recipes_.map((r) => {
           // this.recipes.map((r) => {
@@ -173,10 +179,11 @@ export default {
         //  console.log(this.$root.store.login);
         // this.$root.store.addWatchedList(this.recipes)
         // }
-        console.log(123123, this.recipes_);
-        console.log(11121212, this.recipes);
+        // console.log(123123, this.recipes_);
+        // console.log(11121212, this.recipes);
       } catch (error) {
         console.log(error);
+        this.$router.replace("/NotFound");
       }
     },
   },
@@ -197,11 +204,10 @@ ul {
 
 @import url("https://fonts.googleapis.com/css?family=Do+Hyeon");
 .prev-list-container {
-  font-family: 'Do Hyeon', sans-serif;
-   text-align: center;
+  font-family: "Do Hyeon", sans-serif;
+  text-align: center;
 }
 .title_left {
   color: rgba(216, 191, 216, 0.993);
-  
 }
 </style>
