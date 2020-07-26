@@ -74,7 +74,7 @@ const routes = [
     },
   },
 
-    {
+  {
     path: "/recipes/family",
     name: "familyRecipes",
     component: () => import("./pages/RecipesPage"),
@@ -83,7 +83,7 @@ const routes = [
       requiresAuth: true,
     },
   },
-    
+
   {
     path: "*",
     name: "notFound",

@@ -157,7 +157,10 @@
 
 <script>
 export default {
-  name: "About Page",
+  name: "About",
+  data() {
+    return {};
+  },
 };
 </script>
 
