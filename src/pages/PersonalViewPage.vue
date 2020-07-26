@@ -167,10 +167,10 @@ export default {
     },
   },
   async created() {
+
     console.log("created", 1111111);
     try {
       let response;
-
       try {
         console.log(this.$route.params.recipeId);
         if (this.$route.params.type == "family") {
