@@ -60,6 +60,9 @@ export default {
       console.log(1234567890000, this.numberOfColumns);
       let isExistInGlobal = "false";
       try {
+          this.recipes=[];
+        console.log("recipes", this.recipes);
+        
         let response = [];
         let FullResponse = [];
         let recipes_ = [];
@@ -82,6 +85,8 @@ export default {
         if (this.title_ == "Favorite Recipes") {
           console.log("title is Favorite");
           // console.log(localStorage.favoriteList);
+      
+
           if (localStorage.favoriteList) {
             recipes_ = JSON.parse(localStorage.favoriteList);
           } else {
