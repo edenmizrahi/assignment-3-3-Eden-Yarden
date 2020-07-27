@@ -429,7 +429,9 @@ export default {
             responewatchedorfav.data[this.$route.params.recipeId].watched,
         };
 
-        localStorage.removeItem("watchedList");
+        this.$root.store.watchedList = [];
+        console.log("watcheList", this.$root.store.watchedList);
+        // localStorage.removeItem("watchedList");
         this.recipe = _recipe;
       } catch (error) {
         console.log(error);
@@ -476,8 +478,8 @@ export default {
       };
       this.recipe = _recipe;
 
-      if (localStorage.favoriteList) {
-        localStorage.removeItem("favoriteList");
+      if (this.$root.store.favoriteList.length > 0) {
+        this.$root.store.favoriteList = [];
       }
       // this.$refs.btnFavorite.innerText = "In Favorite";
       // this.$refs.btnFavorite.className = "fa fa-star";

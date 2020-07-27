@@ -139,20 +139,27 @@ export default {
           }
         } else {
           if (this.type == "lastWatch") {
-            if (localStorage.watchedList) {
+            console.log("watcheList", this.$root.store.watchedList);
+            if (
+              this.$root.store.watchedList.length == 0 &&
+              isExistInGlobal == "false"
+            ) {
               // console.log("take from local storage");
-              this.recipes_ = JSON.parse(localStorage.watchedList);
-              isExistInGlobal = "true";
-            } else {
-              // console.log("call API top watched list");
               response = await this.axios.get(
                 this.$root.store.BASE_URL + "/profile/watchedList/top"
               );
+              console.log("after watcheList api");
 
-              localStorage.setItem(
-                "watchedList",
-                JSON.stringify(response.data)
-              );
+              this.$root.store.watchedList = response.data;
+              // localStorage.setItem(
+              //   "watchedList",
+              //   JSON.stringify(response.data)
+              // );
+            } else {
+              // console.log("call API top watched list");
+
+              this.recipes_ = this.$root.store.watchedList;
+              isExistInGlobal = "true";
             }
           }
         }

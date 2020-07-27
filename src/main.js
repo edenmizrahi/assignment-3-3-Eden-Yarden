@@ -63,18 +63,18 @@ const shared_data = {
   // lastWatch: localStorage.watchedList,
   familyList: [],
   myRecipesList: [],
-  // lastWatchList: [],
-  // favoriteList: [],
+  watchedList: [],
+  favoriteList: [],
 
-  addWatchedList(watchedList) {
-    localStorage.setItem("watchedList", watchedList);
-    this.lastWatch = watchedList;
-  },
+  // addWatchedList(watchedList) {
+  //   localStorage.setItem("watchedList", watchedList);
+  //   this.lastWatch = watchedList;
+  // },
 
-  addFamilyList(familyList) {
-    localStorage.setItem("familyList", familyList);
-    // this.lastWatch = familyList;
-  },
+  // addFamilyList(familyList) {
+  //   localStorage.setItem("familyList", familyList);
+  //   // this.lastWatch = familyList;
+  // },
 
   login(username) {
     localStorage.setItem("username", username);
@@ -97,15 +97,15 @@ const shared_data = {
     // this.lastWatch = undefined;
     this.familyList = [];
     this.myRecipesList = [];
-    this.lastWatchList = [];
+    this.watchedList = [];
     this.favoriteList = [];
 
-    if (localStorage.watchedList) {
-      localStorage.removeItem("watchedList");
-    }
-    if (localStorage.favoriteList) {
-      localStorage.removeItem("favoriteList");
-    }
+    // if (localStorage.watchedList) {
+    //   localStorage.removeItem("watchedList");
+    // }
+    // if (localStorage.favoriteList) {
+    //   localStorage.removeItem("favoriteList");
+    // }
     if (localStorage.search) {
       localStorage.removeItem("search");
     }

@@ -86,20 +86,27 @@ export default {
           console.log("title is Favorite");
           // console.log(localStorage.favoriteList);
 
-          if (localStorage.favoriteList) {
-            recipes_ = JSON.parse(localStorage.favoriteList);
-          } else {
-            //  && isExistInGlobal == "false"
-
+          if (
+            this.$root.store.favoriteList.length == 0 &&
+            isExistInGlobal == "false"
+          ) {
             console.log("search in API");
             response = await this.axios.get(
               this.$root.store.BASE_URL + "/profile/favorite"
             );
-            localStorage.setItem("favoriteList", JSON.stringify(response.data));
-            // this.$root.store.favoriteList = response.data;
-            console.log("favorite - after store", localStorage.favoriteList);
+            // localStorage.setItem("favoriteList", JSON.stringify(response.data));
+            this.$root.store.favoriteList = response.data;
+            console.log(
+              "favorite - after store",
+              this.$root.store.favoriteList
+            );
 
             isExistInGlobal = "true";
+
+            // recipes_ = JSON.parse(localStorage.favoriteList);
+          } else {
+            //  && isExistInGlobal == "false"
+            recipes_ = this.$root.store.favoriteList;
           }
         }
         if (this.title_ == "Family Recipes") {
