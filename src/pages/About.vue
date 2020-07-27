@@ -75,7 +75,7 @@
         </td>
 
         <div>
-          <b-carousel class="carousel" :interval="4000">
+          <b-carousel class="carousel" :interval="3000">
             <b-carousel-slide
               img-src="https://res.cloudinary.com/dc9fdssoo/image/upload/v1595782751/edenyarden1.jpg"
               style="padding-top:60px;"
